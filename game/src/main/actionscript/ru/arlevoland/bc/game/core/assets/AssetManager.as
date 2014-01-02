@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 29.05.12
- * Time: 22:24
- */
 
 package ru.arlevoland.bc.game.core.assets {
 import flash.display.Bitmap;
@@ -24,10 +19,6 @@ import ru.arlevoland.bc.game.bcb.model.TankFitData;
 import ru.arlevoland.bc.game.core.debug.GameError;
 
 public class AssetManager {
-
-    /*
-    Менеджер ассетов. Любой графический ассет берется отсюда.
-     */
 
     public function initialize():void {
 

@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 12.06.12
- * Time: 15:17
- */
 package ru.arlevoland.bc.game.bcb.model {
 import flash.geom.Point;
 

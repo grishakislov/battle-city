@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 29.09.12
- * Time: 6:37
- */
 package ru.arlevoland.bc.game.battlestage.tank {
 import flash.geom.Point;
 

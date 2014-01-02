@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 01.07.12
- * Time: 13:52
- */
 package ru.arlevoland.bc.editor.gui {
 import flash.display.Sprite;
 import flash.geom.Point;

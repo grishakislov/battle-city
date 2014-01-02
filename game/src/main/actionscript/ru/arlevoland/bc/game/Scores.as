@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 12.04.12
- * Time: 0:02
- */
 package ru.arlevoland.bc.game {
 public class Scores {
 

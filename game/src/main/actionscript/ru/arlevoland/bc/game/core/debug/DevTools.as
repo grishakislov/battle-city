@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 19.04.12
- * Time: 2:11
- */
 package ru.arlevoland.bc.game.core.debug {
 import flash.display.Bitmap;
 import flash.display.Sprite;

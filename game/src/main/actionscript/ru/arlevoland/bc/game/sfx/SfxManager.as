@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 26.06.12
- * Time: 23:59
- */
 package ru.arlevoland.bc.game.sfx {
 import flash.events.Event;
 import flash.media.Sound;

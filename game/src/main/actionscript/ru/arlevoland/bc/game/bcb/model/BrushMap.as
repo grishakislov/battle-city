@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 15.06.12
- * Time: 1:36
- */
 package ru.arlevoland.bc.game.bcb.model {
 public class BrushMap {
 

@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 15.07.12
- * Time: 3:50
- */
 package ru.arlevoland.bc.game.battlestage.battle_stage_preloader {
 import ru.arlevoland.bc.game.GameScreen;
 

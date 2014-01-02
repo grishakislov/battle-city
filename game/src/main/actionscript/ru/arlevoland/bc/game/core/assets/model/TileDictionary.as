@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 08.07.12
- * Time: 21:47
- */
 package ru.arlevoland.bc.game.core.assets.model {
 public class TileDictionary {
 

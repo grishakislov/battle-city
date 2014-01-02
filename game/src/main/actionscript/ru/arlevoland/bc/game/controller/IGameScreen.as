@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 04.07.12
- * Time: 23:34
- */
 package ru.arlevoland.bc.game.controller {
 public interface IGameScreen {
 

@@ -1,9 +1,3 @@
-/*
- * Copyright © 2010-2012 South Port Studios
- * Copyright © 2010-2012 ООО "Южный Порт Студиоз"
- *
- * @author arlechin
- */
 package ru.arlevoland.bc.game.time {
 import flash.events.Event;
 

@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 09.08.12
- * Time: 15:33
- */
 package ru.arlevoland.bc.game.battlestage.tank.sequencer {
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.Main;

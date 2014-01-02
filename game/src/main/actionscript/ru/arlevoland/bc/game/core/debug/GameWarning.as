@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 04.07.12
- * Time: 23:20
- */
 package ru.arlevoland.bc.game.core.debug {
 import mx.utils.StringUtil;
 

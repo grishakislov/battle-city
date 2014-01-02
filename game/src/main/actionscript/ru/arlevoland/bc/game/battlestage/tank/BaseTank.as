@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 10.08.12
- * Time: 9:12
- */
 package ru.arlevoland.bc.game.battlestage.tank {
 import flash.display.Sprite;
 import flash.geom.Point;

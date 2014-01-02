@@ -1,10 +1,4 @@
-﻿/**
- * @author arlechin
- * Date: 11.04.12
- * Time: 23:38
- */
-
-package ru.arlevoland.bc.game.core.assets {
+﻿package ru.arlevoland.bc.game.core.assets {
 
 
 public class Resources {

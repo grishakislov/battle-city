@@ -1,7 +1,3 @@
-/**
- * @author arlechin
- * @author antivoland
- */
 package ru.arlevoland.bc.game.core.debug {
 public class LogMessageType {
     public static const LOG_MANAGER_INITIALIZED:String = "Log Manager Initialized";

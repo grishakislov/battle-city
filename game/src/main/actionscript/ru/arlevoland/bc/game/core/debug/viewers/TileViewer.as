@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 08.07.12
- * Time: 21:21
- */
 package ru.arlevoland.bc.game.core.debug.viewers {
 import flash.display.Bitmap;
 import flash.display.BitmapData;

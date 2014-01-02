@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 08.07.12
- * Time: 20:17
- */
 package ru.arlevoland.bc.game.title {
 import flash.events.Event;
 

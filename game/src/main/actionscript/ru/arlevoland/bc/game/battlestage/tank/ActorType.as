@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 09.08.12
- * Time: 15:32
- */
 package ru.arlevoland.bc.game.battlestage.tank {
 public class ActorType {
 

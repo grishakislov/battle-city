@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 09.08.12
- * Time: 16:51
- */
 package ru.arlevoland.bc.game.keyboard.key {
 import flash.ui.Keyboard;
 

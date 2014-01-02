@@ -1,7 +1,3 @@
-/**
- * @author arlechin
- * @author antivoland
- */
 package ru.arlevoland.bc.game.controller {
 public class PipelineChannel {
     public static const MAIN:String = "main";

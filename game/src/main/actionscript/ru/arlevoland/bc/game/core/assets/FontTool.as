@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 07.07.12
- * Time: 17:06
- */
 package ru.arlevoland.bc.game.core.assets {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
@@ -19,10 +14,6 @@ import ru.arlevoland.bc.game.core.assets.model.TilePalette;
 import ru.arlevoland.bc.game.core.debug.GameError;
 
 public class FontTool {
-
-    /*
-    Отрисовывает строку шрифтом, на выходе — Bitmap.
-     */
 
     private static const CHARACTERS:String = "©ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._|= ";
 

@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 15.06.12
- * Time: 1:30
- */
 package ru.arlevoland.bc.game.bcb {
 internal class BCBDataMarker {
 

@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 30.05.12
- * Time: 7:57
- */
 package ru.arlevoland.bc.game.core.debug {
 import flash.utils.getTimer;
 

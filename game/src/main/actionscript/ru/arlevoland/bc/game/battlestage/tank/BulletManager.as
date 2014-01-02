@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 30.09.12
- * Time: 20:48
- */
 package ru.arlevoland.bc.game.battlestage.tank {
 import flash.display.Sprite;
 

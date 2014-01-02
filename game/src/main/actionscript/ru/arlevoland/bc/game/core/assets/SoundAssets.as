@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 27.06.12
- * Time: 0:03
- */
 package ru.arlevoland.bc.game.core.assets {
 import flash.media.Sound;
 

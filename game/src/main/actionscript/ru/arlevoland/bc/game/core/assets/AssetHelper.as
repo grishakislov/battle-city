@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 11.06.12
- * Time: 17:27
- */
 package ru.arlevoland.bc.game.core.assets {
 public class AssetHelper {
     public static function convertStringToHex(string:String):uint {

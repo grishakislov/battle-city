@@ -1,7 +1,3 @@
-/**
- * @author arlechin
- * @author antivoland
- */
 package ru.arlevoland.bc.game.power_on {
 import flash.display.Bitmap;
 import flash.display.BitmapData;

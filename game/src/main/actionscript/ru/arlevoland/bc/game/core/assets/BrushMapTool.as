@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 07.07.12
- * Time: 4:01
- */
 package ru.arlevoland.bc.game.core.assets {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
@@ -14,10 +9,6 @@ import ru.arlevoland.bc.game.core.assets.model.TileAsset;
 import ru.arlevoland.bc.game.bcb.model.BrushMap;
 
 internal class BrushMapTool {
-
-    /*
-    Отрисовывает рисунок из карты брашей
-     */
 
     public static function renderBrushMap(model:BrushMap):TileAsset {
         var tiles:Bitmap = new Resources.TILES();

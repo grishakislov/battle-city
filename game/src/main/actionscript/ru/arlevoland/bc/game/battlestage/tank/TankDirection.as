@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 31.05.12
- * Time: 22:42
- */
 package ru.arlevoland.bc.game.battlestage.tank {
 public class TankDirection {
 

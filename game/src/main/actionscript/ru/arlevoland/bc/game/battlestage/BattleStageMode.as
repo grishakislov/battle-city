@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 09.08.12
- * Time: 2:17
- */
 package ru.arlevoland.bc.game.battlestage {
 public class BattleStageMode {
 

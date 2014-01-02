@@ -1,7 +1,3 @@
-/**
- * @author arlechin
- * @author antivoland
- */
 package ru.arlevoland.bc.game {
 import ru.arlevoland.bc.game.battlestage.BattleScreen;
 import ru.arlevoland.bc.game.battlestage.battleground.Battleground;

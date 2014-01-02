@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 12.06.12
- * Time: 13:44
- */
 package ru.arlevoland.bc.editor {
 import flash.display.Sprite;
 

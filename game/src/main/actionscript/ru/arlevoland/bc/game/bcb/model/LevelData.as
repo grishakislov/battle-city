@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 30.05.12
- * Time: 9:04
- */
 package ru.arlevoland.bc.game.bcb.model {
 import ru.arlevoland.bc.GameSettings;
 

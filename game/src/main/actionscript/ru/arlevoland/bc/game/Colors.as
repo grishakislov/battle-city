@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 12.04.12
- * Time: 0:03
- */
 package ru.arlevoland.bc.game {
 
 public class Colors {

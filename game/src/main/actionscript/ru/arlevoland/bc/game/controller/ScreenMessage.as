@@ -1,6 +1,3 @@
-/**
- * @author antivoland
- */
 package ru.arlevoland.bc.game.controller {
 public class ScreenMessage {
     public static const FINISHED:String = "FINISHED";

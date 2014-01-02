@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 12.06.12
- * Time: 15:43
- */
 package ru.arlevoland.bc.editor {
 public class Resources {
 

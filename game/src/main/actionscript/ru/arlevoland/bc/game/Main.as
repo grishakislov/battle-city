@@ -1,8 +1,4 @@
-﻿/**
- * @author arlechin
- * @author antivoland
- */
-package ru.arlevoland.bc.game {
+﻿package ru.arlevoland.bc.game {
 import flash.display.Sprite;
 import flash.display.Stage;
 

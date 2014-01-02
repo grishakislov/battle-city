@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 08.07.12
- * Time: 23:20
- */
 package ru.arlevoland.bc.game {
 import ru.arlevoland.bc.game.controller.IGameScreen;
 import ru.arlevoland.bc.game.core.debug.GameError;

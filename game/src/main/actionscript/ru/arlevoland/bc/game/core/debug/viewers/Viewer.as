@@ -1,7 +1,3 @@
-/**
- * @author arlechin
- * @author antivoland
- */
 package ru.arlevoland.bc.game.core.debug.viewers {
 import flash.events.Event;
 

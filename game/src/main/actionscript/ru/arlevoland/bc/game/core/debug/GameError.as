@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 30.05.12
- * Time: 10:00
- */
 package ru.arlevoland.bc.game.core.debug {
 import flash.errors.IllegalOperationError;
 

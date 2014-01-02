@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 30.05.12
- * Time: 9:07
- */
 package ru.arlevoland.bc.game.core.assets {
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.bcb.model.LevelData;

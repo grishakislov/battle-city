@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 02.07.12
- * Time: 23:46
- */
 package ru.arlevoland.bc.game.bcb.model {
 public class Byte {
 

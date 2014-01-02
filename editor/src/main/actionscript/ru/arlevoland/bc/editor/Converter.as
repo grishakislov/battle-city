@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 12.06.12
- * Time: 15:16
- */
 package ru.arlevoland.bc.editor {
 import flash.geom.Point;
 import flash.net.FileReference;

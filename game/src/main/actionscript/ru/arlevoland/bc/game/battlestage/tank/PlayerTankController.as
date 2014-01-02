@@ -1,8 +1,3 @@
-/**
- * @author arlechin
- * Date: 09.08.12
- * Time: 17:07
- */
 package ru.arlevoland.bc.game.battlestage.tank {
 import flash.events.EventDispatcher;
 
