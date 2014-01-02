@@ -1,15 +1,14 @@
 /**
  * @author arlechin
- * Date: 05.07.12
- * Time: 2:57
+ * @author antivoland
  */
 package ru.arlevoland.bc.game.core.debug {
 public class LogMessageType {
-
     public static const LOG_MANAGER_INITIALIZED:String = "Log Manager Initialized";
     public static const INIT_KEYBOARD_MANAGER:String = "Initialize Keyboard Manager";
     public static const INIT_BCB_LOADER:String = "Initialize BCB Loader";
     public static const INIT_LEVEL_DATA_MANAGER:String = "Initialize Level Data Manager";
+    public static const INIT_TITLE:String = "Initialize Title";
 
     public static const INIT_GAME:String = "Game Started";
 
@@ -27,6 +26,5 @@ public class LogMessageType {
     public static const TITLE_DESTROYED:String = "Title Destroyed";
     public static const BATTLE_STAGE_STARTED:String = "Battle Stage Started";
     public static const BATTLE_STAGE_DESTROYED:String = "Battle Stage Destroyed";
-
 }
 }

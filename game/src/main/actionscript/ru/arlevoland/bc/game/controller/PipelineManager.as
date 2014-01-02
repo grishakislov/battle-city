@@ -13,5 +13,11 @@ public class PipelineManager {
         }
         return channel;
     }
+
+    public function dispatchGameEvent(eventName:String, src:*):void {
+        var message:ScreenMessage = new ScreenMessage(eventName, src);
+        var channelName:String = PipelineChannel.SCREEN;  // TODO: move to signature
+        getPipeLine(channelName).push(message);
+    }
 }
 }

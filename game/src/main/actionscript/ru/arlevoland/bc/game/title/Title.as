@@ -87,7 +87,7 @@ public class Title extends GameScreen {
     }
 
     override public function run(data:* = undefined):void {
-        Main.getKeyboardManager().addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
+        App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
         Ticker.addEventListener(TickerEvent.TICK, onTick);
     }
 
@@ -138,7 +138,7 @@ public class Title extends GameScreen {
 
     private function onMenuSelected(e:TitleEvent):void {
         selectedPosition = e.position;
-        Main.getPipelineManager().dispatchGameEvent(ScreenMessage.FINISHED, this);
+        App.pipelineManager.dispatchGameEvent(ScreenMessage.FINISHED, this);
     }
 
     private var tileSize:uint;

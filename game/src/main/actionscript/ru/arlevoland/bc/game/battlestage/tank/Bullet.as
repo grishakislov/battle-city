@@ -191,7 +191,7 @@ internal class Bullet extends AnimatedObject implements IActor {
     }
 
     private function playShootSound():void {
-        Main.getSfxManager().playShoot();
+        App.sfxManager.playShoot();
     }
 
     private function start():void {

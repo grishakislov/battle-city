@@ -99,7 +99,7 @@ public class BattleScreen extends GameScreen {
         world.initialize(levelId);
         world.initializePlayerTank(previousStageResult.playerLevel);
         worldBackground.addChild(world);
-        App.battleground = world;
+        App.battleground = world; // TODO: move to Main
     }
 
     private var preloader:BattleStagePreloader;

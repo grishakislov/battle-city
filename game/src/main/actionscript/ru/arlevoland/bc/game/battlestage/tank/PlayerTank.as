@@ -7,6 +7,8 @@
 package ru.arlevoland.bc.game.battlestage.tank {
 import flash.geom.Point;
 
+import ru.arlevoland.bc.game.App;
+
 import ru.arlevoland.bc.game.Main;
 
 import ru.arlevoland.bc.game.GameSettings;
@@ -213,15 +215,15 @@ public class PlayerTank extends BaseTank {
 
     //Sound
     private function playIdleSound():void {
-        Main.getSfxManager().playEngine1();
+        App.sfxManager.playEngine1();
     }
 
     private function playMovingSound():void {
-        Main.getSfxManager().playEngine2();
+        App.sfxManager.playEngine2();
     }
 
     private function stopSound():void {
-        Main.getSfxManager().stop();
+        App.sfxManager.stop();
     }
 
     //ITank

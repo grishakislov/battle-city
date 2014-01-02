@@ -53,7 +53,7 @@ internal class TankCursor extends BaseScreen {
     override protected function onAddedToStage(e:Event):void {
         super.onAddedToStage(e);
         Ticker.addEventListener(TickerEvent.TICK, onTick);
-        Main.getKeyboardManager().addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
+        App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
     private function onTick(e:Event):void {
@@ -93,7 +93,7 @@ internal class TankCursor extends BaseScreen {
     private function selectMenu():void {
         dispatchEvent(new TitleEvent(TitleEvent.MENU_SELECTED, _position));
         removeEventListener(Event.ENTER_FRAME, onTick);
-        Main.getKeyboardManager().removeEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
+        App.keyboardManager.removeEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
     private var _position:int;

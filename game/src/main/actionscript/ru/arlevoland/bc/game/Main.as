@@ -6,8 +6,12 @@ package ru.arlevoland.bc.game {
 import flash.display.Sprite;
 import flash.display.Stage;
 
+import ru.arlevoland.bc.game.battlestage.BattleScreen;
+
 import ru.arlevoland.bc.game.bcb.BCBLoader;
 import ru.arlevoland.bc.game.controller.PipelineManager;
+import ru.arlevoland.bc.game.core.assets.AssetManager;
+import ru.arlevoland.bc.game.core.assets.LevelDataManager;
 import ru.arlevoland.bc.game.core.debug.LogManager;
 import ru.arlevoland.bc.game.core.debug.LogMessageType;
 import ru.arlevoland.bc.game.core.debug.viewers.Viewer;
@@ -15,6 +19,7 @@ import ru.arlevoland.bc.game.keyboard.KeyboardManager;
 import ru.arlevoland.bc.game.power_on.PowerOnEffect;
 import ru.arlevoland.bc.game.sfx.SfxManager;
 import ru.arlevoland.bc.game.time.Ticker;
+import ru.arlevoland.bc.game.title.Title;
 
 [SWF(width="768", height="672", frameRate="60", backgroundColor="#000000")]
 public class Main extends Sprite {
@@ -37,7 +42,6 @@ public class Main extends Sprite {
         initPipelineManager();
         initPowerOnEffect();
 
-        /* TODO: fix'n'uncomment
         initAssetManager();
         initLevelDataManager();
 
@@ -45,6 +49,7 @@ public class Main extends Sprite {
 
         initBattleStage();
 
+        /* TODO: fix'n'uncomment
         initGameController();
         */
     }
@@ -82,27 +87,21 @@ public class Main extends Sprite {
         addChild(App.powerOnEffect);
     }
 
-    /* TODO: fix'n'uncomment
-    private static function initLevelDataManager():void {
-        App.levelDataManager = new LevelDataManager();
-        App.logManager.showMessage(LogMessageType.INIT_LEVEL_DATA_MANAGER);
-        App.levelDataManager.initialize();
-    }
-
-    private static function initGameController():void {
-        App.gameController = new GameScreenController();
-        App.logManager.showMessage(LogMessageType.INIT_GAME_CONTROLLER);
-        App.gameController.initialize();
-    }
-
     private function initAssetManager():void {
         App.assetManager = new AssetManager();
         App.logManager.showMessage(LogMessageType.INIT_ASSET_MANAGER);
         App.assetManager.initialize();
     }
 
+    private static function initLevelDataManager():void {
+        App.levelDataManager = new LevelDataManager();
+        App.logManager.showMessage(LogMessageType.INIT_LEVEL_DATA_MANAGER);
+        App.levelDataManager.initialize();
+    }
+
     public function initTitle():void {
         App.title = new Title();
+        App.logManager.showMessage(LogMessageType.INIT_TITLE);
         addChild(App.title);
     }
 
@@ -110,6 +109,13 @@ public class Main extends Sprite {
         App.battleStage = new BattleScreen();
         App.logManager.showMessage(LogMessageType.INIT_BATTLE_STAGE);
         addChild(App.battleStage);
+    }
+
+    /* TODO: fix'n'uncomment
+    private static function initGameController():void {
+        App.gameController = new GameScreenController();
+        App.logManager.showMessage(LogMessageType.INIT_GAME_CONTROLLER);
+        App.gameController.initialize();
     }
 
     public function initDevTools():void {

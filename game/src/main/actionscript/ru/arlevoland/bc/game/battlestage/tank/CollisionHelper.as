@@ -6,6 +6,8 @@
 package ru.arlevoland.bc.game.battlestage.tank {
 import flash.geom.Point;
 
+import ru.arlevoland.bc.game.App;
+
 import ru.arlevoland.bc.game.Main;
 
 import ru.arlevoland.bc.game.GameSettings;
@@ -119,7 +121,7 @@ internal class CollisionHelper {
         var worldPoint:Point;
         while (worldCoords.length > 0) {
             worldPoint = worldCoords.shift();
-            Main.getBattleground().applyDestruction(worldPoint, direction);
+            App.battleground.applyDestruction(worldPoint, direction);
         }
     }
 }
