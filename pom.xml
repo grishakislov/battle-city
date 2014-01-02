@@ -13,5 +13,6 @@
 
     <modules>
         <module>game</module>
+        <module>editor</module>
     </modules>
 </project>
