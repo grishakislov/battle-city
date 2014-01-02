@@ -6,6 +6,7 @@
 package ru.arlevoland.bc.editor {
 import flash.display.Sprite;
 
+import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.editor.gui.Gui;
 
 [SWF(width="512", height="448", frameRate="60"/*39?*/, backgroundColor="#333333")]

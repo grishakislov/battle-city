@@ -14,7 +14,7 @@ import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.Main;
 
 import ru.arlevoland.bc.game.GameScreen;
-import ru.arlevoland.bc.game.GameSettings;
+import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.core.assets.FontTool;
 import ru.arlevoland.bc.game.controller.ScreenMessage;
 import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;

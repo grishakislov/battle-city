@@ -6,8 +6,8 @@ package ru.arlevoland.bc.game {
 import flash.display.Sprite;
 import flash.display.Stage;
 
+import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.battlestage.BattleScreen;
-
 import ru.arlevoland.bc.game.bcb.BCBLoader;
 import ru.arlevoland.bc.game.controller.GameScreenController;
 import ru.arlevoland.bc.game.controller.PipelineManager;

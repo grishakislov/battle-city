@@ -9,7 +9,7 @@ import flash.display.Sprite;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
-import ru.arlevoland.bc.game.GameSettings;
+import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
 import ru.arlevoland.bc.game.battlestage.BattleStageDrawMode;
 import ru.arlevoland.bc.game.battlestage.BattleStageLoader;

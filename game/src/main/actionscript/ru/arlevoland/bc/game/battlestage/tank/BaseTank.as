@@ -7,7 +7,7 @@ package ru.arlevoland.bc.game.battlestage.tank {
 import flash.display.Sprite;
 import flash.geom.Point;
 
-import ru.arlevoland.bc.game.GameSettings;
+import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.core.animation.AnimatedObject;
 import ru.arlevoland.bc.game.core.debug.GameError;
 

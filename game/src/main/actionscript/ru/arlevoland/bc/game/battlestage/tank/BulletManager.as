@@ -6,7 +6,7 @@
 package ru.arlevoland.bc.game.battlestage.tank {
 import flash.display.Sprite;
 
-import ru.arlevoland.bc.game.GameSettings;
+import ru.arlevoland.bc.GameSettings;
 
 public class BulletManager {
     public function BulletManager() {

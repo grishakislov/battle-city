@@ -15,7 +15,7 @@ import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.Colors;
 import ru.arlevoland.bc.game.BaseScreen;
 import ru.arlevoland.bc.game.Main;
-import ru.arlevoland.bc.game.GameSettings;
+import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.core.assets.FontTool;
 import ru.arlevoland.bc.game.battlestage.BattleStageDrawMode;
 import ru.arlevoland.bc.game.battlestage.BattleStageLoader;

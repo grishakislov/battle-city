@@ -11,7 +11,7 @@ import ru.arlevoland.bc.game.App;
 
 import ru.arlevoland.bc.game.Main;
 
-import ru.arlevoland.bc.game.GameSettings;
+import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.core.assets.FontTool;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
 

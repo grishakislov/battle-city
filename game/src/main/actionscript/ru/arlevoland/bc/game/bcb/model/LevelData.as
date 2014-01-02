@@ -4,7 +4,7 @@
  * Time: 9:04
  */
 package ru.arlevoland.bc.game.bcb.model {
-import ru.arlevoland.bc.game.GameSettings;
+import ru.arlevoland.bc.GameSettings;
 
 public class LevelData {
 

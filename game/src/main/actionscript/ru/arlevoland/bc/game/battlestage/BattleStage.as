@@ -10,7 +10,7 @@ import flash.display.MovieClip;
 
 import ru.arlevoland.bc.game.Colors;
 import ru.arlevoland.bc.game.GameScreen;
-import ru.arlevoland.bc.game.GameSettings;
+import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.battlestage.battleground.Battleground;
 import ru.arlevoland.bc.game.model.StageResult;
 

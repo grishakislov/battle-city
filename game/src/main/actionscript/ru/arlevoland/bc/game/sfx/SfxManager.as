@@ -10,7 +10,7 @@ import flash.media.SoundChannel;
 
 import ru.arlevoland.bc.game.Main;
 
-import ru.arlevoland.bc.game.GameSettings;
+import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.core.assets.SoundAssets;
 import ru.arlevoland.bc.game.time.Ticker;
 import ru.arlevoland.bc.game.time.TickerEvent;

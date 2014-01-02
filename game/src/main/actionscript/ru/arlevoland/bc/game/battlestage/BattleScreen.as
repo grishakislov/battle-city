@@ -13,7 +13,7 @@ import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.Colors;
 import ru.arlevoland.bc.game.Main;
 import ru.arlevoland.bc.game.GameScreen;
-import ru.arlevoland.bc.game.GameSettings;
+import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.battlestage.battle_stage_preloader.BattleStagePreloader;
 import ru.arlevoland.bc.game.battlestage.battleground.Battleground;
 import ru.arlevoland.bc.game.model.StageResult;

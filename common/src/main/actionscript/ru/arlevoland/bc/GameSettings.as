@@ -3,7 +3,7 @@
  * Date: 11.04.12
  * Time: 23:48
  */
-package ru.arlevoland.bc.game {
+package ru.arlevoland.bc {
 import flash.geom.Point;
 
 public class GameSettings {

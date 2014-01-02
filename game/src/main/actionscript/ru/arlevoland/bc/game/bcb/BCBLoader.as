@@ -7,7 +7,7 @@ package ru.arlevoland.bc.game.bcb {
 import flash.geom.Point;
 import flash.utils.ByteArray;
 
-import ru.arlevoland.bc.game.GameSettings;
+import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.core.assets.Resources;
 import ru.arlevoland.bc.game.bcb.model.BrushMap;
 import ru.arlevoland.bc.game.bcb.model.FitData;

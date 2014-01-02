@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.arlevoland.bc</groupId>
-    <artifactId>bc-game</artifactId>
+    <artifactId>bc-common</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>swf</packaging>
+    <packaging>swc</packaging>
 
-    <name>Battle City game</name>
-    <url>https://github.com/grishakislov/battle-city/game/</url>
+    <name>Battle City common</name>
+    <url>https://github.com/grishakislov/battle-city/common/</url>
 
     <build>
         <sourceDirectory>src/main/actionscript</sourceDirectory>
@@ -20,7 +20,6 @@
                 <version>4.2-beta</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <sourceFile>ru/arlevoland/bc/game/Main.as</sourceFile>
                     <skipTests>true</skipTests>
                     <storepass/>
                     <staticLinkRuntimeSharedLibraries>true</staticLinkRuntimeSharedLibraries>
@@ -41,12 +40,6 @@
             <artifactId>flex-framework</artifactId>
             <version>4.5.1.21328</version>
             <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>ru.arlevoland.bc</groupId>
-            <artifactId>bc-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>swc</type>
         </dependency>
     </dependencies>
 
