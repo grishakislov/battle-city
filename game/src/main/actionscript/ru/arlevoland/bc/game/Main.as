@@ -1,31 +1,20 @@
 ﻿/**
  * @author arlechin
- * Date: 11.04.12
- * Time: 23:38
+ * @author antivoland
  */
-
 package ru.arlevoland.bc.game {
 import flash.display.Sprite;
 import flash.display.Stage;
 
-import ru.arlevoland.bc.game.battlestage.BattleScreen;
 import ru.arlevoland.bc.game.bcb.BCBLoader;
-import ru.arlevoland.bc.game.controller.GameScreenController;
-import ru.arlevoland.bc.game.core.assets.AssetManager;
-import ru.arlevoland.bc.game.core.assets.LevelDataManager;
-import ru.arlevoland.bc.game.core.debug.DevTools;
 import ru.arlevoland.bc.game.core.debug.LogManager;
 import ru.arlevoland.bc.game.core.debug.LogMessageType;
-import ru.arlevoland.bc.game.core.debug.viewers.Viewer;
 import ru.arlevoland.bc.game.keyboard.KeyboardManager;
-import ru.arlevoland.bc.game.power_on.PowerOnEffect;
 import ru.arlevoland.bc.game.sfx.SfxManager;
 import ru.arlevoland.bc.game.time.Ticker;
-import ru.arlevoland.bc.game.title.Title;
 
 [SWF(width="768", height="672", frameRate="60", backgroundColor="#000000")]
 public class Main extends Sprite {
-
     private const msg:String = "Прикольный у тебя декомпилятор.";
 
     public function Main() {
@@ -42,6 +31,7 @@ public class Main extends Sprite {
         initBCBLoader();
 
         initSFXManager();
+        /* TODO: fix'n'uncomment
         initPowerOnEffect();
 
         initAssetManager();
@@ -52,7 +42,7 @@ public class Main extends Sprite {
         initBattleStage();
 
         initGameController();
-
+        */
     }
 
     private static function initLogManager():void {
@@ -72,6 +62,18 @@ public class Main extends Sprite {
         App.bcbLoader.initialize();
     }
 
+    public function initSFXManager():void {
+        App.sfxManager = new SfxManager();
+        App.logManager.showMessage(LogMessageType.INIT_SFX_MANAGER);
+    }
+
+    /* TODO: fix'n'uncomment
+    public function initPowerOnEffect():void {
+        App.powerOnEffect = new PowerOnEffect();
+        App.logManager.showMessage(LogMessageType.INIT_POWER_ON);
+        addChild(App.powerOnEffect);
+    }
+
     private static function initLevelDataManager():void {
         App.levelDataManager = new LevelDataManager();
         App.logManager.showMessage(LogMessageType.INIT_LEVEL_DATA_MANAGER);
@@ -82,17 +84,6 @@ public class Main extends Sprite {
         App.gameController = new GameScreenController();
         App.logManager.showMessage(LogMessageType.INIT_GAME_CONTROLLER);
         App.gameController.initialize();
-    }
-
-    public function initSFXManager():void {
-        App.sfxManager = new SfxManager();
-        App.logManager.showMessage(LogMessageType.INIT_SFX_MANAGER);
-    }
-
-    public function initPowerOnEffect():void {
-        App.powerOnEffect = new PowerOnEffect();
-        App.logManager.showMessage(LogMessageType.INIT_POWER_ON);
-        addChild(App.powerOnEffect);
     }
 
     private function initAssetManager():void {
@@ -128,8 +119,8 @@ public class Main extends Sprite {
         App.viewer.stop();
         instance.removeChild(App.viewer);
         App.viewer = null;
-
     }
+    */
 
     public static function getStage():Stage {
         return instance.stage;

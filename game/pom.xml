@@ -20,7 +20,16 @@
                 <version>4.2-beta</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <sourceFile>ru/arlevoland/bc/game/Main.as</sourceFile>
+                    <skipTests>true</skipTests>
+                    <storepass/>
+                    <staticLinkRuntimeSharedLibraries>true</staticLinkRuntimeSharedLibraries>
+                    <optimize>true</optimize>
                     <debug>true</debug>
+                    <useNetwork>false</useNetwork>
+                    <compilerWarnings>
+                        <warn-no-constructor>false</warn-no-constructor>
+                    </compilerWarnings>
                 </configuration>
             </plugin>
         </plugins>

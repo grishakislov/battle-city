@@ -74,13 +74,13 @@ public class SfxManager {
 
 
     private function soundIsBackground(sound:Sound):Boolean {
-        return sound == Main.getSfxManager().sounds.ENGINE_1 ||
-                sound == Main.getSfxManager().sounds.ENGINE_2;
+        return sound == getSounds().ENGINE_1 ||
+                sound == getSounds().ENGINE_2;
     }
 
     private function backgroundPlays():Boolean {
-        return currentSound == Main.getSfxManager().sounds.ENGINE_1 ||
-                currentSound == Main.getSfxManager().sounds.ENGINE_2;
+        return currentSound == getSounds().ENGINE_1 ||
+                currentSound == getSounds().ENGINE_2;
     }
 
     private function onSoundComplete(e:Event):void {
