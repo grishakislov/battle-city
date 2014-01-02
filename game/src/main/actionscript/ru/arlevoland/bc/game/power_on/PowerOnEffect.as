@@ -2,13 +2,10 @@ package ru.arlevoland.bc.game.power_on {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 
-import ru.arlevoland.bc.game.App;
-
-import ru.arlevoland.bc.game.GameScreen;
 import ru.arlevoland.bc.GameSettings;
-import ru.arlevoland.bc.game.Main;
-import ru.arlevoland.bc.game.controller.ScreenMessage;
-import ru.arlevoland.bc.game.controller.PipelineChannel;
+import ru.arlevoland.bc.game.App;
+import ru.arlevoland.bc.game.GameScreen;
+import ru.arlevoland.bc.game.screen_manager.GameEvent;
 import ru.arlevoland.bc.game.time.Ticker;
 import ru.arlevoland.bc.game.time.TickerEvent;
 
@@ -37,7 +34,6 @@ public class PowerOnEffect extends GameScreen {
     private function onTick(e:TickerEvent):void {
         switch (_currentFrame) {
             case getFramesForDelay(WAIT_BEFORE):
-//                    trace(_currentFrame);
                 App.sfxManager.playClick();
                 showEffect();
                 break;
@@ -45,7 +41,7 @@ public class PowerOnEffect extends GameScreen {
                 hideEffect();
                 break;
             case getFramesForDelay(WAIT_AFTER + SHOW_TIME + WAIT_BEFORE):
-                App.pipelineManager.getPipeLine(PipelineChannel.SCREEN).push(new ScreenMessage(ScreenMessage.FINISHED, this));
+                App.dispatcher.dispatchEvent(new GameEvent(GameEvent.SCREEN_FINISHED, this));
                 break;
         }
 

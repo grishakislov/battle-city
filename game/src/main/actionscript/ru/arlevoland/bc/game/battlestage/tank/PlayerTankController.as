@@ -2,9 +2,6 @@ package ru.arlevoland.bc.game.battlestage.tank {
 import flash.events.EventDispatcher;
 
 import ru.arlevoland.bc.game.App;
-
-import ru.arlevoland.bc.game.Main;
-
 import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
 

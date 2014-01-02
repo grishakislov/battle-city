@@ -14,15 +14,16 @@ public class AnimatedObject extends Sprite {
      */
 
     //Pixels per second
-    private var _pixelsPerSecond:uint;
+    private var pixelsPerSecond:uint;
 
-    private var _pixelsPerMilli:Number;
-    private var _currentPixels:Number = 0;
+    private var pixelsPerMilli:Number;
+    private var currentPixels:Number = 0;
 
-    private var _timeElapsed:Number = 0;
+    private var timeElapsed:Number = 0;
+    protected var lastDt:uint = 0;
 
-    private var _lastPixels:Number;
-    private var _pixelDelta:uint;
+    private var lastPixels:Number;
+    private var pixelDelta:uint;
 
     public function AnimatedObject() {
         Ticker.addEventListener(TickerEvent.TICK, onTick);
@@ -30,15 +31,16 @@ public class AnimatedObject extends Sprite {
     }
 
     private function onTick(event:TickerEvent):void {
-        _currentPixels += _pixelsPerMilli * event.dt;
-        var delta:uint = Math.floor(_currentPixels) - Math.floor(_lastPixels);
+        currentPixels += pixelsPerMilli * event.dt;
+        var delta:uint = Math.floor(currentPixels) - Math.floor(lastPixels);
         if (delta > 0) {
             onAnimation(delta);
-            _currentPixels -= delta;
+            currentPixels -= delta;
         }
 
-        _lastPixels = _currentPixels;
-        _timeElapsed += event.dt;
+        lastPixels = currentPixels;
+        timeElapsed += event.dt;
+        lastDt = event.dt;
     }
 
     protected function onAnimation(delta:uint):void {
@@ -55,12 +57,12 @@ public class AnimatedObject extends Sprite {
     }
 
     public function getPixelsPerSecond():uint {
-        return _pixelsPerSecond;
+        return pixelsPerSecond;
     }
 
     public function setPixelsPerSecond(value:uint):void {
-        _pixelsPerSecond = value;
-        _pixelsPerMilli = _pixelsPerSecond / 1000;
+        pixelsPerSecond = value;
+        pixelsPerMilli = pixelsPerSecond / 1000;
     }
 
     public function destroy():void {

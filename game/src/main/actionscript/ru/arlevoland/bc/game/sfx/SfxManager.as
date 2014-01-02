@@ -50,7 +50,6 @@ public class SfxManager {
         }
     }
 
-
     public function playShoot():void {
         play(getSounds().SHOOT);
     }
@@ -65,6 +64,10 @@ public class SfxManager {
 
     public function playClick():void {
         play(getSounds().CLICK);
+    }
+
+    public function playIntro():void {
+        play(getSounds().INTRO);
     }
 
 

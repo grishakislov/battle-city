@@ -25,6 +25,9 @@ public class Resources {
     [Embed(source="../../../../../../../resources/embedded/shoot.mp3")]
     public static const SHOOT:Class;
 
+    [Embed(source="../../../../../../../resources/embedded/intro.mp3")]
+    public static const INTRO:Class;
+
 
 }
 

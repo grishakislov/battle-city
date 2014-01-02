@@ -4,16 +4,13 @@ import flash.display.Sprite;
 import flash.events.Event;
 import flash.geom.Point;
 
-import ru.arlevoland.bc.game.App;
-
-import ru.arlevoland.bc.game.Main;
-
-import ru.arlevoland.bc.game.GameScreen;
 import ru.arlevoland.bc.GameSettings;
+import ru.arlevoland.bc.game.App;
+import ru.arlevoland.bc.game.GameScreen;
 import ru.arlevoland.bc.game.core.assets.FontTool;
-import ru.arlevoland.bc.game.controller.ScreenMessage;
 import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
+import ru.arlevoland.bc.game.screen_manager.GameEvent;
 import ru.arlevoland.bc.game.time.Ticker;
 import ru.arlevoland.bc.game.time.TickerEvent;
 
@@ -133,7 +130,7 @@ public class Title extends GameScreen {
 
     private function onMenuSelected(e:TitleEvent):void {
         selectedPosition = e.position;
-        App.pipelineManager.dispatchGameEvent(ScreenMessage.FINISHED, this);
+        App.dispatcher.dispatchEvent(new GameEvent(GameEvent.SCREEN_FINISHED, this));
     }
 
     private var tileSize:uint;

@@ -3,7 +3,6 @@ import flash.events.Event;
 
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
 
-[Deprecated]
 public class KeyboardManagerEvent extends Event {
 
     public static const KEY_DOWN:String = "KEY_DOWN";

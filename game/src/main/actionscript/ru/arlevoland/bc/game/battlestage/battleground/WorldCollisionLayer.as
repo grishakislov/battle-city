@@ -50,8 +50,6 @@ internal class WorldCollisionLayer extends Sprite {
         tileState = findBroken(worldPoint);
         broke(direction, worldPoint, tileState);
 
-        trace("destroyable!");
-
     }
 
     private function isDestroyable(tileName:String):Boolean {

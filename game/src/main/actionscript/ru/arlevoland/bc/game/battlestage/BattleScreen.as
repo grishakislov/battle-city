@@ -9,9 +9,10 @@ import ru.arlevoland.bc.game.Colors;
 import ru.arlevoland.bc.game.Main;
 import ru.arlevoland.bc.game.GameScreen;
 import ru.arlevoland.bc.GameSettings;
-import ru.arlevoland.bc.game.battlestage.battle_stage_preloader.BattleStagePreloader;
+import ru.arlevoland.bc.game.battlestage.battle_stage_preloader.BattleStageSplash;
 import ru.arlevoland.bc.game.battlestage.battleground.Battleground;
 import ru.arlevoland.bc.game.model.StageResult;
+import ru.arlevoland.bc.game.screen_manager.GameEvent;
 
 public class BattleScreen extends GameScreen {
 
@@ -20,16 +21,19 @@ public class BattleScreen extends GameScreen {
     override public function initialize():void {
         initializeStageBackground();
         initializeWorldBackground();
-
     }
 
     override public function run(data:* = undefined):void {
         setBackgroundVisible(false);
         previousStageResult = StageResult(data);
         showPreloader();
-        //TODO: Вставить прелоадер, повесить хэндлер
+        App.dispatcher.addEventListener(BattleScreenEvent.PRELOADER_COMPLETED, onPreloaderCompleted);
+    }
 
-//        initializeWorld(previousStageResult.getNextLevelId());
+    private function onPreloaderCompleted(event:BattleScreenEvent):void {
+        setBackgroundVisible(true);
+        App.dispatcher.removeEventListener(BattleScreenEvent.PRELOADER_COMPLETED, onPreloaderCompleted);
+        initializeWorld(previousStageResult.getNextLevelId());
     }
 
     private function setBackgroundVisible(value:Boolean):void {
@@ -38,7 +42,7 @@ public class BattleScreen extends GameScreen {
     }
 
     private function showPreloader():void {
-        preloader = new BattleStagePreloader();
+        preloader = new BattleStageSplash();
         addChild(preloader);
         preloader.initialize();
         preloader.run(previousStageResult.getNextLevelId())
@@ -97,7 +101,7 @@ public class BattleScreen extends GameScreen {
         App.battleground = world; // TODO: move to Main
     }
 
-    private var preloader:BattleStagePreloader;
+    private var preloader:BattleStageSplash;
 
     private var previousStageResult:StageResult;
 

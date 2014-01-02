@@ -4,9 +4,7 @@ import flash.events.Event;
 import flash.geom.Point;
 
 import ru.arlevoland.bc.game.App;
-
 import ru.arlevoland.bc.game.BaseScreen;
-import ru.arlevoland.bc.game.Main;
 import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
 import ru.arlevoland.bc.game.time.Ticker;

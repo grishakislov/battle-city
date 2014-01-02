@@ -1,12 +1,12 @@
 ﻿package ru.arlevoland.bc.game {
 import flash.display.Sprite;
 import flash.display.Stage;
+import flash.events.EventDispatcher;
 
 import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.battlestage.BattleScreen;
 import ru.arlevoland.bc.game.bcb.BCBLoader;
-import ru.arlevoland.bc.game.controller.GameScreenController;
-import ru.arlevoland.bc.game.controller.PipelineManager;
+import ru.arlevoland.bc.game.screen_manager.GameScreenManager;
 import ru.arlevoland.bc.game.core.assets.AssetManager;
 import ru.arlevoland.bc.game.core.assets.LevelDataManager;
 import ru.arlevoland.bc.game.core.debug.DevTools;
@@ -37,7 +37,7 @@ public class Main extends Sprite {
         initBCBLoader();
 
         initSFXManager();
-        initPipelineManager();
+        initDispatcher();
         initPowerOnEffect();
 
         initAssetManager();
@@ -72,8 +72,8 @@ public class Main extends Sprite {
         App.logManager.showMessage(LogMessageType.INIT_SFX_MANAGER);
     }
 
-    public function initPipelineManager():void {
-        App.pipelineManager = new PipelineManager();
+    public function initDispatcher():void {
+        App.dispatcher = new EventDispatcher();
         App.logManager.showMessage(LogMessageType.INIT_PIPELINE_MANAGER);
     }
 
@@ -108,9 +108,9 @@ public class Main extends Sprite {
     }
 
     private static function initGameController():void {
-        App.gameController = new GameScreenController();
+        App.screenManager = new GameScreenManager();
         App.logManager.showMessage(LogMessageType.INIT_GAME_CONTROLLER);
-        App.gameController.initialize();
+        App.screenManager.initialize();
     }
 
     public function initDevTools():void {

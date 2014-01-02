@@ -1,5 +1,5 @@
 package ru.arlevoland.bc.game {
-import ru.arlevoland.bc.game.controller.IGameScreen;
+import ru.arlevoland.bc.game.screen_manager.IGameScreen;
 import ru.arlevoland.bc.game.core.debug.GameError;
 
 public class GameScreen extends BaseScreen implements IGameScreen {
