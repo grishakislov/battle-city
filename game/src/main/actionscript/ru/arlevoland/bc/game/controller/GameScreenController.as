@@ -25,8 +25,8 @@ public class GameScreenController extends Sprite {
         App.powerOnEffect.run();
         currentGameScreen = App.powerOnEffect;
         App.logManager.showMessage(LogMessageType.POWER_ON_EFFECT_STARTED);
-        Main.getPipelineManager().getPipeLine(PipelineChannel.SCREEN).add(ScreenMessage.FINISHED, onFinish);
-        Main.getKeyboardManager().addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
+        App.pipelineManager.getPipeLine(PipelineChannel.SCREEN).add(ScreenMessage.FINISHED, onFinish);
+        App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
     private function onFinish(e:ScreenMessage):void {

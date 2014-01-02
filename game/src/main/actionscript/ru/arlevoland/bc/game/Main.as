@@ -9,9 +9,11 @@ import flash.display.Stage;
 import ru.arlevoland.bc.game.battlestage.BattleScreen;
 
 import ru.arlevoland.bc.game.bcb.BCBLoader;
+import ru.arlevoland.bc.game.controller.GameScreenController;
 import ru.arlevoland.bc.game.controller.PipelineManager;
 import ru.arlevoland.bc.game.core.assets.AssetManager;
 import ru.arlevoland.bc.game.core.assets.LevelDataManager;
+import ru.arlevoland.bc.game.core.debug.DevTools;
 import ru.arlevoland.bc.game.core.debug.LogManager;
 import ru.arlevoland.bc.game.core.debug.LogMessageType;
 import ru.arlevoland.bc.game.core.debug.viewers.Viewer;
@@ -49,9 +51,7 @@ public class Main extends Sprite {
 
         initBattleStage();
 
-        /* TODO: fix'n'uncomment
         initGameController();
-        */
     }
 
     private static function initLogManager():void {
@@ -111,7 +111,6 @@ public class Main extends Sprite {
         addChild(App.battleStage);
     }
 
-    /* TODO: fix'n'uncomment
     private static function initGameController():void {
         App.gameController = new GameScreenController();
         App.logManager.showMessage(LogMessageType.INIT_GAME_CONTROLLER);
@@ -123,7 +122,6 @@ public class Main extends Sprite {
         App.devTools.initialize();
         addChild(App.devTools);
     }
-    */
 
     public static function showPauseScreen():void {
         App.viewer = new Viewer();

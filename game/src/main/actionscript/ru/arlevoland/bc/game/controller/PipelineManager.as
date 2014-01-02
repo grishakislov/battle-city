@@ -8,7 +8,7 @@ public class PipelineManager {
     public function getPipeLine(channelName:String):PipelineChannel {
         var channel:PipelineChannel = channels[channelName];
         if (channel == null) {
-            channel = new PipelineChannel();
+            channel = new PipelineChannel(this);
             channels[channelName] = channel;
         }
         return channel;
