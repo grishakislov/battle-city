@@ -2,6 +2,9 @@ package ru.arlevoland.bc.game.sfx {
 import flash.events.Event;
 import flash.media.Sound;
 import flash.media.SoundChannel;
+import flash.media.SoundTransform;
+
+import ru.arlevoland.bc.game.App;
 
 import ru.arlevoland.bc.game.Main;
 
@@ -15,12 +18,38 @@ public class SfxManager {
     private static const BEGIN:int = 46;
     private static const END:int = 75;
 
+    private static const VOLUME_DOWN:SoundTransform = new SoundTransform(0);
+    private static const VOLUME_UP:SoundTransform = new SoundTransform(1);
+
     public function initialize():void {
 
     }
 
+    public function playOnly(sound:Sound):void {
+        onlySoundPlaying = true;
+        if (channel != null) {
+            channel.soundTransform = VOLUME_DOWN;
+        }
+        secondChannel = sound.play();
+        secondChannel.addEventListener(Event.SOUND_COMPLETE, onOnlySoundCompleted)
+    }
+
+    private function onOnlySoundCompleted(event:Event):void {
+        if (channel != null) {
+            channel.soundTransform = VOLUME_UP;
+        }
+        secondChannel = null;
+        onlySoundPlaying = false;
+    }
+
     public function play(sound:Sound, loop:int = SfxLoop.NO_LOOP):void {
         if (!GameSettings.SOUND_ENABLED) return;
+
+        if (onlySoundPlaying) {
+            if (loop != SfxLoop.INFINITE_LOOP) {
+                return;
+            }
+        }
 
         if (backgroundPlays() && !soundIsBackground(sound)) {
             if (secondChannel != null) {
@@ -42,7 +71,10 @@ public class SfxManager {
                 break;
             case SfxLoop.INFINITE_LOOP:
                 channel = currentSound.play(BEGIN);
-                Ticker.addEventListener(TickerEvent.FPS, onEnterFrame);
+                if (onlySoundPlaying) {
+                    channel.soundTransform = VOLUME_DOWN;
+                }
+                Ticker.addEventListener(TickerEvent.TICK, onEnterFrame);
                 break;
             default:
                 currentSound.play(0, loop);
@@ -67,7 +99,7 @@ public class SfxManager {
     }
 
     public function playIntro():void {
-        play(getSounds().INTRO);
+        playOnly(getSounds().INTRO);
     }
 
 
@@ -120,6 +152,8 @@ public class SfxManager {
     private function getSounds():SoundAssets {
         return sounds;
     }
+
+    private var onlySoundPlaying:Boolean;
 
     private var lastPosition:Number;
     private var paused:Boolean = false;
