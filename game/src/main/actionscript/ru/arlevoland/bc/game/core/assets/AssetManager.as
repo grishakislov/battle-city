@@ -10,6 +10,8 @@ import flash.display.BitmapData;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
+import ru.arlevoland.bc.game.App;
+
 import ru.arlevoland.bc.game.Main;
 
 import ru.arlevoland.bc.game.GameSettings;
@@ -32,9 +34,9 @@ public class AssetManager {
         _tiles = new Resources.TILES();
         _tankTiles = new Resources.TANKS();
 
-        _fitData = Main.getBcbLoader().fitData;
-        _tankFitData = Main.getBcbLoader().tankFitData;
-        _brushMaps = Main.getBcbLoader().brushMaps;
+        _fitData = App.bcbLoader.fitData;
+        _tankFitData = App.bcbLoader.tankFitData;
+        _brushMaps = App.bcbLoader.brushMaps;
 
         _tileAssets = new TileDictionary();
 
@@ -189,7 +191,7 @@ public class AssetManager {
     private var _tankFitData:Array = [];
     private var _brushMaps:Array = [];
 
-    [ArrayElementType("ru.arlechin.battlecity.core.assets.model.TileAsset")]
+    [ArrayElementType("ru.arlevoland.bc.game.core.assets.model.TileAsset")]
     private var _tileAssets:TileDictionary;
 
 }

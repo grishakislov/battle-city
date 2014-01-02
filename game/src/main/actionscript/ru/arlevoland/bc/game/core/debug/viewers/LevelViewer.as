@@ -10,6 +10,8 @@ import flash.events.Event;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
+import ru.arlevoland.bc.game.App;
+
 import ru.arlevoland.bc.game.Colors;
 import ru.arlevoland.bc.game.BaseScreen;
 import ru.arlevoland.bc.game.Main;
@@ -35,7 +37,7 @@ public class LevelViewer extends BaseScreen {
         _tileSize = GameSettings.TILE_SIZE;
         _mapTileSize = GameSettings.MAP_TILE_SIZE;
         _grid = new Bitmap(new BitmapData(_mapTileSize * GameSettings.WORLD_WIDTH, _mapTileSize * GameSettings.WORLD_HEIGHT, true, 0x00FF0000));
-        _totalLevels = Main.getLevelDataManager().getLevelsTotal();
+        _totalLevels = App.levelDataManager.getLevelsTotal();
 
         _background = new Bitmap(new BitmapData(_screenSize.x, _screenSize.y, false, Colors.MAIN_BG));
         _levelBackground = new Bitmap(new BitmapData(_mapTileSize * GameSettings.WORLD_WIDTH, _mapTileSize * GameSettings.WORLD_HEIGHT, false, Colors.SCENE_BG));
@@ -62,16 +64,16 @@ public class LevelViewer extends BaseScreen {
     }
 
     public function stop():void {
-        Main.getKeyboardManager().removeEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
+        App.keyboardManager.removeEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
     public function start():void {
-        Main.getKeyboardManager().addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
+        App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
 
     override protected function onAddedToStage(e:Event):void {
-        Main.getKeyboardManager().addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
+        App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
     private function onKeyDown(e:KeyboardManagerEvent):void {

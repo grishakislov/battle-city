@@ -62,7 +62,7 @@ public class BattleStageLoader {
         var tileSize:uint = GameSettings.MAP_TILE_SIZE;
         var resultBitmapData:BitmapData = new BitmapData(w * tileSize, h * tileSize, true, 0x000000);
         var resultBitmap:Bitmap = new Bitmap(resultBitmapData);
-        var data:LevelData = Main.getLevelDataManager().getLevelDataByID(stageId);
+        var data:LevelData = App.levelDataManager.getLevelDataByID(stageId);
         var currentTile:TileAsset;
 
         for (y = 0; y < h; y++) {
@@ -129,7 +129,7 @@ public class BattleStageLoader {
         var y:int;
         var cx:int;
         var cy:int;
-        var data:LevelData = Main.getLevelDataManager().getLevelDataByID(stageId);
+        var data:LevelData = App.levelDataManager.getLevelDataByID(stageId);
 
         for (y = 0; y < h * w; y++) {
             result.push(-999);

@@ -7,9 +7,12 @@ import flash.display.Sprite;
 import flash.display.Stage;
 
 import ru.arlevoland.bc.game.bcb.BCBLoader;
+import ru.arlevoland.bc.game.controller.PipelineManager;
 import ru.arlevoland.bc.game.core.debug.LogManager;
 import ru.arlevoland.bc.game.core.debug.LogMessageType;
+import ru.arlevoland.bc.game.core.debug.viewers.Viewer;
 import ru.arlevoland.bc.game.keyboard.KeyboardManager;
+import ru.arlevoland.bc.game.power_on.PowerOnEffect;
 import ru.arlevoland.bc.game.sfx.SfxManager;
 import ru.arlevoland.bc.game.time.Ticker;
 
@@ -31,9 +34,10 @@ public class Main extends Sprite {
         initBCBLoader();
 
         initSFXManager();
-        /* TODO: fix'n'uncomment
+        initPipelineManager();
         initPowerOnEffect();
 
+        /* TODO: fix'n'uncomment
         initAssetManager();
         initLevelDataManager();
 
@@ -67,13 +71,18 @@ public class Main extends Sprite {
         App.logManager.showMessage(LogMessageType.INIT_SFX_MANAGER);
     }
 
-    /* TODO: fix'n'uncomment
+    public function initPipelineManager():void {
+        App.pipelineManager = new PipelineManager();
+        App.logManager.showMessage(LogMessageType.INIT_PIPELINE_MANAGER);
+    }
+
     public function initPowerOnEffect():void {
         App.powerOnEffect = new PowerOnEffect();
         App.logManager.showMessage(LogMessageType.INIT_POWER_ON);
         addChild(App.powerOnEffect);
     }
 
+    /* TODO: fix'n'uncomment
     private static function initLevelDataManager():void {
         App.levelDataManager = new LevelDataManager();
         App.logManager.showMessage(LogMessageType.INIT_LEVEL_DATA_MANAGER);
@@ -108,6 +117,7 @@ public class Main extends Sprite {
         App.devTools.initialize();
         addChild(App.devTools);
     }
+    */
 
     public static function showPauseScreen():void {
         App.viewer = new Viewer();
@@ -120,7 +130,6 @@ public class Main extends Sprite {
         instance.removeChild(App.viewer);
         App.viewer = null;
     }
-    */
 
     public static function getStage():Stage {
         return instance.stage;

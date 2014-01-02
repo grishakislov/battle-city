@@ -45,16 +45,16 @@ public class TileViewer extends BaseScreen {
     }
 
     public function stop():void {
-        Main..getKeyboardManager().removeEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
+        App.keyboardManager.removeEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
     public function start():void {
-        Main.getKeyboardManager().addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
+        App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
 
     override protected function onAddedToStage(e:Event):void {
-        Main.getKeyboardManager().addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
+        App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
     private function onKeyDown(e:KeyboardManagerEvent):void {

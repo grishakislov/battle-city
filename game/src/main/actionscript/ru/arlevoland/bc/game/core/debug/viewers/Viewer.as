@@ -1,18 +1,16 @@
 /**
  * @author arlechin
- * Date: 14.07.12
- * Time: 15:49
+ * @author antivoland
  */
 package ru.arlevoland.bc.game.core.debug.viewers {
 import flash.events.Event;
 
+import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.BaseScreen;
-import ru.arlevoland.bc.game.Main;
 import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
 
 public class Viewer extends BaseScreen {
-
     public function initialize():void {
         _tileViewer = new TileViewer();
         _tileViewer.initialize();
@@ -22,13 +20,13 @@ public class Viewer extends BaseScreen {
     }
 
     override protected function onAddedToStage(e:Event):void {
-        Main.getKeyboardManager().addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
+        App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
     public function stop():void {
         _tileViewer = null;
         _levelViewer = null;
-        Main.getKeyboardManager().removeEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
+        App.keyboardManager.removeEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
     private function onKeyDown(event:KeyboardManagerEvent):void {
@@ -64,9 +62,7 @@ public class Viewer extends BaseScreen {
         }
     }
 
-
     private var _tileViewer:TileViewer;
     private var _levelViewer:LevelViewer;
-
 }
 }

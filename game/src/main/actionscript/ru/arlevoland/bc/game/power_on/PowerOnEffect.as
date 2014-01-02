@@ -1,27 +1,22 @@
 /**
  * @author arlechin
- * Date: 26.06.12
- * Time: 21:40
+ * @author antivoland
  */
 package ru.arlevoland.bc.game.power_on {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
-import flash.events.Event;
 
-import ru.arlevoland.bc.game.*;
-import ru.arlevoland.bc.game.controller.PipelineChannel;
-import ru.arlevoland.bc.game.controller.ScreenMessage;
-import ru.arlevoland.bc.game.controller.ScreenMessage;
-import ru.arlevoland.bc.game.core.pipeline.Pipeline;
-import ru.arlevoland.bc.game.sfx.SfxLoop;
-import ru.arlevoland.bc.game.time.Ticker;
-import ru.arlevoland.bc.game.time.TickerEvent;
+import ru.arlevoland.bc.game.App;
+
 import ru.arlevoland.bc.game.GameScreen;
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.Main;
+import ru.arlevoland.bc.game.controller.ScreenMessage;
+import ru.arlevoland.bc.game.controller.PipelineChannel;
+import ru.arlevoland.bc.game.time.Ticker;
+import ru.arlevoland.bc.game.time.TickerEvent;
 
 public class PowerOnEffect extends GameScreen {
-
     private static const Y_OFFSET:uint = 5;
     private static const MAX_LINES:uint = 3;
     private static const MIN_LINES:uint = 1;
@@ -47,14 +42,14 @@ public class PowerOnEffect extends GameScreen {
         switch (_currentFrame) {
             case getFramesForDelay(WAIT_BEFORE):
 //                    trace(_currentFrame);
-                Main.getSfxManager().playClick();
+                App.sfxManager.playClick();
                 showEffect();
                 break;
             case getFramesForDelay(SHOW_TIME + WAIT_BEFORE):
                 hideEffect();
                 break;
             case getFramesForDelay(WAIT_AFTER + SHOW_TIME + WAIT_BEFORE):
-                Main.getPipelineManager().getPipeLine(PipelineChannel.SCREEN).push(new ScreenMessage(ScreenMessage.FINISHED, this));
+                App.pipelineManager.getPipeLine(PipelineChannel.SCREEN).push(new ScreenMessage(ScreenMessage.FINISHED, this));
                 break;
         }
 
