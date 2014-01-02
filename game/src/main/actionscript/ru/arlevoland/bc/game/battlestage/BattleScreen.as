@@ -9,7 +9,7 @@ import ru.arlevoland.bc.game.Colors;
 import ru.arlevoland.bc.game.Main;
 import ru.arlevoland.bc.game.GameScreen;
 import ru.arlevoland.bc.GameSettings;
-import ru.arlevoland.bc.game.battlestage.battle_stage_preloader.BattleStageSplash;
+import ru.arlevoland.bc.game.battlestage.battle_stage_splash.BattleStageSplash;
 import ru.arlevoland.bc.game.battlestage.battleground.Battleground;
 import ru.arlevoland.bc.game.model.StageResult;
 import ru.arlevoland.bc.game.screen_manager.GameEvent;

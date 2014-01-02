@@ -1,4 +1,4 @@
-package ru.arlevoland.bc.game.battlestage.battle_stage_preloader {
+package ru.arlevoland.bc.game.battlestage.battle_stage_splash {
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.GameScreen;
 import ru.arlevoland.bc.game.battlestage.BattleScreenEvent;

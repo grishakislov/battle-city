@@ -1,4 +1,4 @@
-package ru.arlevoland.bc.game.battlestage.battle_stage_preloader {
+package ru.arlevoland.bc.game.battlestage.battle_stage_splash {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.geom.Point;
