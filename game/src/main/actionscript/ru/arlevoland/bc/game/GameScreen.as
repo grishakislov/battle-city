@@ -27,6 +27,7 @@ public class GameScreen extends BaseScreen implements IGameScreen {
         } else {
             Main.showPauseScreen();
         }
+        App.sfxManager.pause();
         super.pause();
     }
 }

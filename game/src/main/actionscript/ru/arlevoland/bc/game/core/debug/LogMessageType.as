@@ -13,7 +13,7 @@ public class LogMessageType {
     public static const INIT_SFX_MANAGER:String = "Initialize SFX Manager";
     public static const INIT_GAME_CONTROLLER:String = "Initialize Game Controller";
     public static const INIT_GAME_EVENT_DISPATCHER:String = "Initialize Game Event Dispatcher";
-    public static const INIT_PIPELINE_MANAGER:String = "Initialize Pipeline Manager";
+    public static const INIT_PIPELINE:String = "Initialize Pipeline";
     public static const INIT_POWER_ON:String = "Initialize PowerOn Effect";
     public static const INIT_BATTLE_STAGE:String = "Initialize Battle Stage";
     public static const POWER_ON_EFFECT_STARTED:String = "PowerOn Effect Started";

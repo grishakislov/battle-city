@@ -1,5 +1,5 @@
 package ru.arlevoland.bc.game.model {
-import ru.arlevoland.bc.game.battlestage.tank.PlayerTankLevel;
+import ru.arlevoland.bc.game.battle_screen.tank.PlayerTankLevel;
 
 public class StageResult {
 

@@ -25,6 +25,8 @@ public class AnimatedObject extends Sprite {
     private var lastPixels:Number;
     private var pixelDelta:uint;
 
+    private var paused:Boolean = false;
+
     public function AnimatedObject() {
         Ticker.addEventListener(TickerEvent.TICK, onTick);
         setPixelsPerSecond(GameSettings.DEFAULT_SPEED);
@@ -41,6 +43,15 @@ public class AnimatedObject extends Sprite {
         lastPixels = currentPixels;
         timeElapsed += event.dt;
         lastDt = event.dt;
+    }
+
+    public function pause():void {
+        if (paused) {
+            Ticker.addEventListener(TickerEvent.TICK, onTick);
+        } else {
+            Ticker.removeEventListener(TickerEvent.TICK, onTick);
+        }
+        paused = !paused;
     }
 
     protected function onAnimation(delta:uint):void {
