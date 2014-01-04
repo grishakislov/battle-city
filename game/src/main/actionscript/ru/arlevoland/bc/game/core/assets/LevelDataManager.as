@@ -6,7 +6,7 @@ import ru.arlevoland.bc.game.core.debug.GameError;
 public class LevelDataManager {
 
     public function initialize():void {
-        levels = App.bcbLoader.levels;
+        levels = App.bcbLoader.getLevels();
     }
 
     public function getLevelDataByID(levelID:uint):LevelData {

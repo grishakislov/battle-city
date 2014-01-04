@@ -14,25 +14,23 @@ import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
 
 public class TileViewer extends BaseScreen {
 
-
     private static const HEAD_Y_POSITION:uint = 10;
     private static const NAME_Y_POSITION:uint = 60;
     private static const VISUAL_Y_POSITION:uint = 100;
 
     public function initialize():void {
-        _screenSize = GameSettings.NATIVE_NES_SCREEN_SIZE;
-        _background = new Bitmap(new BitmapData(_screenSize.x, _screenSize.y, false, 0xFF000000));
+        screenSize = GameSettings.NATIVE_NES_SCREEN_SIZE;
+        background = new Bitmap(new BitmapData(screenSize.x, screenSize.y, false, 0xFF000000));
 
-        _totalTiles = App.assetManager.getTileCollectionSize();
+        totalTiles = App.assetManager.getTileCollectionSize();
 
-
-        _head = FontTool.drawLine("TILE VIEWER");
-        _head.x = Math.round(_screenSize.x / 2 - _head.bitmapData.width / 2);
-        _head.y = HEAD_Y_POSITION;
-        addChild(_background);
-        addChild(_head);
-        addChild(_tileName);
-        addChild(_tileVisual);
+        head = FontTool.drawLine("TILE VIEWER");
+        head.x = Math.round(screenSize.x / 2 - head.bitmapData.width / 2);
+        head.y = HEAD_Y_POSITION;
+        addChild(background);
+        addChild(head);
+        addChild(tileName);
+        addChild(tileVisual);
         updateScreen();
 
     }
@@ -53,12 +51,12 @@ public class TileViewer extends BaseScreen {
     private function onKeyDown(e:KeyboardManagerEvent):void {
         switch (e.getCommand()) {
             case KeyCommand.LEFT:
-                _currentTileNum--;
-                if (_currentTileNum < 0) _currentTileNum = _totalTiles - 1;
+                currentTileNum--;
+                if (currentTileNum < 0) currentTileNum = totalTiles - 1;
                 break;
             case KeyCommand.RIGHT:
-                _currentTileNum++;
-                if (_currentTileNum == _totalTiles) _currentTileNum = 0;
+                currentTileNum++;
+                if (currentTileNum == totalTiles) currentTileNum = 0;
                 break;
         }
 
@@ -67,31 +65,31 @@ public class TileViewer extends BaseScreen {
 
     private function updateScreen():void {
         clear();
-        _tile = App.assetManager.getTileAssetByIndex(_currentTileNum);
-        _tileName.bitmapData = FontTool.drawLine(_tile.getName()).bitmapData.clone();
-        _tileName.x = Math.round(_screenSize.x / 2 - _tileName.bitmapData.width / 2);
-        _tileName.y = NAME_Y_POSITION;
-        _tileVisual.bitmapData = _tile.getBitmap().bitmapData.clone();//TODO копировать надо в модели
-        _tileVisual.x = Math.round(_screenSize.x / 2 - _tileVisual.bitmapData.width / 2);
-        _tileVisual.y = VISUAL_Y_POSITION;
-        addChild(_tileName);
-        addChild(_tileVisual);
+        tile = App.assetManager.getTileAssetByIndex(currentTileNum);
+        tileName.bitmapData = FontTool.drawLine(tile.getName()).bitmapData.clone();
+        tileName.x = Math.round(screenSize.x / 2 - tileName.bitmapData.width / 2);
+        tileName.y = NAME_Y_POSITION;
+        tileVisual.bitmapData = tile.getBitmap().bitmapData.clone();//TODO копировать надо в модели
+        tileVisual.x = Math.round(screenSize.x / 2 - tileVisual.bitmapData.width / 2);
+        tileVisual.y = VISUAL_Y_POSITION;
+        addChild(tileName);
+        addChild(tileVisual);
     }
 
     private function clear():void {
-        removeChild(_tileName);
-        removeChild(_tileVisual);  //TODO: иногда здесь ловится исключение
+        removeChild(tileName);
+        removeChild(tileVisual);  //TODO: иногда здесь ловится исключение
     }
 
 
-    private var _totalTiles:int;
-    private var _currentTileNum:int = 0;
-    private var _screenSize:Point;
-    private var _background:Bitmap;
-    private var _head:Bitmap;
-    private var _tileName:Bitmap = new Bitmap();
-    private var _tileVisual:Bitmap = new Bitmap();
-    private var _tile:TileAsset;
+    private var totalTiles:int;
+    private var currentTileNum:int = 0;
+    private var screenSize:Point;
+    private var background:Bitmap;
+    private var head:Bitmap;
+    private var tileName:Bitmap = new Bitmap();
+    private var tileVisual:Bitmap = new Bitmap();
+    private var tile:TileAsset;
 
 }
 }

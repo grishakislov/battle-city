@@ -7,14 +7,14 @@ public class TitleEvent extends Event {
 
     public function TitleEvent(type:String, position:int) {
         super(type, false, false);
-        _position = position;
+        position = position;
     }
 
-    public function get position():int {
-        return _position;
+    public function getPosition():int {
+        return position;
     }
 
-    private var _position:int;
+    private var position:int;
 
 }
 }

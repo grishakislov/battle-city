@@ -12,9 +12,9 @@ public class CollisionViewer extends PlayerTank {
         super(tankLevel, world);
     }
 
-    private var _test1:Bitmap = new Bitmap(new BitmapData(8, 8, true, 0xAA00FF00));
+    private var test1:Bitmap = new Bitmap(new BitmapData(8, 8, true, 0xAA00FF00));
 
-    private var _test2:Bitmap = new Bitmap(new BitmapData(8, 8, true, 0xAA0000BB));
+    private var test2:Bitmap = new Bitmap(new BitmapData(8, 8, true, 0xAA0000BB));
 
 }
 }

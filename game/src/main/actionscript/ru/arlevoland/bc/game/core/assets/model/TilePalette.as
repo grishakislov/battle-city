@@ -24,31 +24,31 @@ public class TilePalette {
     public static const PRELOADER_FONT:TilePalette = new TilePalette("PRELOADER_FONT", 0xFF000000, 0x00000000, 0x00000000);
 
     public function TilePalette(name:String, color0:uint, color1:uint, color2:uint):void {
-        _name = name;
-        _color0 = color0;
-        _color1 = color1;
-        _color2 = color2;
+        this.name = name;
+        this.color0 = color0;
+        this.color1 = color1;
+        this.color2 = color2;
     }
 
-    public function get color0():uint {
-        return _color0;
+    public function getColor0():uint {
+        return color0;
     }
 
-    public function get color1():uint {
-        return _color1;
+    public function getColor1():uint {
+        return color1;
     }
 
-    public function get color2():uint {
-        return _color2;
+    public function getColor2():uint {
+        return color2;
     }
 
-    public function get name():String {
-        return _name;
+    public function getName():String {
+        return name;
     }
 
-    private var _name:String;
-    private var _color0:uint;
-    private var _color1:uint;
-    private var _color2:uint;
+    private var name:String;
+    private var color0:uint;
+    private var color1:uint;
+    private var color2:uint;
 }
 }

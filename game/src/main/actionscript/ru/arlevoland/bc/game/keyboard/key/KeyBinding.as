@@ -3,20 +3,20 @@ package ru.arlevoland.bc.game.keyboard.key {
 public class KeyBinding {
 
     public function KeyBinding(command:KeyCommand, keys:Array):void {
-        _command = command;
-        _keys = keys;
+        this.command = command;
+        this.keys = keys;
     }
 
     public function getCommand():KeyCommand {
-        return _command;
+        return command;
     }
 
     public function getKeys():Array {
-        return _keys;
+        return keys;
     }
 
-    private var _command:KeyCommand;
-    private var _keys:Array;
+    private var command:KeyCommand;
+    private var keys:Array;
 
 }
 }

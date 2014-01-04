@@ -12,9 +12,9 @@ import ru.arlevoland.bc.game.bcb.model.TankFitData;
 public class BCBLoader {
 
     public function initialize():void {
-        _dataFile = new Resources.DATA();
+        dataFile = new Resources.DATA();
 //        _dataFile.uncompress();
-        loadBCB(_dataFile.readByte());
+        loadBCB(dataFile.readByte());
     }
 
     private function loadBCB(modelsInFile:uint):Array {
@@ -28,18 +28,18 @@ public class BCBLoader {
     }
 
     private function readData():void {
-        switch (_dataFile.readUTF()) {
+        switch (dataFile.readUTF()) {
             case BCBDataMarker.FIT_DATA:
-                _fitData = loadFitData(_dataFile.readByte());
+                fitData = loadFitData(dataFile.readByte());
                 break;
             case BCBDataMarker.TANK_FIT_DATA:
-                _tankFitData = loadTankFitData(_dataFile.readByte());
+                tankFitData = loadTankFitData(dataFile.readByte());
                 break;
             case BCBDataMarker.BRUSH_MAP:
-                _brushMaps = loadBrushMaps(_dataFile.readByte());
+                brushMaps = loadBrushMaps(dataFile.readByte());
                 break;
             case BCBDataMarker.LEVEL_DATA:
-                _levels = loadLevels(_dataFile.readByte());
+                levels = loadLevels(dataFile.readByte());
                 break;
         }
 
@@ -50,10 +50,10 @@ public class BCBLoader {
         var result:Array = [];
         var model:FitData;
         for (var i:uint = 0; i < length; i++) {
-            model = new FitData(_dataFile.readUTF(), _dataFile.readUTF(), _dataFile.readByte());
+            model = new FitData(dataFile.readUTF(), dataFile.readUTF(), dataFile.readByte());
 
             for (var n:uint = 0; n < model.getTilesNumber(); n++) {
-                model.pushCoordinate(new Point(_dataFile.readByte(), _dataFile.readByte()))
+                model.pushCoordinate(new Point(dataFile.readByte(), dataFile.readByte()))
             }
             result.push(model);
         }
@@ -67,7 +67,7 @@ public class BCBLoader {
         var model:TankFitData;
 
         for (var i:uint = 0; i < length; i++) {
-            model = new TankFitData(_dataFile.readUTF(), new Point(_dataFile.readByte(), _dataFile.readByte()));
+            model = new TankFitData(dataFile.readUTF(), new Point(dataFile.readByte(), dataFile.readByte()));
             result.push(model);
         }
 
@@ -79,9 +79,9 @@ public class BCBLoader {
         var result:Array = [];
         var model:BrushMap;
         for (var i:uint = 0; i < length; i++) {
-            model = new BrushMap(_dataFile.readUTF(), _dataFile.readUTF(), _dataFile.readByte(), _dataFile.readByte());
+            model = new BrushMap(dataFile.readUTF(), dataFile.readUTF(), dataFile.readByte(), dataFile.readByte());
             for (var j:uint = 0; j < model.width * model.height; j++) {
-                model.brushMap.push(_dataFile.readByte());
+                model.brushMap.push(dataFile.readByte());
             }
             result.push(model);
         }
@@ -95,9 +95,9 @@ public class BCBLoader {
         var model:LevelData;
 
         for (var i:uint = 0; i < length; i++) {
-            model = new LevelData(_dataFile.readByte());
+            model = new LevelData(dataFile.readByte());
             for (var j:uint = 0; j < GameSettings.WORLD_WIDTH * GameSettings.WORLD_HEIGHT; j++) {
-                model.levelData.push(_dataFile.readByte());
+                model.levelData.push(dataFile.readByte());
             }
             result.push(model);
         }
@@ -105,28 +105,28 @@ public class BCBLoader {
     }
 
 
-    public function get fitData():Array {
-        return _fitData;
+    public function getFitData():Array {
+        return fitData;
     }
 
-    public function get tankFitData():Array {
-        return _tankFitData;
+    public function getTankFitData():Array {
+        return tankFitData;
     }
 
-    public function get brushMaps():Array {
-        return _brushMaps;
+    public function getBrushMaps():Array {
+        return brushMaps;
     }
 
-    public function get levels():Array {
-        return _levels;
+    public function getLevels():Array {
+        return levels;
     }
 
-    private var _dataFile:ByteArray;
+    private var dataFile:ByteArray;
 
-    private var _fitData:Array;
-    private var _tankFitData:Array;
-    private var _brushMaps:Array;
-    private var _levels:Array;
+    private var fitData:Array;
+    private var tankFitData:Array;
+    private var brushMaps:Array;
+    private var levels:Array;
 
 }
 }

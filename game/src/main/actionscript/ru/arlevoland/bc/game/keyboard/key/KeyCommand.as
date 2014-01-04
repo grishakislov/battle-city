@@ -16,15 +16,15 @@ public class KeyCommand {
 
 
     public function KeyCommand(command:String) {
-        _command = command;
+        this.command = command;
     }
 
 
     public function getCommandId():String {
-        return _command;
+        return command;
     }
 
-    private var _command:String;
+    private var command:String;
 
 }
 }

@@ -64,7 +64,6 @@ public class GameScreenManager extends Sprite {
         }
     }
 
-
     private var currentGameScreen:IGameScreen;
 
 }

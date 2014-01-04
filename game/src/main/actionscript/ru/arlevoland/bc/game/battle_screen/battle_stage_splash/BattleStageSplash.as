@@ -18,7 +18,7 @@ public class BattleStageSplash extends BaseScreen {
         App.dispatcher.dispatchEvent(new BattleScreenEvent(BattleScreenEvent.SPLASH_DESTROYED));
     }
 
-    internal function onComplete() {
+    internal function onComplete():void {
         App.dispatcher.dispatchEvent(new BattleScreenEvent(BattleScreenEvent.SPLASH_COMPLETED));
     }
 

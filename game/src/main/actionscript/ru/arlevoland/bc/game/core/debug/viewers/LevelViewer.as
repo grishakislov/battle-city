@@ -25,33 +25,33 @@ public class LevelViewer extends BaseScreen {
     private static const GRID_THICKNESS:uint = 1;
 
     public function initialize():void {
-        _screenSize = GameSettings.NATIVE_NES_SCREEN_SIZE;
-        _tileSize = GameSettings.TILE_SIZE;
-        _mapTileSize = GameSettings.MAP_TILE_SIZE;
-        _grid = new Bitmap(new BitmapData(_mapTileSize * GameSettings.WORLD_WIDTH, _mapTileSize * GameSettings.WORLD_HEIGHT, true, 0x00FF0000));
-        _totalLevels = App.levelDataManager.getLevelsTotal();
+        screenSize = GameSettings.NATIVE_NES_SCREEN_SIZE;
+        tileSize = GameSettings.TILE_SIZE;
+        mapTileSize = GameSettings.MAP_TILE_SIZE;
+        grid = new Bitmap(new BitmapData(mapTileSize * GameSettings.WORLD_WIDTH, mapTileSize * GameSettings.WORLD_HEIGHT, true, 0x00FF0000));
+        totalLevels = App.levelDataManager.getLevelsTotal();
 
-        _background = new Bitmap(new BitmapData(_screenSize.x, _screenSize.y, false, Colors.MAIN_BG));
-        _levelBackground = new Bitmap(new BitmapData(_mapTileSize * GameSettings.WORLD_WIDTH, _mapTileSize * GameSettings.WORLD_HEIGHT, false, Colors.SCENE_BG));
-        _levelBackground.x = LEVEL_X * _tileSize;
-        _levelBackground.y = LEVEL_Y * _tileSize;
+        background = new Bitmap(new BitmapData(screenSize.x, screenSize.y, false, Colors.MAIN_BG));
+        levelBackground = new Bitmap(new BitmapData(mapTileSize * GameSettings.WORLD_WIDTH, mapTileSize * GameSettings.WORLD_HEIGHT, false, Colors.SCENE_BG));
+        levelBackground.x = LEVEL_X * tileSize;
+        levelBackground.y = LEVEL_Y * tileSize;
 
-        _level = new Bitmap(new BitmapData(_mapTileSize * GameSettings.WORLD_WIDTH, _mapTileSize * GameSettings.WORLD_HEIGHT, true, Colors.SCENE_BG));
-        _water = new WorldWaterLayer();
+        level = new Bitmap(new BitmapData(mapTileSize * GameSettings.WORLD_WIDTH, mapTileSize * GameSettings.WORLD_HEIGHT, true, Colors.SCENE_BG));
+        water = new WorldWaterLayer();
 
-        _levelId = new Bitmap(new BitmapData(_tileSize * 2, _tileSize, false, 0x000000));
+        levelId = new Bitmap(new BitmapData(tileSize * 2, tileSize, false, 0x000000));
 
         drawGrid();
-        _grid.visible = false;
-        _grid.x = LEVEL_X * _tileSize;
-        _grid.y = LEVEL_Y * _tileSize;
-        addChild(_background);
-        addChild(_levelBackground);
+        grid.visible = false;
+        grid.x = LEVEL_X * tileSize;
+        grid.y = LEVEL_Y * tileSize;
+        addChild(background);
+        addChild(levelBackground);
 
-        addChild(_level);
-        addChild(_water);
-        addChild(_levelId);
-        addChild(_grid);
+        addChild(level);
+        addChild(water);
+        addChild(levelId);
+        addChild(grid);
         updateScreen();
     }
 
@@ -71,46 +71,45 @@ public class LevelViewer extends BaseScreen {
     private function onKeyDown(e:KeyboardManagerEvent):void {
         switch (e.getCommand()) {
             case KeyCommand.LEFT:
-                _currentLevel--;
-                if (_currentLevel < 1) _currentLevel = _totalLevels;
+                currentLevel--;
+                if (currentLevel < 1) currentLevel = totalLevels;
                 updateScreen();
                 break;
             case KeyCommand.RIGHT:
-                _currentLevel++;
-                if (_currentLevel > _totalLevels) _currentLevel = 1;
+                currentLevel++;
+                if (currentLevel > totalLevels) currentLevel = 1;
                 updateScreen();
                 break;
             case KeyCommand.GRID_TRIGGER:
-                _gridTrigger ? _grid.visible = true : _grid.visible = false;
-                _gridTrigger = !_gridTrigger;
+                gridTrigger ? grid.visible = true : grid.visible = false;
+                gridTrigger = !gridTrigger;
                 updateScreen();
                 break;
         }
     }
 
-
     private function updateScreen():void {
         clear();
-        _level.bitmapData.dispose();
-        _level = MapLoader.drawStageToBitmap(_currentLevel, BattleStageDrawMode.NO_WATER);
-        _water.initialize(_currentLevel);
-        var line:String = _currentLevel < 10 ? "0" + _currentLevel.toString() : _currentLevel.toString();
-        _levelId = FontTool.drawLine(line);
+        level.bitmapData.dispose();
+        level = MapLoader.drawStageToBitmap(currentLevel, BattleStageDrawMode.NO_WATER);
+        water.initialize(currentLevel);
+        var line:String = currentLevel < 10 ? "0" + currentLevel.toString() : currentLevel.toString();
+        levelId = FontTool.drawLine(line);
 
-        _water.x = _level.x = LEVEL_X * _tileSize;
-        _water.y = _level.y = LEVEL_Y * _tileSize;
-        _levelId.x = LEVEL_ID_X * _tileSize;
-        _levelId.y = LEVEL_ID_Y * _tileSize;
+        water.x = level.x = LEVEL_X * tileSize;
+        water.y = level.y = LEVEL_Y * tileSize;
+        levelId.x = LEVEL_ID_X * tileSize;
+        levelId.y = LEVEL_ID_Y * tileSize;
 
-        addChild(_level);
-        addChild(_levelId);
-        addChild(_grid);
+        addChild(level);
+        addChild(levelId);
+        addChild(grid);
     }
 
     private function clear():void {
-        removeChild(_level);
-        removeChild(_levelId);
-        removeChild(_grid);
+        removeChild(level);
+        removeChild(levelId);
+        removeChild(grid);
     }
 
     private function drawGrid():void {
@@ -124,32 +123,32 @@ public class LevelViewer extends BaseScreen {
         }
 
         function drawHorLine(y:uint):void {
-            var rect:Rectangle = new Rectangle(0, y, GameSettings.MAP_TILE_SIZE * _mapTileSize, GRID_THICKNESS);
-            _grid.bitmapData.fillRect(rect, Colors.GRID);
+            var rect:Rectangle = new Rectangle(0, y, GameSettings.MAP_TILE_SIZE * mapTileSize, GRID_THICKNESS);
+            grid.bitmapData.fillRect(rect, Colors.GRID);
         }
 
         function drawVertLine(x:uint):void {
-            var rect:Rectangle = new Rectangle(x, 0, GRID_THICKNESS, GameSettings.MAP_TILE_SIZE * _mapTileSize);
-            _grid.bitmapData.fillRect(rect, Colors.GRID);
+            var rect:Rectangle = new Rectangle(x, 0, GRID_THICKNESS, GameSettings.MAP_TILE_SIZE * mapTileSize);
+            grid.bitmapData.fillRect(rect, Colors.GRID);
         }
 
-        addChild(_grid);
+        addChild(grid);
     }
 
-    private var _screenSize:Point;
-    private var _tileSize:uint;
-    private var _mapTileSize:uint;
-    private var _currentLevel:int = 1;
-    private var _totalLevels:uint;
+    private var screenSize:Point;
+    private var tileSize:uint;
+    private var mapTileSize:uint;
+    private var currentLevel:int = 1;
+    private var totalLevels:uint;
 
-    private var _level:Bitmap;
-    private var _water:WorldWaterLayer;
+    private var level:Bitmap;
+    private var water:WorldWaterLayer;
 
-    private var _levelId:Bitmap;
-    private var _background:Bitmap;
-    private var _levelBackground:Bitmap;
-    private var _grid:Bitmap = new Bitmap();
-    private var _gridTrigger:Boolean = true;
+    private var levelId:Bitmap;
+    private var background:Bitmap;
+    private var levelBackground:Bitmap;
+    private var grid:Bitmap = new Bitmap();
+    private var gridTrigger:Boolean = true;
 
 
 }

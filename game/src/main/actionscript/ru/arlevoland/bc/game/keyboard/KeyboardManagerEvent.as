@@ -10,14 +10,14 @@ public class KeyboardManagerEvent extends Event {
 
     public function KeyboardManagerEvent(type:String, command:KeyCommand) {
         super(type, false, false);
-        _command = command;
+        this.command = command;
     }
 
 
     public function getCommand():KeyCommand {
-        return _command;
+        return command;
     }
 
-    private var _command:KeyCommand;
+    private var command:KeyCommand;
 }
 }

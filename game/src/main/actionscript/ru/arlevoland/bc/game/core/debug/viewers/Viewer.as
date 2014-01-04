@@ -7,11 +7,12 @@ import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
 
 public class Viewer extends BaseScreen {
+
     public function initialize():void {
-        _tileViewer = new TileViewer();
-        _tileViewer.initialize();
-        _levelViewer = new LevelViewer();
-        _levelViewer.initialize();
+        tileViewer = new TileViewer();
+        tileViewer.initialize();
+        levelViewer = new LevelViewer();
+        levelViewer.initialize();
         showTileViewer();
     }
 
@@ -20,8 +21,8 @@ public class Viewer extends BaseScreen {
     }
 
     public function stop():void {
-        _tileViewer = null;
-        _levelViewer = null;
+        tileViewer = null;
+        levelViewer = null;
         App.keyboardManager.removeEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
@@ -37,28 +38,28 @@ public class Viewer extends BaseScreen {
     }
 
     private function showTileViewer():void {
-        if (contains(_levelViewer)) {
-            removeChild(_levelViewer);
-            _levelViewer.stop();
+        if (contains(levelViewer)) {
+            removeChild(levelViewer);
+            levelViewer.stop();
         }
-        if (!contains(_tileViewer)) {
-            addChild(_tileViewer);
-            _tileViewer.start();
+        if (!contains(tileViewer)) {
+            addChild(tileViewer);
+            tileViewer.start();
         }
     }
 
     private function showLevelViewer():void {
-        if (contains(_tileViewer)) {
-            removeChild(_tileViewer);
-            _tileViewer.stop();
+        if (contains(tileViewer)) {
+            removeChild(tileViewer);
+            tileViewer.stop();
         }
-        if (!contains(_levelViewer)) {
-            addChild(_levelViewer);
-            _levelViewer.start();
+        if (!contains(levelViewer)) {
+            addChild(levelViewer);
+            levelViewer.start();
         }
     }
 
-    private var _tileViewer:TileViewer;
-    private var _levelViewer:LevelViewer;
+    private var tileViewer:TileViewer;
+    private var levelViewer:LevelViewer;
 }
 }

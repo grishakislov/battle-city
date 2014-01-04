@@ -12,8 +12,8 @@ public class KeyboardManager extends EventDispatcher {
     public function initialize():void {
         Main.getStage().addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
         Main.getStage().addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
-        _keyManager = new KeyManager();
-        _keyManager.initialize();
+        keyManager = new KeyManager();
+        keyManager.initialize();
     }
 
     public function bindKey(command:KeyCommand, keyCodes:Array):void {
@@ -22,16 +22,16 @@ public class KeyboardManager extends EventDispatcher {
     }
 
     private function onKeyDown(e:KeyboardEvent):void {
-        var command:KeyCommand = _keyManager.getCommandByKey(e.keyCode);
+        var command:KeyCommand = keyManager.getCommandByKey(e.keyCode);
         if (command != null) dispatchEvent(new KeyboardManagerEvent(KeyboardManagerEvent.KEY_DOWN, command));
     }
 
     private function onKeyUp(e:KeyboardEvent):void {
-        var command:KeyCommand = _keyManager.getCommandByKey(e.keyCode);
+        var command:KeyCommand = keyManager.getCommandByKey(e.keyCode);
         if (command != null) dispatchEvent(new KeyboardManagerEvent(KeyboardManagerEvent.KEY_UP, command));
     }
 
-    private var _keyManager:KeyManager;
+    private var keyManager:KeyManager;
 
 }
 }

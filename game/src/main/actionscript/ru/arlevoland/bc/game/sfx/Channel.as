@@ -30,7 +30,7 @@ public class Channel {
             return;
         }
         muted = !muted;
-        setMute();
+        applyMute();
 
     }
 
@@ -50,7 +50,7 @@ public class Channel {
         }
 
         playing = !paused;
-        setMute();
+        applyMute();
     }
 
     public function stop():void {
@@ -61,7 +61,7 @@ public class Channel {
         return playing;
     }
 
-    private function setMute():void {
+    private function applyMute():void {
         channel.soundTransform = muted ? VOLUME_DOWN : VOLUME_UP;
     }
 
@@ -93,7 +93,7 @@ public class Channel {
         if (channel.position >= sound.length - END) {
             channel.stop();
             playCurrentSound();
-            setMute();
+            applyMute();
         }
     }
 

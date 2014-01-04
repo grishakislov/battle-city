@@ -1,16 +1,16 @@
 package ru.arlevoland.bc.game.title {
+import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.geom.Point;
 
 import ru.arlevoland.bc.game.App;
-import ru.arlevoland.bc.game.BaseScreen;
 import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
 import ru.arlevoland.bc.game.time.Ticker;
 import ru.arlevoland.bc.game.time.TickerEvent;
 
-internal class TankCursor extends BaseScreen {
+internal class TankCursor extends MovieClip {
 
     private static const STATE_1:String = "PT1_R1";
     private static const STATE_2:String = "PT1_R2";
@@ -28,48 +28,47 @@ internal class TankCursor extends BaseScreen {
 
     public function TankCursor() {
 
-        _body = new Sprite();
-        _state1 = App.assetManager.copyTileAsset(STATE_1);
-        _state2 = App.assetManager.copyTileAsset(STATE_2);
-        _state2.visible = false;
-        _body.addChild(_state1);
-        _body.addChild(_state2);
-        addChild(_body);
+        body = new Sprite();
+        state1 = App.assetManager.copyTileAsset(STATE_1);
+        state2 = App.assetManager.copyTileAsset(STATE_2);
+        state2.visible = false;
+        body.addChild(state1);
+        body.addChild(state2);
+        addChild(body);
 
         x = POSITIONS[DEFAULT_POSITION].x;
         y = POSITIONS[DEFAULT_POSITION].y;
-        _position = DEFAULT_POSITION;
+        position = DEFAULT_POSITION;
 
         addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
     }
 
-    override protected function onAddedToStage(e:Event):void {
-        super.onAddedToStage(e);
+    protected function onAddedToStage(e:Event):void {
         Ticker.addEventListener(TickerEvent.TICK, onTick);
         App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
     private function onTick(e:Event):void {
 
-        if (_currentFrame == SKIP_FRAMES) {
-            _currentFrame = 0;
-            _state1.visible = (!_state1.visible);
-            _state2.visible = (!_state2.visible);
+        if (frame == SKIP_FRAMES) {
+            frame = 0;
+            state1.visible = (!state1.visible);
+            state2.visible = (!state2.visible);
         }
 
-        _currentFrame++;
+        frame++;
     }
 
     private function onKeyDown(e:KeyboardManagerEvent):void {
         switch (e.getCommand()) {
             case KeyCommand.UP:
-                _position--;
-                if (_position < 0) _position = 2;
+                position--;
+                if (position < 0) position = 2;
                 applyPosition();
                 break;
             case KeyCommand.DOWN:
-                _position++;
-                if (_position > 2) _position = 0;
+                position++;
+                if (position > 2) position = 0;
                 applyPosition();
                 break;
             case KeyCommand.ENTER:
@@ -79,21 +78,21 @@ internal class TankCursor extends BaseScreen {
     }
 
     private function applyPosition():void {
-        x = POSITIONS[_position].x;
-        y = POSITIONS[_position].y;
+        x = POSITIONS[position].x;
+        y = POSITIONS[position].y;
     }
 
     private function selectMenu():void {
-        dispatchEvent(new TitleEvent(TitleEvent.MENU_SELECTED, _position));
+        dispatchEvent(new TitleEvent(TitleEvent.MENU_SELECTED, position));
         removeEventListener(Event.ENTER_FRAME, onTick);
         App.keyboardManager.removeEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
-    private var _position:int;
-    private var _currentFrame:uint = 0;
-    private var _body:Sprite;
-    private var _state1:Sprite;
-    private var _state2:Sprite;
+    private var position:int;
+    private var frame:uint = 0;
+    private var body:Sprite;
+    private var state1:Sprite;
+    private var state2:Sprite;
 
 }
 }

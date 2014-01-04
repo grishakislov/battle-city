@@ -89,7 +89,6 @@ public class Title extends GameScreen {
         } else {
             if (!animationCompleted) Ticker.removeEventListener(TickerEvent.TICK, onTick);
         }
-        if (tankCursor != null) tankCursor.pause();
         super.pause();
     }
 
@@ -129,7 +128,7 @@ public class Title extends GameScreen {
     }
 
     private function onMenuSelected(e:TitleEvent):void {
-        selectedPosition = e.position;
+        selectedPosition = e.getPosition();
         App.dispatcher.dispatchEvent(new GameEvent(GameEvent.SCREEN_FINISHED, this));
     }
 

@@ -22,14 +22,14 @@ public class AssetManager {
 
     public function initialize():void {
 
-        _tiles = new Resources.TILES();
-        _tankTiles = new Resources.TANKS();
+        tiles = new Resources.TILES();
+        tankTiles = new Resources.TANKS();
 
-        _fitData = App.bcbLoader.fitData;
-        _tankFitData = App.bcbLoader.tankFitData;
-        _brushMaps = App.bcbLoader.brushMaps;
+        fitData = App.bcbLoader.getFitData();
+        tankFitData = App.bcbLoader.getTankFitData();
+        brushMaps = App.bcbLoader.getBrushMaps();
 
-        _tileAssets = new TileDictionary();
+        tileAssets = new TileDictionary();
 
         processFitData();
         processTankFitData();
@@ -37,19 +37,19 @@ public class AssetManager {
     }
 
     private function processFitData():void {
-        for each (var m:FitData in _fitData) {
+        for each (var m:FitData in fitData) {
             var tile:TileAsset = fitTiles(m);
             tile.setPalette(TilePalette[m.getPalette()]);
-            _tileAssets.add(tile);
+            tileAssets.add(tile);
         }
     }
 
     private function processTankFitData():void {
-        for each (var m:TankFitData in _tankFitData) {
+        for each (var m:TankFitData in tankFitData) {
             var tile:TileAsset = fitTankTiles(m);
             m.getName().substr(0, 2) == "PT" ? tile.setPalette(TilePalette.PLAYER_TANK)
                     : tile.setPalette(TilePalette.AI_TANK);
-            _tileAssets.add(tile);
+            tileAssets.add(tile);
 
         }
     }
@@ -65,23 +65,23 @@ public class AssetManager {
             bitmap = new Bitmap(new BitmapData(tileSize * model.getTilesNumber(), tileSize, true, 0x00000000));
             coords = model.getCoordAt(0);
             rect = new Rectangle(coords.x * tileSize, coords.y * tileSize, tileSize * model.getTilesNumber(), tileSize);
-            bitmap.bitmapData.copyPixels(_tiles.bitmapData, rect, new Point(0, 0));
+            bitmap.bitmapData.copyPixels(tiles.bitmapData, rect, new Point(0, 0));
 
         } else if (model.getTilesNumber() == 1) {
 
             bitmap = new Bitmap(new BitmapData(tileSize, tileSize, true, 0x00000000));
             coords = model.getCoordAt(0);
             rect = new Rectangle(coords.x * tileSize, coords.y * tileSize, tileSize, tileSize);
-            bitmap.bitmapData.copyPixels(_tiles.bitmapData, rect, new Point(0, 0));
+            bitmap.bitmapData.copyPixels(tiles.bitmapData, rect, new Point(0, 0));
 
         } else if (model.getTilesNumber() == 2) {
 
             bitmap = new Bitmap(new BitmapData(tileSize, tileSize * 2, true, 0x00000000));
             coords = model.getCoordAt(0);
             rect = new Rectangle(coords.x * tileSize, coords.y * tileSize, tileSize, tileSize);
-            bitmap.bitmapData.copyPixels(_tiles.bitmapData, rect, new Point(0, 0));
+            bitmap.bitmapData.copyPixels(tiles.bitmapData, rect, new Point(0, 0));
             rect = new Rectangle((coords.x + 1) * tileSize, coords.y * tileSize, tileSize, tileSize);
-            bitmap.bitmapData.copyPixels(_tiles.bitmapData, rect, new Point(0, tileSize));
+            bitmap.bitmapData.copyPixels(tiles.bitmapData, rect, new Point(0, tileSize));
 
         } else if (model.getTilesNumber() == 4 || model.getTilesNumber() == 16) {
             var side:int = Math.sqrt(model.getTilesNumber());
@@ -105,7 +105,7 @@ public class AssetManager {
             for each (var p:Point in targetPoints) {
                 coords = coordsArray.shift();
                 rect = new Rectangle(coords.x * tileSize, coords.y * tileSize, tileSize, tileSize);
-                bitmap.bitmapData.copyPixels(_tiles.bitmapData, rect, p);
+                bitmap.bitmapData.copyPixels(tiles.bitmapData, rect, p);
             }
 
         } else {
@@ -142,7 +142,7 @@ public class AssetManager {
         for each (var p:Point in targetPoints) {
             coords = coordsArray.shift();
             rect = new Rectangle(coords.x * tileSize, coords.y * tileSize, tileSize, tileSize);
-            bitmap.bitmapData.copyPixels(_tankTiles.bitmapData, rect, p);
+            bitmap.bitmapData.copyPixels(tankTiles.bitmapData, rect, p);
         }
 
         result = new TileAsset(model.getName(), bitmap);
@@ -151,39 +151,38 @@ public class AssetManager {
 
 
     private function drawBrushMaps():void {
-        for each (var m:BrushMap in _brushMaps) {
+        for each (var m:BrushMap in brushMaps) {
             var tile:TileAsset = BrushMapTool.renderBrushMap(m);
             tile.setPalette(TilePalette[m.palette]);
-            _tileAssets.add(tile);
+            tileAssets.add(tile);
         }
     }
 
 
     public function getTileAsset(name:String):TileAsset {
-        return _tileAssets.getTileAssetByName(name);
+        return tileAssets.getTileAssetByName(name);
     }
 
     public function copyTileAsset(name:String):TileAsset {
-        return _tileAssets.getTileAssetByName(name).getClone();
+        return tileAssets.getTileAssetByName(name).getClone();
     }
 
     public function getTileAssetByIndex(index:int):TileAsset {
-        return _tileAssets.getTileAssetByIndex(index);
+        return tileAssets.getTileAssetByIndex(index);
     }
 
     public function getTileCollectionSize():uint {
-        return _tileAssets.getLength();
+        return tileAssets.getLength();
     }
 
-    private var _tiles:Bitmap;
-    private var _tankTiles:Bitmap;
+    private var tiles:Bitmap;
+    private var tankTiles:Bitmap;
 
-    private var _fitData:Array = [];
-    private var _tankFitData:Array = [];
-    private var _brushMaps:Array = [];
+    private var fitData:Array = [];
+    private var tankFitData:Array = [];
+    private var brushMaps:Array = [];
 
-    [ArrayElementType("ru.arlevoland.bc.game.core.assets.model.TileAsset")]
-    private var _tileAssets:TileDictionary;
+    private var tileAssets:TileDictionary;
 
 }
 }
