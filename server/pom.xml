@@ -135,6 +135,7 @@
     </dependencies>
 
     <repositories>
+        <!-- netty nightly builds -->
         <repository>
             <id>sonatype-repo</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
