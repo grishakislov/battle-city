@@ -4,8 +4,9 @@ import flash.display.Stage;
 import flash.events.EventDispatcher;
 
 import ru.arlevoland.bc.GameSettings;
-import ru.arlevoland.bc.game.battlestage.BattleScreen;
+import ru.arlevoland.bc.game.battle_screen.BattleScreen;
 import ru.arlevoland.bc.game.bcb.BCBLoader;
+import ru.arlevoland.bc.game.core.pipeline.Pipeline;
 import ru.arlevoland.bc.game.screen_manager.GameScreenManager;
 import ru.arlevoland.bc.game.core.assets.AssetManager;
 import ru.arlevoland.bc.game.core.assets.LevelDataManager;
@@ -69,12 +70,13 @@ public class Main extends Sprite {
 
     public function initSFXManager():void {
         App.sfxManager = new SfxManager();
+        App.sfxManager.initialize();
         App.logManager.showMessage(LogMessageType.INIT_SFX_MANAGER);
     }
 
     public function initDispatcher():void {
         App.dispatcher = new EventDispatcher();
-        App.logManager.showMessage(LogMessageType.INIT_PIPELINE_MANAGER);
+        App.logManager.showMessage(LogMessageType.INIT_PIPELINE);
     }
 
     public function initPowerOnEffect():void {

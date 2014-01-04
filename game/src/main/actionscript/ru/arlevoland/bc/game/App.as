@@ -1,9 +1,10 @@
 package ru.arlevoland.bc.game {
 import flash.events.EventDispatcher;
 
-import ru.arlevoland.bc.game.battlestage.BattleScreen;
-import ru.arlevoland.bc.game.battlestage.battleground.Battleground;
+import ru.arlevoland.bc.game.battle_screen.BattleScreen;
+import ru.arlevoland.bc.game.battle_screen.world.World;
 import ru.arlevoland.bc.game.bcb.BCBLoader;
+import ru.arlevoland.bc.game.core.pipeline.Pipeline;
 import ru.arlevoland.bc.game.screen_manager.GameScreenManager;
 import ru.arlevoland.bc.game.core.assets.AssetManager;
 import ru.arlevoland.bc.game.core.assets.LevelDataManager;
@@ -34,6 +35,6 @@ public class App {
     public static var levelDataManager:LevelDataManager;
     public static var devTools:DevTools;
 
-    public static var battleground:Battleground;
+    public static var battleground:World;
 }
 }

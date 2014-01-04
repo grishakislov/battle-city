@@ -9,9 +9,9 @@ import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.BaseScreen;
 import ru.arlevoland.bc.game.Colors;
-import ru.arlevoland.bc.game.battlestage.BattleStageDrawMode;
-import ru.arlevoland.bc.game.battlestage.BattleStageLoader;
-import ru.arlevoland.bc.game.battlestage.battleground.WorldWaterLayer;
+import ru.arlevoland.bc.game.battle_screen.BattleStageDrawMode;
+import ru.arlevoland.bc.game.battle_screen.MapLoader;
+import ru.arlevoland.bc.game.battle_screen.world.WorldWaterLayer;
 import ru.arlevoland.bc.game.core.assets.FontTool;
 import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
@@ -92,7 +92,7 @@ public class LevelViewer extends BaseScreen {
     private function updateScreen():void {
         clear();
         _level.bitmapData.dispose();
-        _level = BattleStageLoader.drawStageToBitmap(_currentLevel, BattleStageDrawMode.NO_WATER);
+        _level = MapLoader.drawStageToBitmap(_currentLevel, BattleStageDrawMode.NO_WATER);
         _water.initialize(_currentLevel);
         var line:String = _currentLevel < 10 ? "0" + _currentLevel.toString() : _currentLevel.toString();
         _levelId = FontTool.drawLine(line);
