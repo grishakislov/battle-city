@@ -50,6 +50,7 @@ public class Channel {
         }
 
         playing = !paused;
+        setMute();
     }
 
     public function stop():void {

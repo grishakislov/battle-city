@@ -81,6 +81,10 @@ public class SfxManager {
     public function pause():void {
         mainChannel.pause();
         loopChannel.pause();
+
+        if (onlySoundPlaying && mainChannel.isPlaying()) {
+            mainChannel.getChannel().addEventListener(Event.SOUND_COMPLETE, onOnlySoundCompleted);
+        }
     }
 
 
