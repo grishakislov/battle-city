@@ -1,28 +1,35 @@
 package ru.arlevoland.bc.game.power_on {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
+import flash.geom.Point;
+import flash.geom.Rectangle;
 
 import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.GameScreen;
+import ru.arlevoland.bc.game.core.assets.Resources;
 import ru.arlevoland.bc.game.screen_manager.GameEvent;
 import ru.arlevoland.bc.game.time.Ticker;
 import ru.arlevoland.bc.game.time.TickerEvent;
 
 public class PowerOnEffect extends GameScreen {
-    private static const Y_OFFSET:uint = 5;
-    private static const MAX_LINES:uint = 3;
-    private static const MIN_LINES:uint = 1;
-    private static const MIN_LINE_THICKNESS:int = 1;
-    private static const MAX_LINE_THICKNESS:int = 8;
-    private static const SHORT_LINE_LENGTH:int = 24;
-    private static const WAIT_BEFORE:Number = 500;
-    private static const WAIT_AFTER:Number = 500;
-    private static const SHOW_TIME:Number = 70;
+
+    private static const PAUSE:uint = 60;
+    private static const PHASE_1:uint = 5;
+    private static const PHASE_2:uint = 10;
+    private static const PHASE_3:uint = 13;
+    private static const PHASE_4:uint = 25;
 
     override public function run(data:* = undefined):void {
-        _frameLength = Math.round(1000 / stage.frameRate);
-        _bitmap = generateBitmap();
+        var width:int = GameSettings.NATIVE_NES_SCREEN_SIZE.x;
+        var height:int = GameSettings.NATIVE_NES_SCREEN_SIZE.y;
+
+        frameLength = Math.round(1000 / stage.frameRate);
+        bigBitmap = new Bitmap(new BitmapData(width, height, true, 0x77FFFFFF))
+        smallBitmap = new Bitmap(new BitmapData(8, 8));
+        var tanks:Bitmap = new Resources.TANKS();
+        smallBitmap.bitmapData.copyPixels(tanks.bitmapData, new Rectangle(8,0,8,8), new Point (0,0));
+
         Ticker.addEventListener(TickerEvent.TICK, onTick);
     }
 
@@ -32,66 +39,32 @@ public class PowerOnEffect extends GameScreen {
     }
 
     private function onTick(e:TickerEvent):void {
-        switch (_currentFrame) {
-            case getFramesForDelay(WAIT_BEFORE):
+        switch (currentFrame) {
+            case PAUSE:
                 App.sfxManager.playClick();
-                showEffect();
+                removeChildren();
+                addChild(bigBitmap);
                 break;
-            case getFramesForDelay(SHOW_TIME + WAIT_BEFORE):
-                hideEffect();
+            case PAUSE + PHASE_1:
+                removeChildren();
                 break;
-            case getFramesForDelay(WAIT_AFTER + SHOW_TIME + WAIT_BEFORE):
+            case PAUSE + PHASE_2:
+                removeChildren();
+                addChild(smallBitmap);
+                break;
+            case PAUSE + PHASE_3:
+                removeChildren();
+                break;
+            case PAUSE + PHASE_4:
                 App.dispatcher.dispatchEvent(new GameEvent(GameEvent.SCREEN_FINISHED, this));
                 break;
         }
 
-        _currentFrame++;
-    }
-
-    private function showEffect():void {
-        addChild(_bitmap);
-    }
-
-    private function hideEffect():void {
-        removeChild(_bitmap);
-
-    }
-
-    private function generateBitmap():Bitmap {
-        var width:int = GameSettings.NATIVE_NES_SCREEN_SIZE.x;
-        var height:int = GameSettings.NATIVE_NES_SCREEN_SIZE.y;
-        var result:Bitmap = new Bitmap(new BitmapData(width, height, false, 0x000000));
-        var yCoord:int;
-        var linesNumber:int = Math.floor(Math.random() * (1 + MAX_LINES - MIN_LINES) + MIN_LINES);
-
-        for (var i:int = 0; i < linesNumber; i++) {
-            yCoord = Math.floor(Math.random() * (height - Y_OFFSET) + Y_OFFSET);
-            var lineThickness:int = Math.floor(Math.random() * (1 + MAX_LINE_THICKNESS - MIN_LINE_THICKNESS) + MIN_LINE_THICKNESS);
-            for (var y:int = yCoord; y < yCoord + lineThickness; y++) {
-                drawLine(y, width);
-            }
-            //Неполные линии. Такое действительно было на некоторых версиях Фамикома.
-            drawLine(y, SHORT_LINE_LENGTH);
-            drawLine(y++, SHORT_LINE_LENGTH);
-            drawLine(y++, SHORT_LINE_LENGTH);
-            drawLine(y++, SHORT_LINE_LENGTH);
-        }
-
-        return result;
-
-        function drawLine(y:int, w:int):void {
-            for (var x:int = 0; x < w; x++) {
-                result.bitmapData.setPixel32(x, y, 0xFFFFFFFF);
-            }
-        }
-    }
-
-    private function getFramesForDelay(delay:Number):int {
-        return Math.round(delay / _frameLength);
+        currentFrame++;
     }
 
     override public function pause():void {
-        if (_paused) {
+        if (paused) {
             Ticker.addEventListener(TickerEvent.TICK, onTick);
         } else {
             Ticker.removeEventListener(TickerEvent.TICK, onTick);
@@ -99,8 +72,9 @@ public class PowerOnEffect extends GameScreen {
         super.pause();
     }
 
-    private var _currentFrame:Number = 0;
-    private var _frameLength:Number;
-    private var _bitmap:Bitmap;
+    private var currentFrame:Number = 0;
+    private var frameLength:Number;
+    private var bigBitmap:Bitmap;
+    private var smallBitmap:Bitmap;
 }
 }

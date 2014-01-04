@@ -22,7 +22,7 @@ public class GameScreen extends BaseScreen implements IGameScreen {
     }
 
     override public function pause():void {
-        if (_paused) {
+        if (paused) {
             Main.removePauseScreen();
         } else {
             Main.showPauseScreen();

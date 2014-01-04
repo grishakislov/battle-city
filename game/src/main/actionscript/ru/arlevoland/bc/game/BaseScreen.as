@@ -19,10 +19,10 @@ public class BaseScreen extends Sprite {
     }
 
     public function pause():void {
-        _paused = !_paused;
+        paused = !paused;
     }
 
-    protected var _paused:Boolean;
+    protected var paused:Boolean;
 
 }
 }

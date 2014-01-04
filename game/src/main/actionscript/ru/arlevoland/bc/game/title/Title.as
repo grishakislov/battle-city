@@ -84,7 +84,7 @@ public class Title extends GameScreen {
     }
 
     override public function pause():void {
-        if (_paused) {
+        if (paused) {
             if (!animationCompleted) Ticker.addEventListener(TickerEvent.TICK, onTick);
         } else {
             if (!animationCompleted) Ticker.removeEventListener(TickerEvent.TICK, onTick);
