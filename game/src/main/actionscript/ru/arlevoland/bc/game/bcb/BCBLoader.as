@@ -97,7 +97,7 @@ public class BCBLoader {
         for (var i:uint = 0; i < length; i++) {
             model = new LevelData(dataFile.readByte());
             for (var j:uint = 0; j < GameSettings.WORLD_WIDTH * GameSettings.WORLD_HEIGHT; j++) {
-                model.levelData.push(dataFile.readByte());
+                model.getLevelData().push(dataFile.readByte());
             }
             result.push(model);
         }

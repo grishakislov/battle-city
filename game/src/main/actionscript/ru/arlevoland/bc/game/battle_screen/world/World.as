@@ -3,9 +3,9 @@ import flash.display.Sprite;
 import flash.geom.Point;
 
 import ru.arlevoland.bc.game.battle_screen.MapLoader;
-import ru.arlevoland.bc.game.battle_screen.tank.BulletManager;
+import ru.arlevoland.bc.game.battle_screen.bullet.BulletManager;
 import ru.arlevoland.bc.game.battle_screen.tank.PlayerTank;
-import ru.arlevoland.bc.game.battle_screen.tank.TankDirection;
+import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
 
 public class World extends Sprite {
 
@@ -13,7 +13,7 @@ public class World extends Sprite {
 
         stageId = levelId;
         bulletManager = new BulletManager();
-        collisionLayer = new WorldCollisionLayer();
+        collisionLayer = new WorldImpactLayer();
         collisionLayer.initialize(levelId);
         addChild(collisionLayer);
 
@@ -32,9 +32,6 @@ public class World extends Sprite {
         treeLayer.initialize(levelId);
         addChild(treeLayer);
 
-        tankCollisionMap = MapLoader.fillTankCollisionMap(stageId);
-        bulletCollisionMap = MapLoader.fillBulletCollisionMap(stageId);
-
     }
 
     public function initializePlayerTank(tankLevel:uint):void {
@@ -52,24 +49,20 @@ public class World extends Sprite {
         return stageId;
     }
 
-    public function getTankCollisionMap():Array {
-        return tankCollisionMap;
-    }
-
-    public function getBulletCollisionMap():Array {
-        return bulletCollisionMap;
-    }
-
     public function getBulletManager():BulletManager {
         return bulletManager;
     }
 
-    public function applyDestruction(worldPoint:Point, direction:TankDirection):void {
+    public function applyDestruction(worldPoint:Point, direction:ActorDirection):void {
         collisionLayer.applyDestruction(worldPoint, direction);
     }
 
-    private var tankCollisionMap:Array;
-    private var bulletCollisionMap:Array;
+    public function shoot(tank:IActor):void {
+        bulletManager.shoot(tank);
+    }
+
+//    private var tankCollisionMap:Array;
+//    private var bulletCollisionMap:Array;
 
     private var bulletManager:BulletManager;
 
@@ -78,7 +71,7 @@ public class World extends Sprite {
     private var playerTank1:PlayerTank;
     private var player2:PlayerTank;
     private var aiTanks:Array = [];
-    private var collisionLayer:WorldCollisionLayer;
+    private var collisionLayer:WorldImpactLayer;
     private var waterLayer:WorldWaterLayer;
     private var bulletLayer:Sprite;
     private var effectsLayer:Sprite;

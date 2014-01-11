@@ -3,10 +3,12 @@ import flash.display.Sprite;
 import flash.geom.Point;
 
 import ru.arlevoland.bc.GameSettings;
+import ru.arlevoland.bc.game.battle_screen.world.ActorType;
+import ru.arlevoland.bc.game.battle_screen.world.IActor;
 import ru.arlevoland.bc.game.core.animation.AnimatedObject;
 import ru.arlevoland.bc.game.core.debug.GameError;
 
-internal class BaseTank extends AnimatedObject implements ITank {
+internal class BaseTank extends AnimatedObject implements IActor {
     public function BaseTank() {
     }
 
@@ -25,8 +27,8 @@ internal class BaseTank extends AnimatedObject implements ITank {
         return new Point(Math.floor(x / GameSettings.TILE_SIZE), Math.floor(y / GameSettings.TILE_SIZE));
     }
 
-    public function getMovement():TankDirection {
-        return movement;
+    public function getDirection():ActorDirection {
+        return direction;
     }
 
     public function getPosition():Point {
@@ -38,6 +40,7 @@ internal class BaseTank extends AnimatedObject implements ITank {
         return null;
     }
 
-    protected var movement:TankDirection;
+    protected var movement:ActorDirection;
+    protected var direction:ActorDirection;
 }
 }

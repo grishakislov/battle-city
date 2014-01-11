@@ -1,4 +1,4 @@
-package ru.arlevoland.bc.game.battle_screen.tank {
+package ru.arlevoland.bc.game.battle_screen.world {
 public class ActorType {
 
     public static const PLAYER:ActorType = new ActorType("PLAYER");

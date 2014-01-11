@@ -8,6 +8,8 @@ import ru.arlevoland.bc.game.Main;
 import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.tank.sequencer.SequencerRequest;
 import ru.arlevoland.bc.game.battle_screen.tank.sequencer.TankSpriteSequencer;
+import ru.arlevoland.bc.game.battle_screen.world.ActorType;
+import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactProcessor;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
 import ru.arlevoland.bc.game.battle_screen.world.World;
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
@@ -18,7 +20,7 @@ import ru.arlevoland.bc.game.time.TickerEvent;
 
 public class PlayerTank extends BaseTank {
 
-    private static const DEFAULT_DIRECTION:TankDirection = TankDirection.UP;
+    private static const DEFAULT_DIRECTION:ActorDirection = ActorDirection.UP;
     private static const TRACK_FRAMES_SKIP:uint = 4;
 
     public function PlayerTank(tankLevel:uint, world:World) {
@@ -39,7 +41,7 @@ public class PlayerTank extends BaseTank {
         playIdleSound();
     }
 
-    public function setMovement(direction:TankDirection):void {
+    public function setMovement(direction:ActorDirection):void {
         if (movement == direction) return;
         movement = direction;
         playMovingSound();
@@ -67,23 +69,23 @@ public class PlayerTank extends BaseTank {
     }
 
     private function processMovement(delta:uint):void {
-        if (CollisionHelper.borderAhead(this) || CollisionHelper.wallAhead(this, world.getTankCollisionMap())) {
+        if (ImpactProcessor.borderAhead(this) || ImpactProcessor.checkWall(this)) {
             movement = null;
             playIdleSound();
             return;
         }
 
         switch (movement) {
-            case TankDirection.UP:
+            case ActorDirection.UP:
                 y -= delta;
                 break;
-            case TankDirection.RIGHT:
+            case ActorDirection.RIGHT:
                 x += delta;
                 break;
-            case TankDirection.DOWN:
+            case ActorDirection.DOWN:
                 y += delta;
                 break;
-            case TankDirection.LEFT:
+            case ActorDirection.LEFT:
                 x -= delta;
                 break;
         }
@@ -91,12 +93,12 @@ public class PlayerTank extends BaseTank {
 
     private function alignTankToGrid():void {
         switch (movement) {
-            case TankDirection.UP:
-            case TankDirection.DOWN:
+            case ActorDirection.UP:
+            case ActorDirection.DOWN:
                 x = Math.round(x / GameSettings.TANK_GRID_SIZE) * GameSettings.TANK_GRID_SIZE;
                 break;
-            case TankDirection.RIGHT:
-            case TankDirection.LEFT:
+            case ActorDirection.RIGHT:
+            case ActorDirection.LEFT:
                 y = Math.round(y / GameSettings.TANK_GRID_SIZE) * GameSettings.TANK_GRID_SIZE;
                 break;
         }
@@ -112,24 +114,24 @@ public class PlayerTank extends BaseTank {
         if (e.type == PlayerTankControllerEvent.START) {
             switch (e.getCommand()) {
                 case KeyCommand.UP:
-                    setDirection(TankDirection.UP);
-                    setMovement(TankDirection.UP);
+                    setDirection(ActorDirection.UP);
+                    setMovement(ActorDirection.UP);
                     break;
                 case KeyCommand.RIGHT:
-                    setDirection(TankDirection.RIGHT);
-                    setMovement(TankDirection.RIGHT);
+                    setDirection(ActorDirection.RIGHT);
+                    setMovement(ActorDirection.RIGHT);
                     break;
                 case KeyCommand.DOWN:
-                    setDirection(TankDirection.DOWN);
-                    setMovement(TankDirection.DOWN);
+                    setDirection(ActorDirection.DOWN);
+                    setMovement(ActorDirection.DOWN);
                     break;
                 case KeyCommand.LEFT:
-                    setDirection(TankDirection.LEFT);
-                    setMovement(TankDirection.LEFT);
+                    setDirection(ActorDirection.LEFT);
+                    setMovement(ActorDirection.LEFT);
                     break;
                 case KeyCommand.FIRE:
                     //TODO: Wrap
-                    world.getBulletManager().shoot(_currentDirection, this);
+                    world.shoot(this);
                     break;
             }
         } else {
@@ -163,9 +165,9 @@ public class PlayerTank extends BaseTank {
         }
     }
 
-    private function setDirection(direction:TankDirection):void {
-        if (_currentDirection == direction) return;
-        _currentDirection = direction;
+    private function setDirection(direction:ActorDirection):void {
+        if (this.direction == direction) return;
+        this.direction = direction;
         setSprite(TankSpriteSequencer.getSprite(getSequencerRequest()));
     }
 
@@ -184,7 +186,7 @@ public class PlayerTank extends BaseTank {
 
     private function getSequencerRequest():SequencerRequest {
         var result:SequencerRequest = new SequencerRequest();
-        result.direction = _currentDirection;
+        result.direction = direction;
         result.tankType = ActorType.PLAYER;
         result.level = tankLevel;
         result.animationKey = animationKey;
@@ -231,11 +233,10 @@ public class PlayerTank extends BaseTank {
         return ActorType.PLAYER;
     }
 
-    override public function getBulletCollisionTable():Array {
-        return world.getBulletCollisionMap();
-    }
+//    override public function getBulletCollisionTable():Array {
+//        return world.getBulletCollisionMap();
+//    }
 
-    private var _currentDirection:TankDirection;
     private var tankLevel:uint;
 
     private var world:World;

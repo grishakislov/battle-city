@@ -1,4 +1,6 @@
-package ru.arlevoland.bc.game.battle_screen.tank {
+package ru.arlevoland.bc.game.battle_screen.bullet {
+import ru.arlevoland.bc.game.battle_screen.tank.*;
+
 import flash.geom.Point;
 
 import ru.arlevoland.bc.game.App;
@@ -6,6 +8,9 @@ import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.Main;
 
 import ru.arlevoland.bc.GameSettings;
+import ru.arlevoland.bc.game.battle_screen.world.ActorType;
+import ru.arlevoland.bc.game.battle_screen.world.IActor;
+import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactProcessor;
 import ru.arlevoland.bc.game.core.animation.AnimatedObject;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
 import ru.arlevoland.bc.game.core.debug.GameError;
@@ -15,11 +20,9 @@ import ru.arlevoland.bc.game.time.TickerEvent;
 
 internal class Bullet extends AnimatedObject implements IActor {
 
-
     public function Bullet(data:BulletData) {
         this.direction = data.getDirection();
         this.tankCoords = data.getTankCoords();
-        this.collisionTable = data.getCollisionTable();
         initialize();
         applyStartCoordsForBullet();
         playShootSound();
@@ -38,19 +41,19 @@ internal class Bullet extends AnimatedObject implements IActor {
          Спрайт пули независимо от направления имеет размер 1x2
          */
         switch (direction) {
-            case TankDirection.UP:
+            case ActorDirection.UP:
                 x = tankCoords.x + 3;
                 y = tankCoords.y - 7;
                 break;
-            case TankDirection.RIGHT:
+            case ActorDirection.RIGHT:
                 x = tankCoords.x + GameSettings.TANK_SIZE - 5;
                 y = tankCoords.y;
                 break;
-            case TankDirection.DOWN:
+            case ActorDirection.DOWN:
                 x = tankCoords.x + 3;
                 y = tankCoords.y + 7;
                 break;
-            case TankDirection.LEFT:
+            case ActorDirection.LEFT:
                 x = tankCoords.x - 3;
                 y = tankCoords.y;
                 break;
@@ -59,19 +62,19 @@ internal class Bullet extends AnimatedObject implements IActor {
 
     private function applyStartCoordsForExplode():void {
         switch (direction) {
-            case TankDirection.UP:
+            case ActorDirection.UP:
                 x -= 4;
                 y -= 2;
                 break;
-            case TankDirection.RIGHT:
+            case ActorDirection.RIGHT:
                 y -= 1;
                 x -= 2;
                 break;
-            case TankDirection.DOWN:
+            case ActorDirection.DOWN:
                 x -= 3;
                 y += 2;
                 break;
-            case TankDirection.LEFT:
+            case ActorDirection.LEFT:
                 x -= 5;
                 break;
         }
@@ -105,37 +108,37 @@ internal class Bullet extends AnimatedObject implements IActor {
     private function move(delta:uint):void {
         if (wallAhead()) {
             explode();
-            ceaseMovement();
+            stopMovement();
             return;
         }
         if (endAhead()) {
             explode();
-            ceaseMovement();
+            stopMovement();
             return;
         }
 
 //        if (tankAhead() != null) {
-//            ceaseMovement();
+//            stopMovement();
 //            return;
 //        }
         switch (movement) {
-            case TankDirection.UP:
+            case ActorDirection.UP:
                 y -= delta;
                 break;
-            case TankDirection.RIGHT:
+            case ActorDirection.RIGHT:
                 x += delta;
                 break;
-            case TankDirection.DOWN:
+            case ActorDirection.DOWN:
                 y += delta;
                 break;
-            case TankDirection.LEFT:
+            case ActorDirection.LEFT:
                 x -= delta;
                 break;
         }
     }
 
     private function endAhead():Boolean {
-        return CollisionHelper.borderAhead(this);
+        return ImpactProcessor.borderAhead(this);
     }
 
     private function wallAhead():Boolean {
@@ -150,7 +153,9 @@ internal class Bullet extends AnimatedObject implements IActor {
          если непрозрачный, определяем координаты столкновения
          */
 
-        return CollisionHelper.wallAhead(this, collisionTable);
+        //TODO: Проверить уровень пули
+
+        return ImpactProcessor.checkWall(this);
     }
 
     private function tankAhead():* {
@@ -160,19 +165,19 @@ internal class Bullet extends AnimatedObject implements IActor {
     private function getForwardBound():Point {
         var result:Point = new Point();
         switch (movement) {
-            case TankDirection.UP:
+            case ActorDirection.UP:
                 result.x = x;
                 result.y = y + 6;
                 break;
-            case TankDirection.RIGHT:
+            case ActorDirection.RIGHT:
                 result.x = x - 10;
                 result.y = y;
                 break;
-            case TankDirection.DOWN:
+            case ActorDirection.DOWN:
                 result.x = x;
                 result.y = y - 6;
                 break;
-            case TankDirection.LEFT:
+            case ActorDirection.LEFT:
                 result.x = x + 2;
                 result.y = y;
                 break;
@@ -193,16 +198,16 @@ internal class Bullet extends AnimatedObject implements IActor {
         var visualName:String;
         movement = direction;
         switch (direction) {
-            case TankDirection.UP:
+            case ActorDirection.UP:
                 visualName = "BULLET_U";
                 break;
-            case TankDirection.RIGHT:
+            case ActorDirection.RIGHT:
                 visualName = "BULLET_R";
                 break;
-            case TankDirection.DOWN:
+            case ActorDirection.DOWN:
                 visualName = "BULLET_D";
                 break;
-            case TankDirection.LEFT:
+            case ActorDirection.LEFT:
                 visualName = "BULLET_L";
                 break;
         }
@@ -221,7 +226,7 @@ internal class Bullet extends AnimatedObject implements IActor {
         destroy();
     }
 
-    private function ceaseMovement():void {
+    private function stopMovement():void {
         movement = null;
     }
 
@@ -239,8 +244,7 @@ internal class Bullet extends AnimatedObject implements IActor {
     //IActor
 
     public function getLevel():uint {
-        GameError.someError();
-        return 0;
+        return level;
     }
 
     public function getType():ActorType {
@@ -256,17 +260,16 @@ internal class Bullet extends AnimatedObject implements IActor {
         return getForwardBound();
     }
 
-    public function getMovement():TankDirection {
+    public function getDirection():ActorDirection {
         return movement;
     }
 
     private var _millisElapsed:int = 0;
 
-    private var direction:TankDirection;
+    private var direction:ActorDirection;
+    private var level:uint;
     private var tankCoords:Point;
-    private var movement:TankDirection;
-
-    private var collisionTable:Array;
+    private var movement:ActorDirection;
 
     private var UP:TileAsset;
     private var RIGHT:TileAsset;

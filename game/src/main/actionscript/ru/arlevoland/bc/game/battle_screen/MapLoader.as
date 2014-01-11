@@ -10,7 +10,7 @@ import ru.arlevoland.bc.game.Main;
 
 import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
-import ru.arlevoland.bc.game.battle_screen.tank.ActorType;
+import ru.arlevoland.bc.game.battle_screen.world.ActorType;
 import ru.arlevoland.bc.game.bcb.model.LevelData;
 
 public class MapLoader {
@@ -104,47 +104,6 @@ public class MapLoader {
 
     public static function getTileByID(tileID:uint):TileAsset {
         return App.assetManager.getTileAsset(TILE_ORDER[tileID]);
-    }
-
-
-    public static function fillTankCollisionMap(stageId:uint):Array {
-        return fillCollisionMap(stageId, ActorType.TANK);
-    }
-
-    public static function fillBulletCollisionMap(stageId:uint):Array {
-        return fillCollisionMap(stageId, ActorType.BULLET);
-    }
-
-    private static function fillCollisionMap(stageId:uint, type:ActorType):Array {
-        var result:Array = [];
-
-        var w:uint = GameSettings.WORLD_WIDTH * 2;
-        var h:uint = GameSettings.WORLD_HEIGHT * 2;
-        var x:int;
-        var y:int;
-        var cx:int;
-        var cy:int;
-        var data:LevelData = App.levelDataManager.getLevelDataByID(stageId);
-
-        for (y = 0; y < h * w; y++) {
-            result.push(-999);
-        }
-
-        for (y = 0; y < GameSettings.WORLD_HEIGHT; y++) {
-            cy = y * 2;
-            for (x = 0; x < GameSettings.WORLD_WIDTH; x++) {
-                cx = x * 2;
-                var m:CollisionModel = CollisionModel.getModelByName(TILE_ORDER[data.getDataAt(x, y)], type);
-
-                result[cx + cy * h] = m.TL;
-                result[cx + 1 + cy * h] = m.TR;
-
-                result[cx + 1 + (cy + 1) * h] = m.BR;
-                result[cx + (cy + 1) * h] = m.BL;
-
-            }
-        }
-        return result;
     }
 
 }
