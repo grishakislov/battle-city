@@ -1,4 +1,6 @@
-package ru.arlevoland.bc.game.battle_screen.world {
+package ru.arlevoland.bc.game.battle_screen.world.impact {
+import ru.arlevoland.bc.game.battle_screen.world.*;
+
 import flash.display.Bitmap;
 import flash.display.Sprite;
 import flash.geom.Point;

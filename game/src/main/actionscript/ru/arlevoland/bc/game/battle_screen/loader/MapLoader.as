@@ -1,4 +1,6 @@
-package ru.arlevoland.bc.game.battle_screen {
+package ru.arlevoland.bc.game.battle_screen.loader {
+import ru.arlevoland.bc.game.battle_screen.*;
+
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.geom.Point;
@@ -43,7 +45,7 @@ public class MapLoader {
         "METAL_LEFT",
         "METAL_TOP",
         "METAL_FULL",
-        "ICE_FULL",
+//        "ICE_FULL",
         "WATER_FULL"
     ];
 
