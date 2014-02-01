@@ -3,11 +3,8 @@ import flash.display.Sprite;
 import flash.display.Stage;
 import flash.events.EventDispatcher;
 
-import ru.arlevoland.bc.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.BattleScreen;
-import ru.arlevoland.bc.game.bcb.BCBLoader;
-import ru.arlevoland.bc.game.core.pipeline.Pipeline;
-import ru.arlevoland.bc.game.screen_manager.GameScreenManager;
+
 import ru.arlevoland.bc.game.core.assets.AssetManager;
 import ru.arlevoland.bc.game.core.assets.LevelDataManager;
 import ru.arlevoland.bc.game.core.debug.DevTools;
@@ -16,6 +13,7 @@ import ru.arlevoland.bc.game.core.debug.LogMessageType;
 import ru.arlevoland.bc.game.core.debug.viewers.Viewer;
 import ru.arlevoland.bc.game.keyboard.KeyboardManager;
 import ru.arlevoland.bc.game.power_on.PowerOnEffect;
+import ru.arlevoland.bc.game.screen_manager.GameScreenManager;
 import ru.arlevoland.bc.game.sfx.SfxManager;
 import ru.arlevoland.bc.game.time.Ticker;
 import ru.arlevoland.bc.game.title.Title;
@@ -35,7 +33,6 @@ public class Main extends Sprite {
         scaleY = GameSettings.WORLD_SCALE;
 
         initKeyboardManager();
-        initBCBLoader();
 
         initSFXManager();
         initDispatcher();
@@ -60,12 +57,6 @@ public class Main extends Sprite {
         App.keyboardManager = new KeyboardManager();
         App.logManager.showMessage(LogMessageType.INIT_KEYBOARD_MANAGER);
         App.keyboardManager.initialize();
-    }
-
-    private static function initBCBLoader():void {
-        App.bcbLoader = new BCBLoader();
-        App.logManager.showMessage(LogMessageType.INIT_BCB_LOADER);
-        App.bcbLoader.initialize();
     }
 
     public function initSFXManager():void {
@@ -99,6 +90,7 @@ public class Main extends Sprite {
 
     public function initTitle():void {
         App.title = new Title();
+        !1;
         App.logManager.showMessage(LogMessageType.INIT_TITLE);
         addChild(App.title);
     }

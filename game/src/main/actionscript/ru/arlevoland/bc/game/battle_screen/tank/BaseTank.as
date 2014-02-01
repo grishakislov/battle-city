@@ -2,7 +2,7 @@ package ru.arlevoland.bc.game.battle_screen.tank {
 import flash.display.Sprite;
 import flash.geom.Point;
 
-import ru.arlevoland.bc.GameSettings;
+import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.world.ActorType;
 import ru.arlevoland.bc.game.battle_screen.world.IActor;
 import ru.arlevoland.bc.game.core.animation.AnimatedObject;

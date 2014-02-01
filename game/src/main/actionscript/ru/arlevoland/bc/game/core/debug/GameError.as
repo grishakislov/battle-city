@@ -3,7 +3,7 @@ import flash.errors.IllegalOperationError;
 
 import mx.utils.StringUtil;
 
-import ru.arlevoland.bc.game.bcb.model.FitData;
+import ru.arlevoland.bc.game.json.model.FitData;
 
 public class GameError {
 
@@ -35,7 +35,7 @@ public class GameError {
     }
 
     public static function invalidFitData(model:FitData):void {
-        var text:String = StringUtil.substitute(INVALID_TILE_FIT, model.getName(), model.getTilesNumber());
+        var text:String = StringUtil.substitute(INVALID_TILE_FIT, model.name, model.coords.length);
         throw new IllegalOperationError(text);
     }
 

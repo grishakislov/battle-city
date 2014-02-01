@@ -12,9 +12,7 @@
     <url>https://github.com/grishakislov/battle-city/</url>
 
     <modules>
-        <module>common</module>
         <module>game</module>
-        <module>editor</module>
         <module>server</module>
     </modules>
 </project>

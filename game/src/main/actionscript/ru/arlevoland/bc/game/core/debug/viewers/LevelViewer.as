@@ -5,12 +5,12 @@ import flash.events.Event;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
-import ru.arlevoland.bc.GameSettings;
+import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.BaseScreen;
 import ru.arlevoland.bc.game.Colors;
 import ru.arlevoland.bc.game.battle_screen.BattleStageDrawMode;
-import ru.arlevoland.bc.game.battle_screen.MapLoader;
+import ru.arlevoland.bc.game.battle_screen.loader.MapLoader;
 import ru.arlevoland.bc.game.battle_screen.world.WorldWaterLayer;
 import ru.arlevoland.bc.game.core.assets.FontTool;
 import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;

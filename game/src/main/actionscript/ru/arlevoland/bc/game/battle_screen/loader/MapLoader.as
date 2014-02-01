@@ -1,19 +1,14 @@
 package ru.arlevoland.bc.game.battle_screen.loader {
-import ru.arlevoland.bc.game.battle_screen.*;
-
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import ru.arlevoland.bc.game.App;
-
-import ru.arlevoland.bc.game.Main;
-
-import ru.arlevoland.bc.GameSettings;
+import ru.arlevoland.bc.game.GameSettings;
+import ru.arlevoland.bc.game.battle_screen.*;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
-import ru.arlevoland.bc.game.battle_screen.world.ActorType;
-import ru.arlevoland.bc.game.bcb.model.LevelData;
+import ru.arlevoland.bc.game.json.model.LevelData;
 
 public class MapLoader {
 

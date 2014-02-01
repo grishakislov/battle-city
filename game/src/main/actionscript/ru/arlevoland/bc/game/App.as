@@ -3,8 +3,6 @@ import flash.events.EventDispatcher;
 
 import ru.arlevoland.bc.game.battle_screen.BattleScreen;
 import ru.arlevoland.bc.game.battle_screen.world.World;
-import ru.arlevoland.bc.game.bcb.BCBLoader;
-import ru.arlevoland.bc.game.core.pipeline.Pipeline;
 import ru.arlevoland.bc.game.screen_manager.GameScreenManager;
 import ru.arlevoland.bc.game.core.assets.AssetManager;
 import ru.arlevoland.bc.game.core.assets.LevelDataManager;
@@ -20,7 +18,6 @@ public class App {
     public static var keyboardManager:KeyboardManager;
     public static var viewer:Viewer;
     public static var logManager:LogManager;
-    public static var bcbLoader:BCBLoader;
     public static var screenManager:GameScreenManager;
     public static var dispatcher:EventDispatcher;
 

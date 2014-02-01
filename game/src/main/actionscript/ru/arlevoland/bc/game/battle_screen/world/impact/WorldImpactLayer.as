@@ -1,21 +1,17 @@
 package ru.arlevoland.bc.game.battle_screen.world.impact {
-import ru.arlevoland.bc.game.battle_screen.world.*;
-
 import flash.display.Bitmap;
 import flash.display.Sprite;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import ru.arlevoland.bc.game.App;
-
-import ru.arlevoland.bc.game.Main;
-
-import ru.arlevoland.bc.GameSettings;
-import ru.arlevoland.bc.game.core.assets.model.TileAsset;
+import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.BattleStageDrawMode;
-import ru.arlevoland.bc.game.battle_screen.MapLoader;
+import ru.arlevoland.bc.game.battle_screen.loader.MapLoader;
 import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
-import ru.arlevoland.bc.game.bcb.model.LevelData;
+import ru.arlevoland.bc.game.battle_screen.world.*;
+import ru.arlevoland.bc.game.core.assets.model.TileAsset;
+import ru.arlevoland.bc.game.json.model.LevelData;
 
 public class WorldImpactLayer extends Sprite {
 

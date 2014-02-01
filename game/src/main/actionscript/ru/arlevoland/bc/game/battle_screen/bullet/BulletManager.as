@@ -3,7 +3,7 @@ import ru.arlevoland.bc.game.battle_screen.tank.*;
 
 import flash.display.Sprite;
 
-import ru.arlevoland.bc.GameSettings;
+import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.bullet.Bullet;
 import ru.arlevoland.bc.game.battle_screen.bullet.BulletData;
 import ru.arlevoland.bc.game.battle_screen.world.ActorType;

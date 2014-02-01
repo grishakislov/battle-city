@@ -2,7 +2,7 @@ package ru.arlevoland.bc.game.sfx {
 import flash.events.Event;
 import flash.media.Sound;
 
-import ru.arlevoland.bc.GameSettings;
+import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.core.assets.SoundAssets;
 
 public class SfxManager {

@@ -1,6 +1,6 @@
 package ru.arlevoland.bc.game.battle_screen.world.impact {
-import ru.arlevoland.bc.GameSettings;
-import ru.arlevoland.bc.game.bcb.model.LevelData;
+import ru.arlevoland.bc.game.GameSettings;
+import ru.arlevoland.bc.bcb_model.LevelData;
 
 public class ImpactMap {
 
@@ -29,7 +29,10 @@ public class ImpactMap {
         return result;
     }
 
+    //26x26
     private var map:Vector.<ImpactEntity>;
+
+    //13x13
     private var level:LevelData;
 }
 }

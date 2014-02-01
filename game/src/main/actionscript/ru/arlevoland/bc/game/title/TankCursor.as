@@ -12,8 +12,8 @@ import ru.arlevoland.bc.game.time.TickerEvent;
 
 internal class TankCursor extends MovieClip {
 
-    private static const STATE_1:String = "PT1_R1";
-    private static const STATE_2:String = "PT1_R2";
+    private static const STATE_1:String = "P1R1";
+    private static const STATE_2:String = "P1R2";
 
     private const DEFAULT_POSITION:int = 0;
 

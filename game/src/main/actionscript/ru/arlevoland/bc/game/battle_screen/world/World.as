@@ -2,10 +2,11 @@ package ru.arlevoland.bc.game.battle_screen.world {
 import flash.display.Sprite;
 import flash.geom.Point;
 
-import ru.arlevoland.bc.game.battle_screen.MapLoader;
+import ru.arlevoland.bc.game.battle_screen.loader.MapLoader;
 import ru.arlevoland.bc.game.battle_screen.bullet.BulletManager;
 import ru.arlevoland.bc.game.battle_screen.tank.PlayerTank;
 import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
+import ru.arlevoland.bc.game.battle_screen.world.impact.WorldImpactLayer;
 
 public class World extends Sprite {
 

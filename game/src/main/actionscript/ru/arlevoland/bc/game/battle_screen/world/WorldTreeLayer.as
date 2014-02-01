@@ -3,7 +3,7 @@ import flash.display.Bitmap;
 import flash.display.Sprite;
 
 import ru.arlevoland.bc.game.battle_screen.BattleStageDrawMode;
-import ru.arlevoland.bc.game.battle_screen.MapLoader;
+import ru.arlevoland.bc.game.battle_screen.loader.MapLoader;
 
 internal class WorldTreeLayer extends Sprite {
 

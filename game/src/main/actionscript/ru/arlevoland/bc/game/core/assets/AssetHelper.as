@@ -1,4 +1,4 @@
-package ru.arlevoland.bc {
+package ru.arlevoland.bc.game.core.assets {
 public class AssetHelper {
     public static function convertStringToHex(string:String):uint {
         var result:uint;

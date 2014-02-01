@@ -8,7 +8,7 @@ import ru.arlevoland.bc.game.App;
 
 import ru.arlevoland.bc.game.Main;
 
-import ru.arlevoland.bc.GameSettings;
+import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.world.ActorType;
 import ru.arlevoland.bc.game.battle_screen.world.IActor;
 

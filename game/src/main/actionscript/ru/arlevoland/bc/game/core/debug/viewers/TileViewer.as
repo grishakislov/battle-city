@@ -4,7 +4,7 @@ import flash.display.BitmapData;
 import flash.events.Event;
 import flash.geom.Point;
 
-import ru.arlevoland.bc.GameSettings;
+import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.BaseScreen;
 import ru.arlevoland.bc.game.core.assets.FontTool;

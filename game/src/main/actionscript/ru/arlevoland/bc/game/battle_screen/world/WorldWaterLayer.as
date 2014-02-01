@@ -5,10 +5,10 @@ import flash.display.Sprite;
 
 import ru.arlevoland.bc.game.App;
 
-import ru.arlevoland.bc.GameSettings;
+import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
 import ru.arlevoland.bc.game.battle_screen.BattleStageDrawMode;
-import ru.arlevoland.bc.game.battle_screen.MapLoader;
+import ru.arlevoland.bc.game.battle_screen.loader.MapLoader;
 import ru.arlevoland.bc.game.time.Ticker;
 import ru.arlevoland.bc.game.time.TickerEvent;
 
