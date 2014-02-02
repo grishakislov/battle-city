@@ -27,11 +27,11 @@ public class SettingsManager {
     private function indexBigTiles():void {
         bigTilesIndex = [];
         for (var i:int = 0; i < bigTiles.length; i++) {
-            bigTiles.push(null);
+            bigTilesIndex.push(null);
         }
 
         for each (var b:BigTile in bigTiles) {
-            bigTiles[b.id] = b;
+            bigTilesIndex[b.id] = b;
         }
     }
 
