@@ -4,11 +4,9 @@ import flash.display.BitmapData;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
-import ru.arlevoland.bc.game.core.assets.AssetHelper;
-
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
-import ru.arlevoland.bc.game.json.model.BrushMap;
+import ru.arlevoland.bc.game.settings.model.BrushMap;
 
 internal class BrushMapTool {
 

@@ -1,4 +1,4 @@
-package ru.arlevoland.bc.game.json.model {
+package ru.arlevoland.bc.game.settings.model {
 import flash.geom.Point;
 
 public class FitData {

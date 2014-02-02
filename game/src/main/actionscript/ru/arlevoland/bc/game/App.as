@@ -11,6 +11,7 @@ import ru.arlevoland.bc.game.core.debug.LogManager;
 import ru.arlevoland.bc.game.core.debug.viewers.Viewer;
 import ru.arlevoland.bc.game.keyboard.KeyboardManager;
 import ru.arlevoland.bc.game.power_on.PowerOnEffect;
+import ru.arlevoland.bc.game.settings.SettingsManager;
 import ru.arlevoland.bc.game.sfx.SfxManager;
 import ru.arlevoland.bc.game.title.Title;
 
@@ -18,6 +19,7 @@ public class App {
     public static var keyboardManager:KeyboardManager;
     public static var viewer:Viewer;
     public static var logManager:LogManager;
+    public static var settingsManager:SettingsManager;
     public static var screenManager:GameScreenManager;
     public static var dispatcher:EventDispatcher;
 

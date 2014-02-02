@@ -11,7 +11,7 @@ import ru.arlevoland.bc.game.battle_screen.loader.MapLoader;
 import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
 import ru.arlevoland.bc.game.battle_screen.world.*;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
-import ru.arlevoland.bc.game.json.model.LevelData;
+import ru.arlevoland.bc.game.settings.model.LevelData;
 
 public class WorldImpactLayer extends Sprite {
 

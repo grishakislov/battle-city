@@ -14,6 +14,7 @@ import ru.arlevoland.bc.game.core.debug.viewers.Viewer;
 import ru.arlevoland.bc.game.keyboard.KeyboardManager;
 import ru.arlevoland.bc.game.power_on.PowerOnEffect;
 import ru.arlevoland.bc.game.screen_manager.GameScreenManager;
+import ru.arlevoland.bc.game.settings.SettingsManager;
 import ru.arlevoland.bc.game.sfx.SfxManager;
 import ru.arlevoland.bc.game.time.Ticker;
 import ru.arlevoland.bc.game.title.Title;
@@ -24,6 +25,7 @@ public class Main extends Sprite {
 
     public function Main() {
         initLogManager();
+        initSettingsManager();
 
         App.logManager.showMessage(LogMessageType.INIT_GAME);
 
@@ -46,6 +48,12 @@ public class Main extends Sprite {
         initBattleStage();
 
         initGameController();
+    }
+
+    private function initSettingsManager():void {
+        App.settingsManager = new SettingsManager();
+        App.logManager.showMessage(LogMessageType.INIT_SETTINGS);
+        App.settingsManager.initialize();
     }
 
     private static function initLogManager():void {
@@ -90,7 +98,6 @@ public class Main extends Sprite {
 
     public function initTitle():void {
         App.title = new Title();
-        !1;
         App.logManager.showMessage(LogMessageType.INIT_TITLE);
         addChild(App.title);
     }

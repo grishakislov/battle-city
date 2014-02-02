@@ -4,16 +4,18 @@ import flash.display.BitmapData;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
+import ru.arlevoland.bc.game.App;
+
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
 import ru.arlevoland.bc.game.core.assets.model.TileDictionary;
 import ru.arlevoland.bc.game.core.assets.model.TilePalette;
 import ru.arlevoland.bc.game.core.debug.GameError;
-import ru.arlevoland.bc.game.json.JsonHelper;
-import ru.arlevoland.bc.game.json.model.BrushMap;
-import ru.arlevoland.bc.game.json.model.Coord;
-import ru.arlevoland.bc.game.json.model.FitData;
-import ru.arlevoland.bc.game.json.model.TankFitData;
+import ru.arlevoland.bc.game.settings.SettingsManager;
+import ru.arlevoland.bc.game.settings.model.BrushMap;
+import ru.arlevoland.bc.game.settings.model.Coord;
+import ru.arlevoland.bc.game.settings.model.FitData;
+import ru.arlevoland.bc.game.settings.model.TankFitData;
 
 public class AssetManager {
 
@@ -22,9 +24,9 @@ public class AssetManager {
         tiles = new Resources.TILES();
         tankTiles = new Resources.TANKS();
 
-        fitData = JsonHelper.getFitData();
-        tankFitData = JsonHelper.getTankFitData();
-        brushMaps = JsonHelper.getBrushMaps();
+        fitData = App.settingsManager.getFitData();
+        tankFitData = App.settingsManager.getTankFitData()
+        brushMaps = App.settingsManager.getBrushMaps();
         tileAssets = new TileDictionary();
 
         processFitData();

@@ -22,6 +22,9 @@ public class Resources {
     [Embed(source="../../../../../../../resources/embedded/json/brushmaps.json", mimeType='application/octet-stream')]
     public static const BRUSH_MAPS:Class;
 
+    [Embed(source="../../../../../../../resources/embedded/json/bigtiles.json", mimeType='application/octet-stream')]
+    public static const BIG_TILES:Class;
+
     //Sound
     [Embed(source="../../../../../../../resources/embedded/sfx/click.mp3")]
     public static const CLICK:Class;

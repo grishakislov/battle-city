@@ -1,12 +1,12 @@
 package ru.arlevoland.bc.game.core.assets {
+import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.core.debug.GameError;
-import ru.arlevoland.bc.game.json.JsonHelper;
-import ru.arlevoland.bc.game.json.model.LevelData;
+import ru.arlevoland.bc.game.settings.model.LevelData;
 
 public class LevelDataManager {
 
     public function initialize():void {
-        levels = JsonHelper.getLevels();
+        levels = App.settingsManager.getLevels();
         parseData();
     }
 
@@ -30,7 +30,7 @@ public class LevelDataManager {
         return levels.length;
     }
 
-    [ArrayElementType("ru.arlevoland.bc.game.json.model.LevelData")]
+    [ArrayElementType("ru.arlevoland.bc.game.settings.model.LevelData")]
     private var levels:Array = [];
 
 }

@@ -3,7 +3,7 @@ import flash.errors.IllegalOperationError;
 
 import mx.utils.StringUtil;
 
-import ru.arlevoland.bc.game.json.model.FitData;
+import ru.arlevoland.bc.game.settings.model.FitData;
 
 public class GameError {
 
