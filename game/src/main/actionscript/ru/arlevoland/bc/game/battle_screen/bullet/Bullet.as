@@ -10,6 +10,7 @@ import ru.arlevoland.bc.game.Main;
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.world.ActorType;
 import ru.arlevoland.bc.game.battle_screen.world.IActor;
+import ru.arlevoland.bc.game.battle_screen.world.World;
 import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactProcessor;
 import ru.arlevoland.bc.game.core.animation.AnimatedObject;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
@@ -18,11 +19,12 @@ import ru.arlevoland.bc.game.sfx.SfxLoop;
 import ru.arlevoland.bc.game.time.Ticker;
 import ru.arlevoland.bc.game.time.TickerEvent;
 
-internal class Bullet extends AnimatedObject implements IActor {
+public class Bullet extends AnimatedObject implements IActor {
 
     public function Bullet(data:BulletData) {
-        this.direction = data.getDirection();
-        this.tankCoords = data.getTankCoords();
+        world = data.getWorld();
+        this.direction = data.getActor().getDirection();
+        this.tankCoords = data.getActor().getPosition();
         initialize();
         applyStartCoordsForBullet();
         playShootSound();
@@ -106,12 +108,7 @@ internal class Bullet extends AnimatedObject implements IActor {
     }
 
     private function move(delta:uint):void {
-        if (wallAhead()) {
-            explode();
-            stopMovement();
-            return;
-        }
-        if (endAhead()) {
+        if (world.isBarrierAhead(this)) {
             explode();
             stopMovement();
             return;
@@ -135,27 +132,6 @@ internal class Bullet extends AnimatedObject implements IActor {
                 x -= delta;
                 break;
         }
-    }
-
-    private function endAhead():Boolean {
-        return ImpactProcessor.borderAhead(this);
-    }
-
-    private function wallAhead():Boolean {
-        /*
-         избавиться от карт столкновений и проверять тайлы
-
-         ввести в бинарник модели столкновений для тайлов
-
-         алгоритм:
-         проверяем, есть ли тайл (8x8) впереди
-         если есть, проверяем, прозрачный он или нет
-         если непрозрачный, определяем координаты столкновения
-         */
-
-        //TODO: Проверить уровень пули
-
-        return ImpactProcessor.checkWall(this);
     }
 
     private function tankAhead():* {
@@ -266,6 +242,7 @@ internal class Bullet extends AnimatedObject implements IActor {
 
     private var _millisElapsed:int = 0;
 
+    private var world:World;
     private var direction:ActorDirection;
     private var level:uint;
     private var tankCoords:Point;

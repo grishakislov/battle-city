@@ -2,7 +2,7 @@
 	{
 		"name":"BRUSH_0",
 		"palette":"DEFAULT",
-		"index":0,
+		"brushIndex":0,
 		"tag":"",
 		"coords":[
 			{"x":0,"y":0}
@@ -11,7 +11,7 @@
 	{
 		"name":"BRUSH_1",
 		"palette":"DEFAULT",
-		"index":1,
+		"brushIndex":1,
 		"tag":"",
 		"coords":[
 			{"x":1,"y":0}
@@ -20,7 +20,7 @@
 	{
 		"name":"BRUSH_2",
 		"palette":"DEFAULT",
-		"index":2,
+		"brushIndex":2,
 		"tag":"",
 		"coords":[
 			{"x":2,"y":0}
@@ -29,7 +29,7 @@
 	{
 		"name":"BRUSH_3",
 		"palette":"DEFAULT",
-		"index":3,
+		"brushIndex":3,
 		"tag":"",
 		"coords":[
 			{"x":3,"y":0}
@@ -38,7 +38,7 @@
 	{
 		"name":"BRUSH_4",
 		"palette":"DEFAULT",
-		"index":4,
+		"brushIndex":4,
 		"tag":"",
 		"coords":[
 			{"x":4,"y":0}
@@ -47,7 +47,7 @@
 	{
 		"name":"BRUSH_5",
 		"palette":"DEFAULT",
-		"index":5,
+		"brushIndex":5,
 		"tag":"",
 		"coords":[
 			{"x":5,"y":0}
@@ -56,7 +56,7 @@
 	{
 		"name":"BRUSH_6",
 		"palette":"DEFAULT",
-		"index":6,
+		"brushIndex":6,
 		"tag":"",
 		"coords":[
 			{"x":6,"y":0}
@@ -65,7 +65,7 @@
 	{
 		"name":"BRUSH_7",
 		"palette":"DEFAULT",
-		"index":7,
+		"brushIndex":7,
 		"tag":"",
 		"coords":[
 			{"x":7,"y":0}
@@ -74,7 +74,7 @@
 	{
 		"name":"BRUSH_8",
 		"palette":"DEFAULT",
-		"index":8,
+		"brushIndex":8,
 		"tag":"",
 		"coords":[
 			{"x":8,"y":0}
@@ -83,7 +83,7 @@
 	{
 		"name":"BRUSH_9",
 		"palette":"DEFAULT",
-		"index":9,
+		"brushIndex":9,
 		"tag":"",
 		"coords":[
 			{"x":9,"y":0}
@@ -92,7 +92,7 @@
 	{
 		"name":"BRUSH_A",
 		"palette":"DEFAULT",
-		"index":10,
+		"brushIndex":10,
 		"tag":"",
 		"coords":[
 			{"x":10,"y":0}
@@ -101,7 +101,7 @@
 	{
 		"name":"BRUSH_B",
 		"palette":"DEFAULT",
-		"index":11,
+		"brushIndex":11,
 		"tag":"",
 		"coords":[
 			{"x":11,"y":0}
@@ -110,7 +110,7 @@
 	{
 		"name":"BRUSH_C",
 		"palette":"DEFAULT",
-		"index":12,
+		"brushIndex":12,
 		"tag":"",
 		"coords":[
 			{"x":12,"y":0}
@@ -119,7 +119,7 @@
 	{
 		"name":"BRUSH_D",
 		"palette":"DEFAULT",
-		"index":13,
+		"brushIndex":13,
 		"tag":"",
 		"coords":[
 			{"x":13,"y":0}
@@ -128,7 +128,7 @@
 	{
 		"name":"BRUSH_E",
 		"palette":"DEFAULT",
-		"index":14,
+		"brushIndex":14,
 		"tag":"",
 		"coords":[
 			{"x":14,"y":0}
@@ -137,7 +137,7 @@
 	{
 		"name":"BRUSH_F",
 		"palette":"DEFAULT",
-		"index":15,
+		"brushIndex":15,
 		"tag":"",
 		"coords":[
 			{"x":15,"y":0}

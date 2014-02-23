@@ -1,16 +1,10 @@
 package ru.arlevoland.bc.game.battle_screen.world.impact {
-import ru.arlevoland.bc.game.battle_screen.world.*;
-import ru.arlevoland.bc.game.battle_screen.tank.*;
-
 import flash.geom.Point;
 
-import ru.arlevoland.bc.game.App;
-
-import ru.arlevoland.bc.game.Main;
-
 import ru.arlevoland.bc.game.GameSettings;
-import ru.arlevoland.bc.game.battle_screen.world.ActorType;
-import ru.arlevoland.bc.game.battle_screen.world.IActor;
+import ru.arlevoland.bc.game.battle_screen.bullet.Bullet;
+import ru.arlevoland.bc.game.battle_screen.tank.*;
+import ru.arlevoland.bc.game.battle_screen.world.*;
 
 public class ImpactProcessor {
 
@@ -36,92 +30,104 @@ public class ImpactProcessor {
         }
     }
 
-    public static function checkWall(actor:IActor):Boolean {
+    public static function isBarrierAhead(actor:IActor, world:World):Boolean {
+        if (actor.getType() == ActorType.BULLET) {
+            return borderAhead(actor) || checkWallBeforeBullet(actor as Bullet, world);
+        } else if (actor.getType().isTank()) {
+            return borderAhead(actor) || checkWallBeforeTank(actor as BaseTank, world);
+        }
 
-//        var collisionCoords:Array = [];
-//        var isBullet:Boolean = actor.getType() == ActorType.BULLET;
-//
-//        var leftForward:Point = new Point(0, 0);
-//        var rightForward:Point = new Point(0, 0);
-//        var topForward:Point = new Point(0, 0);
-//        var bottomForward:Point = new Point(0, 0);
-//
-//        var minX:int = -1000;
-//        var maxX:int = 1000;
-//        var minY:int = -1000;
-//        var maxY:int = 1000;
-//
-//        var direction:ActorDirection = actor.getDirection();
-//        var position:Point = actor.getPosition();
-//
-//        switch (direction) {
-//            case ActorDirection.UP:
-//                leftForward.x = Math.floor(position.x / GameSettings.TILE_SIZE);
-//                rightForward.x = Math.floor(position.x / GameSettings.TILE_SIZE) + 1;
-//                rightForward.y = leftForward.y = Math.floor(position.y / GameSettings.TILE_SIZE);
-//
-//                if (collisionTable[leftForward.x + leftForward.y * GameSettings.WORLD_WIDTH * 2] == 1) {
-//                    collisionCoords.push(leftForward);
-//                    minY = (leftForward.y + 1) * GameSettings.TILE_SIZE;
-//                }
-//                if (collisionTable[rightForward.x + rightForward.y * GameSettings.WORLD_WIDTH * 2] == 1) {
-//                    collisionCoords.push(rightForward);
-//                    minY = (rightForward.y + 1) * GameSettings.TILE_SIZE;
-//                }
-//
-//                if (position.y <= minY) {
-//                    applyDestruction(collisionCoords, actor.getMovement(), isBullet);
-//                    return true;
-//                }
-//                break;
-//
-//            case ActorDirection.RIGHT:
-//                topForward.x = bottomForward.x = Math.ceil(position.x / GameSettings.TILE_SIZE) + 1;
-//                topForward.y = Math.floor(position.y / GameSettings.TILE_SIZE);
-//                bottomForward.y = Math.floor(position.y / GameSettings.TILE_SIZE) + 1;
-//
-//                if (collisionTable[topForward.x + topForward.y * GameSettings.WORLD_WIDTH * 2] == 1 ||
-//                        collisionTable[bottomForward.x + bottomForward.y * GameSettings.WORLD_WIDTH * 2] == 1) {
-//                    maxX = (topForward.x - 2) * GameSettings.TILE_SIZE;
-//                }
-//
-//                return position.x >= maxX;
-//                break;
-//            case ActorDirection.DOWN:
-//
-//                leftForward.x = Math.floor(position.x / GameSettings.TILE_SIZE);
-//                rightForward.x = Math.floor(position.x / GameSettings.TILE_SIZE) + 1;
-//                rightForward.y = leftForward.y = Math.ceil(position.y / GameSettings.TILE_SIZE) + 1;
-//
-//                if (collisionTable[leftForward.x + leftForward.y * GameSettings.WORLD_WIDTH * 2] == 1 ||
-//                        collisionTable[rightForward.x + rightForward.y * GameSettings.WORLD_WIDTH * 2] == 1) {
-//                    maxY = (rightForward.y - 2) * GameSettings.TILE_SIZE;
-//                }
-//
-//                return position.y >= maxY;
-//                break;
-//
-//            case ActorDirection.LEFT:
-//                topForward.x = bottomForward.x = Math.floor(position.x / GameSettings.TILE_SIZE);
-//                topForward.y = Math.floor(position.y / GameSettings.TILE_SIZE);
-//                bottomForward.y = Math.floor(position.y / GameSettings.TILE_SIZE) + 1;
-//
-//                if (collisionTable[topForward.x + topForward.y * GameSettings.WORLD_WIDTH * 2] == 1 ||
-//                        collisionTable[bottomForward.x + bottomForward.y * GameSettings.WORLD_WIDTH * 2] == 1) {
-//                    minX = (topForward.x + 1) * GameSettings.TILE_SIZE;
-//                }
-//                return position.x <= minX;
-//                break;
-//        }
         return false;
     }
 
-    private static function applyDestruction(worldCoords:Array, direction:ActorDirection, isBullet:Boolean):void {
-        if (!isBullet) return;
+    private static function checkWallBeforeBullet(bullet:IActor, world:World):Boolean {
+        var frontCells:Array = getFrontCells(bullet);
+
+        //TODO: applyDestruction
+        return false;
+    }
+
+    private static function checkWallBeforeTank(tank:IActor, world:World):Boolean {
+        var impactMap:ImpactMap = world.getCollisionLayer().getImpactMap();
+        var frontCells:Array = getFrontCells(tank);
+        world.setFrontCellsCoord(frontCells[0], frontCells[1]);
+        [ArrayElementType("ru.arlevoland.bc.game.battle_screen.world.impact.ImpactEntity")]
+        var entities:Array = [];
+        entities.push(impactMap.getEntity(frontCells[0].x, frontCells[0].y));
+        entities.push(impactMap.getEntity(frontCells[1].x, frontCells[1].y));
+
+        var r0:Boolean = entities[0].checkImpact(tank);
+        var r1:Boolean = entities[1].checkImpact(tank);
+
+        return entities[0].checkImpact(tank) || entities[1].checkImpact(tank);
+    }
+
+    public static function getFrontCells(actor:IActor):Array {
+        var left:Point = new Point(0, 0);
+        var right:Point = new Point(0, 0);
+        var top:Point = new Point(0, 0);
+        var bottom:Point = new Point(0, 0);
+        var position:Point = actor.getPosition();
+
+        switch (actor.getDirection()) {
+            case ActorDirection.UP:
+                left.x = Math.floor(position.x / GameSettings.TILE_SIZE);
+                right.x = Math.floor(position.x / GameSettings.TILE_SIZE) + 1;
+                right.y = left.y = Math.floor(position.y / GameSettings.TILE_SIZE);
+                trim(left, right);
+                return [left, right];
+                break;
+
+            case ActorDirection.RIGHT:
+                top.x = bottom.x = Math.ceil(position.x / GameSettings.TILE_SIZE) + 1;
+                top.y = Math.floor(position.y / GameSettings.TILE_SIZE);
+                bottom.y = Math.floor(position.y / GameSettings.TILE_SIZE) + 1;
+                trim(top, bottom);
+                return [top, bottom];
+                break;
+
+            case ActorDirection.DOWN:
+                left.x = Math.floor(position.x / GameSettings.TILE_SIZE);
+                right.x = Math.floor(position.x / GameSettings.TILE_SIZE) + 1;
+                right.y = left.y = Math.ceil(position.y / GameSettings.TILE_SIZE) + 1;
+                trim(left, right);
+                return [left, right];
+                break;
+
+            case ActorDirection.LEFT:
+                top.x = bottom.x = Math.ceil(position.x / GameSettings.TILE_SIZE) - 1;
+                top.y = Math.floor(position.y / GameSettings.TILE_SIZE);
+                bottom.y = Math.floor(position.y / GameSettings.TILE_SIZE) + 1;
+                trim(top, bottom);
+                return [top, bottom];
+                break;
+
+            default :
+                return null;
+        }
+
+        function trim(p1:Point, p2:Point):void {
+            trace(p1 + " " + p2);
+            const maxX:uint = GameSettings.WORLD_WIDTH * 2 - 1;
+            const maxY:uint = GameSettings.WORLD_WIDTH * 2 - 1;
+            const minX:uint = 0;
+            const minY:uint = 0;
+            if (p1.x > maxX) p1.x = maxX;
+            if (p1.x < minX) p1.x = minX;
+            if (p1.y > maxY) p1.y = maxY;
+            if (p1.y < minY) p1.y = minY;
+            if (p2.x > maxX) p2.x = maxX;
+            if (p2.x < minX) p2.x = minX;
+            if (p2.y > maxY) p2.y = maxY;
+            if (p2.y < minY) p2.y = minY;
+        }
+    }
+
+    private static function applyDestruction(worldCoords:Array, direction:ActorDirection, world:World):void {
         var worldPoint:Point;
         while (worldCoords.length > 0) {
             worldPoint = worldCoords.shift();
-            App.battleground.applyDestruction(worldPoint, direction);
+            world.applyDestruction(worldPoint, direction);
         }
     }
 }

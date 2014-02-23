@@ -9,6 +9,7 @@ import ru.arlevoland.bc.game.settings.model.TankFitData;
 public class SettingsManager {
 
     private var fitData:Array;
+    private var fitDataDictionary:Object;
     private var tankFitData:Array;
     private var brushMaps:Array;
     private var levels:Array;
@@ -22,6 +23,7 @@ public class SettingsManager {
         levels = createLevels();
         bigTiles = createBigTiles();
         indexBigTiles();
+        indexFitData();
     }
 
     private function indexBigTiles():void {
@@ -33,6 +35,17 @@ public class SettingsManager {
         for each (var b:BigTile in bigTiles) {
             bigTilesIndex[b.id] = b;
         }
+    }
+
+    private function indexFitData():void {
+        fitDataDictionary = {};
+        for each (var d:FitData in fitData) {
+            fitDataDictionary[d.name] = d;
+        }
+    }
+
+    public function getFitDataByName(tileName:String):FitData {
+        return fitDataDictionary[tileName];
     }
 
     private function createBigTiles():Array {

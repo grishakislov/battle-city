@@ -34,6 +34,6 @@ public class App {
     public static var levelDataManager:LevelDataManager;
     public static var devTools:DevTools;
 
-    public static var battleground:World;
+//    public static var battleground:World;
 }
 }

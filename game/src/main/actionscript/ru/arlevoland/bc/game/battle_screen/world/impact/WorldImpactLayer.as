@@ -7,7 +7,7 @@ import flash.geom.Rectangle;
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.BattleStageDrawMode;
-import ru.arlevoland.bc.game.battle_screen.loader.MapLoader;
+import ru.arlevoland.bc.game.battle_screen.map_loader.MapLoader;
 import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
 import ru.arlevoland.bc.game.battle_screen.world.*;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
@@ -24,14 +24,10 @@ public class WorldImpactLayer extends Sprite {
     ];
 
     public function initialize(levelId:uint):void {
+        impactMap = MapLoader.createImpactMap(levelId);
         visual = MapLoader.drawStageToBitmap(levelId, BattleStageDrawMode.MAIN);
         data = App.levelDataManager.getLevelDataByID(levelId);
-        createImpactMap();
         addChild(visual);
-    }
-
-    private function createImpactMap():void {
-
     }
 
     public function applyDestruction(worldPoint:Point, direction:ActorDirection):void {
@@ -67,6 +63,11 @@ public class WorldImpactLayer extends Sprite {
         return App.assetManager.getTileAsset(name);
     }
 
+    public function getImpactMap():ImpactMap {
+        return impactMap;
+    }
+
+    private var impactMap:ImpactMap;
     private var destroyedTiles:Array = [];
     private var visual:Bitmap;
     private var data:LevelData;

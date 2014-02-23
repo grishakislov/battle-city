@@ -69,7 +69,8 @@ public class PlayerTank extends BaseTank {
     }
 
     private function processMovement(delta:uint):void {
-        if (ImpactProcessor.borderAhead(this) || ImpactProcessor.checkWall(this)) {
+
+        if (world.isBarrierAhead(this)) {
             movement = null;
             playIdleSound();
             return;
@@ -201,13 +202,6 @@ public class PlayerTank extends BaseTank {
         return result;
     }
 
-    [ArrayElementType("flash.geom.Point")]
-    private function getCellsBeforeTank():Array {
-        var result:Array = [];
-
-        return result;
-    }
-
     //Shooting
 
     //Sound
@@ -242,7 +236,6 @@ public class PlayerTank extends BaseTank {
     private var world:World;
     private var speed:uint;
     private var score:uint;
-    private var stageResult:StageResult;
     private var animationKey:uint = 1;
     private var animationFramesPassed:Number = 0;
     private var visual:TileAsset;

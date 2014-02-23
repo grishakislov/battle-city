@@ -1,5 +1,4 @@
 package ru.arlevoland.bc.game.settings.model {
-import flash.geom.Point;
 
 public class FitData {
 
@@ -7,8 +6,8 @@ public class FitData {
     public var name:String;
     [JsonProperty("palette")]
     public var palette:String;
-    [JsonProperty("index")]
-    public var index:uint;
+    [JsonProperty("brushIndex")]
+    public var brushIndex:uint;
     [JsonProperty("tag")]
     public var tag:String;
     [JsonProperty("straight")]

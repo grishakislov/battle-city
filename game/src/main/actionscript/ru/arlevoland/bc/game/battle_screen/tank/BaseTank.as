@@ -8,7 +8,7 @@ import ru.arlevoland.bc.game.battle_screen.world.IActor;
 import ru.arlevoland.bc.game.core.animation.AnimatedObject;
 import ru.arlevoland.bc.game.core.debug.GameError;
 
-internal class BaseTank extends AnimatedObject implements IActor {
+public class BaseTank extends AnimatedObject implements IActor {
     public function BaseTank() {
     }
 

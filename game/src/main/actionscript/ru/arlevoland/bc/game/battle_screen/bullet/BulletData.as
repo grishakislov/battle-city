@@ -3,29 +3,26 @@ import ru.arlevoland.bc.game.battle_screen.tank.*;
 
 import flash.geom.Point;
 
+import ru.arlevoland.bc.game.battle_screen.world.IActor;
+import ru.arlevoland.bc.game.battle_screen.world.World;
+
 public class BulletData {
 
-    public function BulletData(direction:ActorDirection, tankCoords:Point, level:uint) {
-        this.direction = direction;
-        this.tankCoords = tankCoords;
-        this.level = level;
+    public function BulletData(actor:IActor, world:World) {
+        this.actor = actor;
+        this.world = world;
     }
 
-    public function getDirection():ActorDirection {
-        return direction;
+    public function getActor():IActor {
+        return actor;
     }
 
-    public function getTankCoords():Point {
-        return tankCoords;
+    public function getWorld():World {
+        return world;
     }
 
-    public function getLevel():uint {
-        return level;
-    }
-
-    private var direction:ActorDirection;
-    private var tankCoords:Point;
-    private var level:uint;
+    private var actor:IActor;
+    private var world:World;
 
 }
 }
