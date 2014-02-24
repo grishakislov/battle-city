@@ -26,6 +26,8 @@ public class Main extends Sprite {
     private const msg:String = "Прикольный у тебя декомпилятор.";
 
     public function Main() {
+        var a:uint = 0x3 & 0xC;
+        !1;
         initLogManager();
         initSettingsManager();
 

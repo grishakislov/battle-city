@@ -3,6 +3,7 @@ import flash.geom.Point;
 
 public class GameSettings {
 
+    public static const DEBUG:Boolean = true;
     public static const SOUND_ENABLED:Boolean = true;
 
     public static const WORLD_WIDTH:uint = 13;//by 32

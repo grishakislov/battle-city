@@ -7,7 +7,6 @@ import flash.geom.Rectangle;
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.*;
-import ru.arlevoland.bc.game.battle_screen.new_world.map.MapModel;
 import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactMap;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
 import ru.arlevoland.bc.game.settings.model.LevelData;

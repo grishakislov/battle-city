@@ -2,7 +2,11 @@ package ru.arlevoland.bc.game.battle_screen.world {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Sprite;
+import flash.events.KeyboardEvent;
 import flash.geom.Point;
+import flash.ui.Keyboard;
+
+import ru.arlevoland.bc.game.App;
 
 import ru.arlevoland.bc.game.GameSettings;
 
@@ -13,8 +17,24 @@ import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
 import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactEntity;
 import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactProcessor;
 import ru.arlevoland.bc.game.battle_screen.world.impact.WorldImpactLayer;
+import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;
+import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
+import ru.arlevoland.bc.game.keyboard.key.KeyManager;
 
 public class World extends Sprite {
+
+    private var bulletManager:BulletManager;
+    private var stageId:uint;
+
+    private var tankLayer:Sprite;
+    private var playerTank1:PlayerTank;
+    private var player2:PlayerTank;
+    private var aiTanks:Array = [];
+    private var collisionLayer:WorldImpactLayer;
+    private var waterLayer:WorldWaterLayer;
+    private var bulletLayer:Sprite;
+    private var effectsLayer:Sprite;
+    private var treeLayer:WorldTreeLayer;
 
     public function initialize(levelId:uint):void {
 
@@ -41,9 +61,21 @@ public class World extends Sprite {
 
 
         //Test
+        if (GameSettings.DEBUG) {
+            App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
+        }
         initTestGrid();
         addChild(c1);
         addChild(c2);
+        updateImpactsVisibility();
+    }
+
+    private function onKeyDown(event:KeyboardManagerEvent):void {
+        var command:KeyCommand = event.getCommand();
+        if (command == KeyCommand.IMPACT_TRIGGER) {
+            showImpacts = !showImpacts;
+            updateImpactsVisibility();
+        }
     }
 
     public function initializePlayerTank(tankLevel:uint):void {
@@ -60,10 +92,10 @@ public class World extends Sprite {
         return stageId;
     }
 
-
     public function getBulletManager():BulletManager {
         return bulletManager;
     }
+
 
     public function applyDestruction(worldPoint:Point, direction:ActorDirection):void {
         collisionLayer.applyDestruction(worldPoint, direction);
@@ -81,23 +113,20 @@ public class World extends Sprite {
         return collisionLayer;
     }
 
-
-    private var bulletManager:BulletManager;
-
-    private var stageId:uint;
-    private var tankLayer:Sprite;
-    private var playerTank1:PlayerTank;
-    private var player2:PlayerTank;
-    private var aiTanks:Array = [];
-    private var collisionLayer:WorldImpactLayer;
-    private var waterLayer:WorldWaterLayer;
-    private var bulletLayer:Sprite;
-    private var effectsLayer:Sprite;
-    private var treeLayer:WorldTreeLayer;
+    public function destroy():void {
+        if (GameSettings.DEBUG) {
+            App.keyboardManager.removeEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
+        }
+    }
 
     //Test
-    private var grid:Bitmap;
+    private function updateImpactsVisibility():void {
+        grid.visible = showImpacts;
+        c1.visible = c2.visible = showImpacts;
+    }
 
+    private var grid:Bitmap;
+    private var showImpacts:Boolean;
 
     private function initTestGrid():void {
         var w:uint = GameSettings.WORLD_WIDTH * 2;
@@ -121,13 +150,28 @@ public class World extends Sprite {
 
         addChild(grid);
     }
+
     private var c1:Bitmap = new Bitmap(new BitmapData(8,8,false, 0x00FF00));
     private var c2:Bitmap = new Bitmap(new BitmapData(8,8,false, 0x00FF00));
+
     public function setFrontCellsCoord(frontCell:Point, frontCell2:Point):void {
+        if (!showImpacts) {
+            return;
+        }
         c1.x = frontCell.x * GameSettings.TILE_SIZE;
         c1.y = frontCell.y * GameSettings.TILE_SIZE;
         c2.x = frontCell2.x * GameSettings.TILE_SIZE;
         c2.y = frontCell2.y * GameSettings.TILE_SIZE;
+    }
+
+    public function redrawTiles(cells:Array):void {
+        for each (var p:Point in cells) {
+            redrawTileAt(p.x, p.y);
+        }
+    }
+
+    private function redrawTileAt(x:uint, y:uint):void {
+        collisionLayer.redrawTileAt(x,y);
     }
 }
 }

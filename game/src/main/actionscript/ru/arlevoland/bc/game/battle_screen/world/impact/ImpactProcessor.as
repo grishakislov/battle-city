@@ -34,7 +34,7 @@ public class ImpactProcessor {
         if (actor.getType() == ActorType.BULLET) {
             return borderAhead(actor) || checkWallBeforeBullet(actor as Bullet, world);
         } else if (actor.getType().isTank()) {
-            return borderAhead(actor) || checkWallBeforeTank(actor as BaseTank, world);
+            return borderAhead(actor) || checkWallBeforeActor(actor, world);
         }
 
         return false;
@@ -42,26 +42,35 @@ public class ImpactProcessor {
 
     private static function checkWallBeforeBullet(bullet:IActor, world:World):Boolean {
         var frontCells:Array = getFrontCells(bullet);
-
-        //TODO: applyDestruction
-        return false;
+        var result:Boolean = checkWallBeforeActor(bullet, world);
+        if (result) {
+            world.redrawTiles(frontCells);
+        }
+        return result;
     }
 
-    private static function checkWallBeforeTank(tank:IActor, world:World):Boolean {
+    [ArrayElementType("ru.arlevoland.bc.game.battle_screen.world.impact.ImpactEntity")]
+    private static function getEntitiesByFrontCells(frontCells:Array, world:World):Array {
         var impactMap:ImpactMap = world.getCollisionLayer().getImpactMap();
-        var frontCells:Array = getFrontCells(tank);
-        world.setFrontCellsCoord(frontCells[0], frontCells[1]);
-        [ArrayElementType("ru.arlevoland.bc.game.battle_screen.world.impact.ImpactEntity")]
         var entities:Array = [];
         entities.push(impactMap.getEntity(frontCells[0].x, frontCells[0].y));
         entities.push(impactMap.getEntity(frontCells[1].x, frontCells[1].y));
-
-        var r0:Boolean = entities[0].checkImpact(tank);
-        var r1:Boolean = entities[1].checkImpact(tank);
-
-        return entities[0].checkImpact(tank) || entities[1].checkImpact(tank);
+        return entities;
     }
 
+    private static function checkWallBeforeActor(actor:IActor, world:World):Boolean {
+        var frontCells:Array = getFrontCells(actor);
+
+        world.setFrontCellsCoord(frontCells[0], frontCells[1]);
+
+        [ArrayElementType("ru.arlevoland.bc.game.battle_screen.world.impact.ImpactEntity")]
+        var entities:Array = getEntitiesByFrontCells(frontCells, world);
+        var result1:Boolean = entities[0].checkImpact(actor, false);
+        var result2:Boolean = entities[1].checkImpact(actor, true);
+        return result1 || result2;
+    }
+
+    [ArrayElementType("flash.geom.Point")]
     public static function getFrontCells(actor:IActor):Array {
         var left:Point = new Point(0, 0);
         var right:Point = new Point(0, 0);
@@ -107,7 +116,6 @@ public class ImpactProcessor {
         }
 
         function trim(p1:Point, p2:Point):void {
-            trace(p1 + " " + p2);
             const maxX:uint = GameSettings.WORLD_WIDTH * 2 - 1;
             const maxY:uint = GameSettings.WORLD_WIDTH * 2 - 1;
             const minX:uint = 0;
@@ -120,14 +128,6 @@ public class ImpactProcessor {
             if (p2.x < minX) p2.x = minX;
             if (p2.y > maxY) p2.y = maxY;
             if (p2.y < minY) p2.y = minY;
-        }
-    }
-
-    private static function applyDestruction(worldCoords:Array, direction:ActorDirection, world:World):void {
-        var worldPoint:Point;
-        while (worldCoords.length > 0) {
-            worldPoint = worldCoords.shift();
-            world.applyDestruction(worldPoint, direction);
         }
     }
 }

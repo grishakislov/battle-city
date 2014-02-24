@@ -25,6 +25,11 @@ public class DefaultBindings {
             "g".charCodeAt(0),
             "П".charCodeAt(0),
             "п".charCodeAt(0)]);
+
+        result[KeyCommand.IMPACT_TRIGGER.getCommandId()] = new KeyBinding(KeyCommand.IMPACT_TRIGGER, ["D".charCodeAt(0),
+            "d".charCodeAt(0),
+            "В".charCodeAt(0),
+            "в".charCodeAt(0)]);
         return result;
     }
 

@@ -52,7 +52,12 @@ public class WorldImpactLayer extends Sprite {
         return DESTROYABLE_TILES.indexOf(tileName) > -1;
     }
 
-    private function redrawTileAt(coords:Point, tile:TileAsset):void {
+    public function redrawTileAt(x:uint, y:uint):void {
+        var entity:ImpactEntity = impactMap.getEntity(x,y);
+        redrawTile(new Point(x,y), App.assetManager.getTileAsset(entity.getTileName()));
+    }
+
+    private function redrawTile(coords:Point, tile:TileAsset):void {
         var rect:Rectangle = new Rectangle(0, 0, GameSettings.TILE_SIZE, GameSettings.TILE_SIZE);
         coords.x *= GameSettings.TILE_SIZE;
         coords.y *= GameSettings.TILE_SIZE;

@@ -12,7 +12,9 @@ public class ImpactMap {
         this.level = level;
         this.bigTiles = App.settingsManager.getBigTiles().concat();
         initializeMap();
-        traceMap();
+        if (GameSettings.DEBUG) {
+            traceMap();
+        }
     }
 
     private function initializeMap():void {
@@ -69,6 +71,9 @@ public class ImpactMap {
         var fitData:FitData = App.settingsManager.getFitDataByName(tileName);
         var isBrick:Boolean = fitData.name == "BRUSH_F";
         var brickIndex:uint = fitData.brushIndex;
+        if (brickIndex != 0 && brickIndex != 15) {
+            !1;
+        }
         var result:ImpactEntity = new ImpactEntity(tileName, isBrick, brickIndex);
         return result;
     }
