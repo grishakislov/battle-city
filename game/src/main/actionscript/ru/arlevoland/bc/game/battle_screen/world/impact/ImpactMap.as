@@ -1,4 +1,6 @@
 package ru.arlevoland.bc.game.battle_screen.world.impact {
+import flash.geom.Point;
+
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.settings.model.BigTile;
@@ -63,6 +65,14 @@ public class ImpactMap {
 
     public function getEntity(x:uint, y:uint):ImpactEntity {
         return map[getIndexFor(x,y)];
+    }
+
+    public function getEntityByPoint(coords:Point):ImpactEntity {
+        return map[getIndexFor(coords.x,coords.y)];
+    }
+
+    public function getEntities(frontCells:PointPair):ImpactEntityPair {
+        return new ImpactEntityPair(getEntityByPoint(frontCells.getFirst()), getEntityByPoint(frontCells.getSecond()));
     }
 
     private function createEntity(tileName:String):ImpactEntity {

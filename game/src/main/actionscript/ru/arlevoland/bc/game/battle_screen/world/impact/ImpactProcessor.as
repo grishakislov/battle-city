@@ -49,12 +49,9 @@ public class ImpactProcessor {
         return result;
     }
 
-    private static function getEntitiesByFrontCells(frontCells:PointPair, world:World):Vector.<ImpactEntity> {
+    private static function getEntitiesByFrontCells(frontCells:PointPair, world:World):ImpactEntityPair {
         var impactMap:ImpactMap = world.getCollisionLayer().getImpactMap();
-        var entities:Vector.<ImpactEntity> = new Vector.<ImpactEntity>();
-        entities.push(impactMap.getEntity(frontCells.getFirst().x, frontCells.getFirst().y));
-        entities.push(impactMap.getEntity(frontCells.getSecond().x, frontCells.getSecond().y));
-        return entities;
+        return impactMap.getEntities(frontCells);
     }
 
     private static function checkWallBeforeActor(actor:IActor, world:World):Boolean {
@@ -62,9 +59,9 @@ public class ImpactProcessor {
 
         world.setFrontCellsCoord(frontCells);
 
-        var entities:Vector.<ImpactEntity> = getEntitiesByFrontCells(frontCells, world);
-        var result1:Boolean = entities[0].checkImpact(actor, false);
-        var result2:Boolean = entities[1].checkImpact(actor, true);
+        var entities:ImpactEntityPair = getEntitiesByFrontCells(frontCells, world);
+        var result1:Boolean = entities.getFirst().checkImpact(actor, false);
+        var result2:Boolean = entities.getSecond().checkImpact(actor, true);
         return result1 || result2;
     }
 

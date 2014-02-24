@@ -3,7 +3,6 @@ import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
 import ru.arlevoland.bc.game.battle_screen.world.ActorType;
 import ru.arlevoland.bc.game.battle_screen.world.IActor;
 
-[Deprecated]
 public class ImpactEntity {
 
     public function ImpactEntity(tileName:String, isBrick:Boolean, brickIndex:uint) {

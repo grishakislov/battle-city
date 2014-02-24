@@ -15,8 +15,5 @@ public class PointPair extends AbstractPair {
         return second;
     }
 
-    public function toArray():Array {
-        return [first, second];
-    }
 }
 }

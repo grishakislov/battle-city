@@ -73,7 +73,6 @@ public class WorldImpactLayer extends Sprite {
     }
 
     private var impactMap:ImpactMap;
-    private var destroyedTiles:Array = [];
     private var visual:Bitmap;
     private var data:LevelData;
     private var water:WorldWaterLayer;
