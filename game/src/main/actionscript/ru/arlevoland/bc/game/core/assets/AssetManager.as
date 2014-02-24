@@ -190,9 +190,9 @@ public class AssetManager {
     private var tiles:Bitmap;
     private var tankTiles:Bitmap;
 
-    private var fitData:Array = [];
-    private var tankFitData:Array = [];
-    private var brushMaps:Array = [];
+    private var fitData:Vector.<FitData> = new Vector.<FitData>();
+    private var tankFitData:Vector.<TankFitData> = new Vector.<TankFitData>();
+    private var brushMaps:Vector.<BrushMap> = new Vector.<BrushMap>();
 
     private var tileAssets:TileDictionary;
 

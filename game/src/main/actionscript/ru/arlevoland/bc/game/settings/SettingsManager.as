@@ -8,13 +8,13 @@ import ru.arlevoland.bc.game.settings.model.TankFitData;
 
 public class SettingsManager {
 
-    private var fitData:Array;
+    private var fitData:Vector.<FitData>;
     private var fitDataDictionary:Object;
-    private var tankFitData:Array;
-    private var brushMaps:Array;
-    private var levels:Array;
-    private var bigTiles:Array;
-    private var bigTilesIndex:Array;
+    private var tankFitData:Vector.<TankFitData>;
+    private var brushMaps:Vector.<BrushMap>;
+    private var levels:Vector.<LevelData>;
+    private var bigTiles:Vector.<BigTile>;
+    private var bigTilesIndex:Vector.<BigTile>;
 
     public function initialize():void {
         fitData = createFitData();
@@ -27,11 +27,7 @@ public class SettingsManager {
     }
 
     private function indexBigTiles():void {
-        bigTilesIndex = [];
-        for (var i:int = 0; i < bigTiles.length; i++) {
-            bigTilesIndex.push(null);
-        }
-
+        bigTilesIndex = new Vector.<BigTile>(bigTiles.length);
         for each (var b:BigTile in bigTiles) {
             bigTilesIndex[b.id] = b;
         }
@@ -48,33 +44,38 @@ public class SettingsManager {
         return fitDataDictionary[tileName];
     }
 
-    private function createBigTiles():Array {
+    private function createBigTiles():Vector.<BigTile> {
         var data:String = new Resources.BIG_TILES;
-        var result:Array = JSONHelper.readList(BigTile, data);
+        var array:Array = JSONHelper.readList(BigTile, data);
+        var result:Vector.<BigTile> = Vector.<BigTile>(array);
         return result;
     }
 
-    private function createFitData():Array {
+    private function createFitData():Vector.<FitData> {
         var data:String = new Resources.FIT_DATA;
-        var result:Array = JSONHelper.readList(FitData, data);
+        var array:Array = JSONHelper.readList(FitData, data);
+        var result:Vector.<FitData> = Vector.<FitData>(array);
         return result;
     }
 
-    private function createTankFitData():Array {
+    private function createTankFitData():Vector.<TankFitData> {
         var data:String = new Resources.TANK_FIT_DATA;
-        var result:Array = JSONHelper.readList(TankFitData, data);
+        var array:Array = JSONHelper.readList(TankFitData, data);
+        var result:Vector.<TankFitData> = Vector.<TankFitData>(array);
         return result;
     }
 
-    private function createBrushMaps():Array {
+    private function createBrushMaps():Vector.<BrushMap> {
         var data:String = new Resources.BRUSH_MAPS;
-        var result:Array = JSONHelper.readList(BrushMap, data);
+        var array:Array = JSONHelper.readList(BrushMap, data);
+        var result:Vector.<BrushMap> = Vector.<BrushMap>(array);
         return result;
     }
 
-    private function createLevels():Array {
+    private function createLevels():Vector.<LevelData> {
         var data:String = new Resources.LEVELS;
-        var result:Array = JSONHelper.readList(LevelData, data);
+        var array:Array = JSONHelper.readList(LevelData, data);
+        var result:Vector.<LevelData> = Vector.<LevelData>(array);
         return result;
     }
 
@@ -82,23 +83,23 @@ public class SettingsManager {
         return bigTilesIndex[id];
     }
 
-    public function getFitData():Array {
+    public function getFitData():Vector.<FitData> {
         return fitData;
     }
 
-    public function getTankFitData():Array {
+    public function getTankFitData():Vector.<TankFitData> {
         return tankFitData;
     }
 
-    public function getBrushMaps():Array {
+    public function getBrushMaps():Vector.<BrushMap> {
         return brushMaps;
     }
 
-    public function getLevels():Array {
+    public function getLevels():Vector.<LevelData> {
         return levels;
     }
 
-    public function getBigTiles():Array {
+    public function getBigTiles():Vector.<BigTile> {
         return bigTiles;
     }
 }

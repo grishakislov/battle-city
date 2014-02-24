@@ -2,8 +2,8 @@ package ru.arlevoland.bc.game.battle_screen.world.impact {
 import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
 import ru.arlevoland.bc.game.battle_screen.world.ActorType;
 import ru.arlevoland.bc.game.battle_screen.world.IActor;
-import ru.arlevoland.bc.game.core.assets.AssetHelper;
 
+[Deprecated]
 public class ImpactEntity {
 
     public function ImpactEntity(tileName:String, isBrick:Boolean, brickIndex:uint) {
@@ -53,7 +53,7 @@ public class ImpactEntity {
 
 
     public function applyDestruction(direction:ActorDirection):void {
-
+        //TODO: Можно уменьшить в четыре раза
         switch (direction) {
             case ActorDirection.UP:
                 brickIndex & 0xC ? brickIndex ^= 0xC : brickIndex ^= 0x3;

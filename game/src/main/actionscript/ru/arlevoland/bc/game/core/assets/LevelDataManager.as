@@ -30,8 +30,7 @@ public class LevelDataManager {
         return levels.length;
     }
 
-    [ArrayElementType("ru.arlevoland.bc.game.settings.model.LevelData")]
-    private var levels:Array = [];
+    private var levels:Vector.<LevelData>;
 
 }
 }

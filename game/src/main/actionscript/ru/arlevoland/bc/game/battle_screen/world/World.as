@@ -16,6 +16,7 @@ import ru.arlevoland.bc.game.battle_screen.tank.PlayerTank;
 import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
 import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactEntity;
 import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactProcessor;
+import ru.arlevoland.bc.game.battle_screen.world.impact.PointPair;
 import ru.arlevoland.bc.game.battle_screen.world.impact.WorldImpactLayer;
 import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
@@ -154,14 +155,14 @@ public class World extends Sprite {
     private var c1:Bitmap = new Bitmap(new BitmapData(8,8,false, 0x00FF00));
     private var c2:Bitmap = new Bitmap(new BitmapData(8,8,false, 0x00FF00));
 
-    public function setFrontCellsCoord(frontCell:Point, frontCell2:Point):void {
+    public function setFrontCellsCoord(frontCells:PointPair):void {
         if (!showImpacts) {
             return;
         }
-        c1.x = frontCell.x * GameSettings.TILE_SIZE;
-        c1.y = frontCell.y * GameSettings.TILE_SIZE;
-        c2.x = frontCell2.x * GameSettings.TILE_SIZE;
-        c2.y = frontCell2.y * GameSettings.TILE_SIZE;
+        c1.x = frontCells.getFirst().x * GameSettings.TILE_SIZE;
+        c1.y = frontCells.getFirst().y * GameSettings.TILE_SIZE;
+        c2.x = frontCells.getSecond().x * GameSettings.TILE_SIZE;
+        c2.y = frontCells.getSecond().y * GameSettings.TILE_SIZE;
     }
 
     public function redrawTiles(cells:Array):void {

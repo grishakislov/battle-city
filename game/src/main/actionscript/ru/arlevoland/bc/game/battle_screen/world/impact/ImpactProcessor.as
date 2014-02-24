@@ -41,93 +41,93 @@ public class ImpactProcessor {
     }
 
     private static function checkWallBeforeBullet(bullet:IActor, world:World):Boolean {
-        var frontCells:Array = getFrontCells(bullet);
+        var frontCells:PointPair = getFrontCells(bullet);
         var result:Boolean = checkWallBeforeActor(bullet, world);
         if (result) {
-            world.redrawTiles(frontCells);
+            world.redrawTiles(frontCells.toArray());
         }
         return result;
     }
 
-    [ArrayElementType("ru.arlevoland.bc.game.battle_screen.world.impact.ImpactEntity")]
-    private static function getEntitiesByFrontCells(frontCells:Array, world:World):Array {
+    private static function getEntitiesByFrontCells(frontCells:PointPair, world:World):Vector.<ImpactEntity> {
         var impactMap:ImpactMap = world.getCollisionLayer().getImpactMap();
-        var entities:Array = [];
-        entities.push(impactMap.getEntity(frontCells[0].x, frontCells[0].y));
-        entities.push(impactMap.getEntity(frontCells[1].x, frontCells[1].y));
+        var entities:Vector.<ImpactEntity> = new Vector.<ImpactEntity>();
+        entities.push(impactMap.getEntity(frontCells.getFirst().x, frontCells.getFirst().y));
+        entities.push(impactMap.getEntity(frontCells.getSecond().x, frontCells.getSecond().y));
         return entities;
     }
 
     private static function checkWallBeforeActor(actor:IActor, world:World):Boolean {
-        var frontCells:Array = getFrontCells(actor);
+        var frontCells:PointPair = getFrontCells(actor);
 
-        world.setFrontCellsCoord(frontCells[0], frontCells[1]);
+        world.setFrontCellsCoord(frontCells);
 
-        [ArrayElementType("ru.arlevoland.bc.game.battle_screen.world.impact.ImpactEntity")]
-        var entities:Array = getEntitiesByFrontCells(frontCells, world);
+        var entities:Vector.<ImpactEntity> = getEntitiesByFrontCells(frontCells, world);
         var result1:Boolean = entities[0].checkImpact(actor, false);
         var result2:Boolean = entities[1].checkImpact(actor, true);
         return result1 || result2;
     }
 
-    [ArrayElementType("flash.geom.Point")]
-    public static function getFrontCells(actor:IActor):Array {
+    public static function getFrontCells(actor:IActor):PointPair {
         var left:Point = new Point(0, 0);
         var right:Point = new Point(0, 0);
         var top:Point = new Point(0, 0);
         var bottom:Point = new Point(0, 0);
         var position:Point = actor.getPosition();
 
+        var result:PointPair;
+
         switch (actor.getDirection()) {
             case ActorDirection.UP:
                 left.x = Math.floor(position.x / GameSettings.TILE_SIZE);
                 right.x = Math.floor(position.x / GameSettings.TILE_SIZE) + 1;
                 right.y = left.y = Math.floor(position.y / GameSettings.TILE_SIZE);
-                trim(left, right);
-                return [left, right];
+                result = new PointPair(left, right);
+                trim(result);
+                return result;
                 break;
 
             case ActorDirection.RIGHT:
                 top.x = bottom.x = Math.ceil(position.x / GameSettings.TILE_SIZE) + 1;
                 top.y = Math.floor(position.y / GameSettings.TILE_SIZE);
                 bottom.y = Math.floor(position.y / GameSettings.TILE_SIZE) + 1;
-                trim(top, bottom);
-                return [top, bottom];
+                result = new PointPair(top, bottom);
                 break;
 
             case ActorDirection.DOWN:
                 left.x = Math.floor(position.x / GameSettings.TILE_SIZE);
                 right.x = Math.floor(position.x / GameSettings.TILE_SIZE) + 1;
                 right.y = left.y = Math.ceil(position.y / GameSettings.TILE_SIZE) + 1;
-                trim(left, right);
-                return [left, right];
+                result = new PointPair(left, right);
                 break;
 
             case ActorDirection.LEFT:
                 top.x = bottom.x = Math.ceil(position.x / GameSettings.TILE_SIZE) - 1;
                 top.y = Math.floor(position.y / GameSettings.TILE_SIZE);
                 bottom.y = Math.floor(position.y / GameSettings.TILE_SIZE) + 1;
-                trim(top, bottom);
-                return [top, bottom];
+                result = new PointPair(top, bottom);
                 break;
 
             default :
                 return null;
         }
 
-        function trim(p1:Point, p2:Point):void {
+        trim(result);
+        return result;
+
+        function trim(pair:PointPair):void {
             const maxX:uint = GameSettings.WORLD_WIDTH * 2 - 1;
             const maxY:uint = GameSettings.WORLD_WIDTH * 2 - 1;
             const minX:uint = 0;
             const minY:uint = 0;
-            if (p1.x > maxX) p1.x = maxX;
-            if (p1.x < minX) p1.x = minX;
-            if (p1.y > maxY) p1.y = maxY;
-            if (p1.y < minY) p1.y = minY;
-            if (p2.x > maxX) p2.x = maxX;
-            if (p2.x < minX) p2.x = minX;
-            if (p2.y > maxY) p2.y = maxY;
-            if (p2.y < minY) p2.y = minY;
+            if (pair.getFirst().x > maxX) pair.getFirst().x = maxX;
+            if (pair.getFirst().x < minX) pair.getFirst().x = minX;
+            if (pair.getFirst().y > maxY) pair.getFirst().y = maxY;
+            if (pair.getFirst().y < minY) pair.getFirst().y = minY;
+            if (pair.getSecond().x > maxX) pair.getSecond().x = maxX;
+            if (pair.getSecond().x < minX) pair.getSecond().x = minX;
+            if (pair.getSecond().y > maxY) pair.getSecond().y = maxY;
+            if (pair.getSecond().y < minY) pair.getSecond().y = minY;
         }
     }
 }

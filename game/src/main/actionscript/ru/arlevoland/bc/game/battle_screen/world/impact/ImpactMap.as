@@ -10,7 +10,7 @@ public class ImpactMap {
     public function ImpactMap(levelId:uint) {
         var level:LevelData = App.levelDataManager.getLevelDataByID(levelId);
         this.level = level;
-        this.bigTiles = App.settingsManager.getBigTiles().concat();
+        this.bigTiles = App.settingsManager.getBigTiles();
         initializeMap();
         if (GameSettings.DEBUG) {
             traceMap();
@@ -54,8 +54,6 @@ public class ImpactMap {
     }
 
     private function storeEntity(x:uint, y:uint, entity:ImpactEntity):void {
-//        var index:uint = getIndexFor(x,y);
-//        trace(index + "_" + entity.getTileName());
         map[getIndexFor(x,y)] = entity;
     }
 
@@ -71,9 +69,6 @@ public class ImpactMap {
         var fitData:FitData = App.settingsManager.getFitDataByName(tileName);
         var isBrick:Boolean = fitData.name == "BRUSH_F";
         var brickIndex:uint = fitData.brushIndex;
-        if (brickIndex != 0 && brickIndex != 15) {
-            !1;
-        }
         var result:ImpactEntity = new ImpactEntity(tileName, isBrick, brickIndex);
         return result;
     }
@@ -84,7 +79,6 @@ public class ImpactMap {
     //13x13
     private var level:LevelData;
 
-    [ArrayElementType("ru.arlevoland.bc.game.settings.model.BigTile")]
-    private var bigTiles:Array;
+    private var bigTiles:Vector.<BigTile>;
 }
 }
