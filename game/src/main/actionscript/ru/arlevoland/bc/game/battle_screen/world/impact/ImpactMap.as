@@ -77,9 +77,7 @@ public class ImpactMap {
 
     private function createEntity(tileName:String):ImpactEntity {
         var fitData:FitData = App.settingsManager.getFitDataByName(tileName);
-        var isBrick:Boolean = fitData.name == "BRUSH_F";
-        var brickIndex:uint = fitData.brushIndex;
-        var result:ImpactEntity = new ImpactEntity(tileName, isBrick, brickIndex);
+        var result:ImpactEntity = new ImpactEntity(tileName, fitData.brushIndex);
         return result;
     }
 

@@ -60,8 +60,31 @@ public class ImpactProcessor {
         world.setFrontCellsCoord(frontCells);
 
         var entities:ImpactEntityPair = getEntitiesByFrontCells(frontCells, world);
-        var result1:Boolean = entities.getFirst().checkImpact(actor, false);
-        var result2:Boolean = entities.getSecond().checkImpact(actor, true);
+        var first:ImpactEntity = entities.getFirst();
+        var second:ImpactEntity = entities.getSecond();
+
+        var result1:Boolean = first.checkImpact(actor, false);
+        var result2:Boolean = second.checkImpact(actor, true);
+
+        if (actor.getType() == ActorType.BULLET) {
+            if (result1 && result2) {
+                if (first.getFrontFlag() && second.getFrontFlag()) {
+                    first.destruct(actor.getDirection());
+                    second.destruct(actor.getDirection());
+                } else if (first.getFrontFlag()) {
+                    first.destruct(actor.getDirection())
+                } else if (second.getFrontFlag()) {
+                    second.destruct(actor.getDirection());
+                } else {
+                    first.destruct(actor.getDirection());
+                    second.destruct(actor.getDirection());
+                }
+            } else {
+                if (result1) first.destruct(actor.getDirection());
+                if (result2) second.destruct(actor.getDirection());
+            }
+        }
+
         return result1 || result2;
     }
 
@@ -74,34 +97,37 @@ public class ImpactProcessor {
 
         var result:PointPair;
 
+        var floorX:uint = Math.floor(position.x / GameSettings.TILE_SIZE);
+        var floorY:uint = Math.floor(position.y / GameSettings.TILE_SIZE);
+        var ceilX:uint = Math.ceil(position.x / GameSettings.TILE_SIZE);
+        var ceilY:uint = Math.ceil(position.y / GameSettings.TILE_SIZE);
+
         switch (actor.getDirection()) {
             case ActorDirection.UP:
-                left.x = Math.floor(position.x / GameSettings.TILE_SIZE);
-                right.x = Math.floor(position.x / GameSettings.TILE_SIZE) + 1;
-                right.y = left.y = Math.floor(position.y / GameSettings.TILE_SIZE);
+                left.x = floorX;
+                right.x = floorX + 1;
+                right.y = left.y = floorY;
                 result = new PointPair(left, right);
-                trim(result);
-                return result;
                 break;
 
             case ActorDirection.RIGHT:
-                top.x = bottom.x = Math.ceil(position.x / GameSettings.TILE_SIZE) + 1;
-                top.y = Math.floor(position.y / GameSettings.TILE_SIZE);
-                bottom.y = Math.floor(position.y / GameSettings.TILE_SIZE) + 1;
+                top.x = bottom.x = ceilX + 1;
+                top.y = floorY;
+                bottom.y = floorY + 1;
                 result = new PointPair(top, bottom);
                 break;
 
             case ActorDirection.DOWN:
-                left.x = Math.floor(position.x / GameSettings.TILE_SIZE);
-                right.x = Math.floor(position.x / GameSettings.TILE_SIZE) + 1;
-                right.y = left.y = Math.ceil(position.y / GameSettings.TILE_SIZE) + 1;
+                left.x = floorX;
+                right.x = floorX + 1;
+                right.y = left.y = ceilY + 1;
                 result = new PointPair(left, right);
                 break;
 
             case ActorDirection.LEFT:
-                top.x = bottom.x = Math.ceil(position.x / GameSettings.TILE_SIZE) - 1;
-                top.y = Math.floor(position.y / GameSettings.TILE_SIZE);
-                bottom.y = Math.floor(position.y / GameSettings.TILE_SIZE) + 1;
+                top.x = bottom.x = ceilX - 1;
+                top.y = floorY;
+                bottom.y = floorY + 1;
                 result = new PointPair(top, bottom);
                 break;
 
@@ -117,14 +143,7 @@ public class ImpactProcessor {
             const maxY:uint = GameSettings.WORLD_WIDTH * 2 - 1;
             const minX:uint = 0;
             const minY:uint = 0;
-            if (pair.getFirst().x > maxX) pair.getFirst().x = maxX;
-            if (pair.getFirst().x < minX) pair.getFirst().x = minX;
-            if (pair.getFirst().y > maxY) pair.getFirst().y = maxY;
-            if (pair.getFirst().y < minY) pair.getFirst().y = minY;
-            if (pair.getSecond().x > maxX) pair.getSecond().x = maxX;
-            if (pair.getSecond().x < minX) pair.getSecond().x = minX;
-            if (pair.getSecond().y > maxY) pair.getSecond().y = maxY;
-            if (pair.getSecond().y < minY) pair.getSecond().y = minY;
+            pair.trimAll(minX, maxX, minY, maxY);
         }
     }
 }

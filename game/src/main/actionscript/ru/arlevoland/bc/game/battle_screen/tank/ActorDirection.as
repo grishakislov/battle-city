@@ -11,6 +11,13 @@ public class ActorDirection {
         this.direction = direction;
     }
 
+    public function isVertical():Boolean {
+        return this == UP || this == DOWN;
+    }
+
+    public function isHorizontal():Boolean {
+        return this == LEFT || this == RIGHT;
+    }
 
     public function getDirectionId():String {
         return direction;

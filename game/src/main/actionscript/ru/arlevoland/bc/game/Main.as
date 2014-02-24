@@ -4,9 +4,6 @@ import flash.display.Stage;
 import flash.events.EventDispatcher;
 
 import ru.arlevoland.bc.game.battle_screen.BattleScreen;
-import ru.arlevoland.bc.game.battle_screen.map_loader.MapLoader;
-import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactMap;
-
 import ru.arlevoland.bc.game.core.assets.AssetManager;
 import ru.arlevoland.bc.game.core.assets.LevelDataManager;
 import ru.arlevoland.bc.game.core.debug.DevTools;
