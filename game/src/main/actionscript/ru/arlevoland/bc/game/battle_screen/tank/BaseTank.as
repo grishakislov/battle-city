@@ -4,11 +4,11 @@ import flash.geom.Point;
 
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.world.ActorType;
-import ru.arlevoland.bc.game.battle_screen.world.IActor;
+import ru.arlevoland.bc.game.battle_screen.world.Actor;
 import ru.arlevoland.bc.game.core.animation.AnimatedObject;
 import ru.arlevoland.bc.game.core.debug.GameError;
 
-public class BaseTank extends AnimatedObject implements IActor {
+public class BaseTank extends AnimatedObject implements Actor {
     public function BaseTank() {
     }
 

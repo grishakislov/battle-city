@@ -1,9 +1,7 @@
 package ru.arlevoland.bc.game.battle_screen.world.impact {
-import org.osmf.layout.LayoutRendererBase;
-
 import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
+import ru.arlevoland.bc.game.battle_screen.world.Actor;
 import ru.arlevoland.bc.game.battle_screen.world.ActorType;
-import ru.arlevoland.bc.game.battle_screen.world.IActor;
 
 public class ImpactEntity {
 
@@ -16,7 +14,7 @@ public class ImpactEntity {
      positionFlag равен false для левого и верхнего тайла из двух перед пулей
      и true для правого и нижнего
      */
-    public function checkImpact(actor:IActor, positionFlag:Boolean):Boolean {
+    public function checkImpact(actor:Actor, positionFlag:Boolean):Boolean {
         if (actor.getType().isTank()) {
 
             return isBrick() || tileName == "METAL" || tileName == "WATER";

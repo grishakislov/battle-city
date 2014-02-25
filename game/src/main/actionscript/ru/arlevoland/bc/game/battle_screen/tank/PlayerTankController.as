@@ -19,6 +19,7 @@ internal class PlayerTankController extends EventDispatcher {
             currentCommand = e.getCommand();
             dispatchEvent(new PlayerTankControllerEvent(PlayerTankControllerEvent.START, currentCommand));
         } else {
+            //TODO: double command
             dispatchEvent(new PlayerTankControllerEvent(PlayerTankControllerEvent.START, e.getCommand()));
         }
     }

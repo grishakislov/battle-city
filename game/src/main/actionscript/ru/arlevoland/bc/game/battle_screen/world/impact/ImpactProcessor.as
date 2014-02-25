@@ -8,7 +8,17 @@ import ru.arlevoland.bc.game.battle_screen.world.*;
 
 public class ImpactProcessor {
 
-    public static function borderAhead(actor:IActor):Boolean {
+    public static function isBarrierAhead(actor:Actor, world:World):Boolean {
+        if (actor.getType() == ActorType.BULLET) {
+            return borderAhead(actor) || checkWallBeforeBullet(actor as Bullet, world);
+        } else if (actor.getType().isTank()) {
+            return borderAhead(actor) || checkWallBeforeActor(actor, world);
+        }
+
+        return false;
+    }
+
+    private static function borderAhead(actor:Actor):Boolean {
         var movement:ActorDirection = actor.getDirection();
         var position:Point = actor.getPosition();
         switch (movement) {
@@ -30,17 +40,7 @@ public class ImpactProcessor {
         }
     }
 
-    public static function isBarrierAhead(actor:IActor, world:World):Boolean {
-        if (actor.getType() == ActorType.BULLET) {
-            return borderAhead(actor) || checkWallBeforeBullet(actor as Bullet, world);
-        } else if (actor.getType().isTank()) {
-            return borderAhead(actor) || checkWallBeforeActor(actor, world);
-        }
-
-        return false;
-    }
-
-    private static function checkWallBeforeBullet(bullet:IActor, world:World):Boolean {
+    private static function checkWallBeforeBullet(bullet:Actor, world:World):Boolean {
         var frontCells:PointPair = getFrontCells(bullet);
         var result:Boolean = checkWallBeforeActor(bullet, world);
         if (result) {
@@ -54,10 +54,10 @@ public class ImpactProcessor {
         return impactMap.getEntities(frontCells);
     }
 
-    private static function checkWallBeforeActor(actor:IActor, world:World):Boolean {
+    private static function checkWallBeforeActor(actor:Actor, world:World):Boolean {
         var frontCells:PointPair = getFrontCells(actor);
 
-        world.setFrontCellsCoord(frontCells);
+        world.setFrontCellsCoord(frontCells); //For debug
 
         var entities:ImpactEntityPair = getEntitiesByFrontCells(frontCells, world);
         var first:ImpactEntity = entities.getFirst();
@@ -67,28 +67,30 @@ public class ImpactProcessor {
         var result2:Boolean = second.checkImpact(actor, true);
 
         if (actor.getType() == ActorType.BULLET) {
-            if (result1 && result2) {
-                if (first.getFrontFlag() && second.getFrontFlag()) {
-                    first.destruct(actor.getDirection());
-                    second.destruct(actor.getDirection());
-                } else if (first.getFrontFlag()) {
-                    first.destruct(actor.getDirection())
-                } else if (second.getFrontFlag()) {
-                    second.destruct(actor.getDirection());
-                } else {
-                    first.destruct(actor.getDirection());
-                    second.destruct(actor.getDirection());
-                }
+
+            var direction:ActorDirection = actor.getDirection();
+            var doubleImpact:Boolean = result1 && result2;
+            var flagsEqual:Boolean = (first.getFrontFlag() == second.getFrontFlag());
+
+            if (doubleImpact) {
+
+                if (flagsEqual) {
+                    first.destruct(direction);
+                    second.destruct(direction);
+
+                } else if (first.getFrontFlag()) first.destruct(direction);
+                else if (second.getFrontFlag()) second.destruct(direction);
+
             } else {
-                if (result1) first.destruct(actor.getDirection());
-                if (result2) second.destruct(actor.getDirection());
+                if (result1) first.destruct(direction);
+                if (result2) second.destruct(direction);
             }
         }
 
         return result1 || result2;
     }
 
-    public static function getFrontCells(actor:IActor):PointPair {
+    private static function getFrontCells(actor:Actor):PointPair {
         var left:Point = new Point(0, 0);
         var right:Point = new Point(0, 0);
         var top:Point = new Point(0, 0);
@@ -141,9 +143,7 @@ public class ImpactProcessor {
         function trim(pair:PointPair):void {
             const maxX:uint = GameSettings.WORLD_WIDTH * 2 - 1;
             const maxY:uint = GameSettings.WORLD_WIDTH * 2 - 1;
-            const minX:uint = 0;
-            const minY:uint = 0;
-            pair.trimAll(minX, maxX, minY, maxY);
+            pair.trimAll(0, maxX, 0, maxY);
         }
     }
 }

@@ -2,25 +2,19 @@ package ru.arlevoland.bc.game.battle_screen.world {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Sprite;
-import flash.events.KeyboardEvent;
 import flash.geom.Point;
-import flash.ui.Keyboard;
 
 import ru.arlevoland.bc.game.App;
-
 import ru.arlevoland.bc.game.GameSettings;
-
-import ru.arlevoland.bc.game.battle_screen.map_loader.MapLoader;
 import ru.arlevoland.bc.game.battle_screen.bullet.BulletManager;
-import ru.arlevoland.bc.game.battle_screen.tank.PlayerTank;
 import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
+import ru.arlevoland.bc.game.battle_screen.tank.PlayerTank;
 import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactEntity;
 import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactProcessor;
 import ru.arlevoland.bc.game.battle_screen.world.impact.PointPair;
 import ru.arlevoland.bc.game.battle_screen.world.impact.WorldImpactLayer;
 import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
-import ru.arlevoland.bc.game.keyboard.key.KeyManager;
 
 public class World extends Sprite {
 
@@ -102,11 +96,11 @@ public class World extends Sprite {
         collisionLayer.applyDestruction(worldPoint, direction);
     }
 
-    public function shoot(tank:IActor):void {
+    public function shoot(tank:Actor):void {
         bulletManager.shoot(tank, this);
     }
 
-    public function isBarrierAhead(actor:IActor):Boolean {
+    public function isBarrierAhead(actor:Actor):Boolean {
         return ImpactProcessor.isBarrierAhead(actor, this);
     }
 
@@ -133,18 +127,17 @@ public class World extends Sprite {
         var w:uint = GameSettings.WORLD_WIDTH * 2;
         var h:uint = GameSettings.WORLD_HEIGHT * 2;
 
-        var fullTile:BitmapData = new BitmapData(8,8,true,0xAAFFFFFF);
-        var emptyTile:BitmapData = new BitmapData(8,8,true,0x00FFFFFF);
+        var fullTile:BitmapData = new BitmapData(8, 8, true, 0xAAFFFFFF);
+        var emptyTile:BitmapData = new BitmapData(8, 8, true, 0x00FFFFFF);
         var currentBitmapData:BitmapData;
         var currentEntity:ImpactEntity;
         var currentPoint:Point = new Point();
-        grid = new Bitmap(new BitmapData(w*8,h*8,true,0x00FFFFFF));
+        grid = new Bitmap(new BitmapData(w * 8, h * 8, true, 0x00FFFFFF));
         for (var y:uint = 0; y < h; y++) {
             for (var x:uint = 0; x < w; x++) {
-                currentEntity = collisionLayer.getImpactMap().getEntity(x,y);
+                currentEntity = collisionLayer.getImpactMap().getEntity(x, y);
                 currentBitmapData = currentEntity.isBrick() ? fullTile : emptyTile;
-                currentPoint.x = x * GameSettings.TILE_SIZE;
-                currentPoint.y = y * GameSettings.TILE_SIZE;
+                currentPoint.setTo(x * GameSettings.TILE_SIZE, y * GameSettings.TILE_SIZE);
                 grid.bitmapData.copyPixels(currentBitmapData, currentBitmapData.rect, currentPoint);
             }
         }
@@ -152,8 +145,8 @@ public class World extends Sprite {
         addChild(grid);
     }
 
-    private var c1:Bitmap = new Bitmap(new BitmapData(8,8,false, 0x00FF00));
-    private var c2:Bitmap = new Bitmap(new BitmapData(8,8,false, 0x00FF00));
+    private var c1:Bitmap = new Bitmap(new BitmapData(8, 8, false, 0x00FF00));
+    private var c2:Bitmap = new Bitmap(new BitmapData(8, 8, false, 0x00FF00));
 
     public function setFrontCellsCoord(frontCells:PointPair):void {
         if (!showImpacts) {
@@ -172,7 +165,7 @@ public class World extends Sprite {
     }
 
     private function redrawTileAt(x:uint, y:uint):void {
-        collisionLayer.redrawTileAt(x,y);
+        collisionLayer.redrawTileAt(x, y);
     }
 }
 }

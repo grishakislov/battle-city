@@ -9,7 +9,7 @@ import ru.arlevoland.bc.game.Main;
 
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.world.ActorType;
-import ru.arlevoland.bc.game.battle_screen.world.IActor;
+import ru.arlevoland.bc.game.battle_screen.world.Actor;
 import ru.arlevoland.bc.game.battle_screen.world.World;
 import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactProcessor;
 import ru.arlevoland.bc.game.core.animation.AnimatedObject;
@@ -19,7 +19,7 @@ import ru.arlevoland.bc.game.sfx.SfxLoop;
 import ru.arlevoland.bc.game.time.Ticker;
 import ru.arlevoland.bc.game.time.TickerEvent;
 
-public class Bullet extends AnimatedObject implements IActor {
+public class Bullet extends AnimatedObject implements Actor {
 
     public function Bullet(data:BulletData) {
         world = data.getWorld();

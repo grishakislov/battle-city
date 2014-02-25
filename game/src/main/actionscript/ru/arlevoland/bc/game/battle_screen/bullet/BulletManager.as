@@ -7,14 +7,14 @@ import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.bullet.Bullet;
 import ru.arlevoland.bc.game.battle_screen.bullet.BulletData;
 import ru.arlevoland.bc.game.battle_screen.world.ActorType;
-import ru.arlevoland.bc.game.battle_screen.world.IActor;
+import ru.arlevoland.bc.game.battle_screen.world.Actor;
 import ru.arlevoland.bc.game.battle_screen.world.World;
 
 public class BulletManager {
     public function BulletManager() {
     }
 
-    public function shoot(tank:IActor, world:World):void {
+    public function shoot(tank:Actor, world:World):void {
 
         switch (tank.getType()) {
             case ActorType.PLAYER:
@@ -27,7 +27,7 @@ public class BulletManager {
 
     }
 
-    private function createPlayerBullet(tank:IActor, world:World):Bullet {
+    private function createPlayerBullet(tank:Actor, world:World):Bullet {
         var bullet:Bullet;
         var data:BulletData;
         switch (tank.getLevel()) {
@@ -52,8 +52,8 @@ public class BulletManager {
     }
 
     private static var bulletLayer:Sprite = new Sprite();
-    private var player:IActor;
-    private var ai:IActor;
+    private var player:Actor;
+    private var ai:Actor;
     private var playerBullets:uint = 0;
 }
 }

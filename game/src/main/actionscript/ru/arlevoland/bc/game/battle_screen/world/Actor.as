@@ -3,7 +3,7 @@ import ru.arlevoland.bc.game.battle_screen.tank.*;
 
 import flash.geom.Point;
 
-public interface IActor {
+public interface Actor {
 
     function getLevel():uint;
 
