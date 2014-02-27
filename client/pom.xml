@@ -8,7 +8,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>bc-server</artifactId>
+    <artifactId>bc-client</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -35,9 +35,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>ru.arlevoland.bc.server.Main</mainClass>
+                            <mainClass>ru.arlevoland.bc.client.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

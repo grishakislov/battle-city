@@ -8,11 +8,168 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <name>Battle City parent</name>
-    <url>https://github.com/grishakislov/battle-city/</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <modules>
         <module>game</module>
         <module>server</module>
+        <module>client</module>
     </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>copy-dependencies</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>copy-dependencies</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                                <includeScope>compile</includeScope>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                        <debug>true</debug>
+                        <showDeprecation>true</showDeprecation>
+                        <showWarnings>true</showWarnings>
+                        <optimize>true</optimize>
+                        <compilerVersion>1.7</compilerVersion>
+                        <compilerArgument>-Xlint:-path</compilerArgument>
+                        <executable>${env.JAVA_HOME}/bin/javac</executable>
+                        <fork>true</fork>
+                        <meminitial>64m</meminitial>
+                        <maxmem>512m</maxmem>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addClasspath>true</addClasspath>
+                                <classpathPrefix>lib/</classpathPrefix>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+
+                <!-- ActionScript -->
+                <plugin>
+                    <groupId>org.sonatype.flexmojos</groupId>
+                    <artifactId>flexmojos-maven-plugin</artifactId>
+                    <version>4.2-beta</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <skipTests>true</skipTests>
+                        <staticLinkRuntimeSharedLibraries>true</staticLinkRuntimeSharedLibraries>
+                        <optimize>true</optimize>
+                        <debug>true</debug>
+                        <useNetwork>false</useNetwork>
+                        <compilerWarnings>
+                            <warn-no-constructor>false</warn-no-constructor>
+                        </compilerWarnings>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.adobe.flex</groupId>
+                            <artifactId>compiler</artifactId>
+                            <version>4.6.b.23201</version>
+                            <type>pom</type>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>commons-configuration</groupId>
+                <artifactId>commons-configuration</artifactId>
+                <version>1.10</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.inject</groupId>
+                <artifactId>guice</artifactId>
+                <version>4.0-beta</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.5</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>1.0.13</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>5.0.0.Alpha1</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>3.8.1</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- ActionScript -->
+            <dependency>
+                <groupId>com.adobe.flex.framework</groupId>
+                <artifactId>flex-framework</artifactId>
+                <version>4.6.b.23201</version>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <!-- netty nightly builds -->
+        <repository>
+            <id>sonatype-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <!-- ActionScript -->
+        <repository>
+            <id>flex-mojos-repository</id>
+            <url>http://repository.sonatype.org/content/groups/flexgroup</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>flex-mojos-plugin-repository</id>
+            <url>http://repository.sonatype.org/content/groups/flexgroup</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
