@@ -31,46 +31,41 @@ public class MapHelper {
         new Point(13,24)
     ];
 
-    public static function drawEagle(map:BitmapData) {
+    public static function drawEagle(map:BitmapData):void {
         var tileSize:uint = GameSettings.TILE_SIZE;
         var eagle:BitmapData = App.assetManager.getTileAsset("HQ").getBitmap().bitmapData;
         map.copyPixels(eagle, eagle.rect, new Point(12 * tileSize, 24 * tileSize));
     }
 
-    public static function drawHqBricks(map:BitmapData) {
+    public static function drawHqBricks(map:BitmapData):void {
         var brick:TileAsset = App.assetManager.getTileAsset("BRICK");
         drawWall(brick, map);
     }
 
-    public static function drawHqMetal(map:BitmapData) {
+    public static function drawHqMetal(map:BitmapData):void {
         var metal:TileAsset = App.assetManager.getTileAsset("METAL");
         drawWall(metal, map);
     }
 
-    public static function setHqBricks(map:ImpactMap) {
+    public static function setHqBricks(map:ImpactMap):void {
         var fitData:FitData;
         var tileName:String = "BRUSH_F";
+        fitData = App.settingsManager.getFitDataByName(tileName);
         for (var i:int = 0; i < WALL_COORDS.length; i++) {
-            fitData = App.settingsManager.getFitDataByName(tileName);
             map.setEntity(new ImpactEntity(tileName, fitData.brushIndex), WALL_COORDS[i]);
         }
     }
 
-    public static function setHqMetal(map:ImpactMap) {
-        var fitData:FitData;
+    public static function setHqMetal(map:ImpactMap):void {
         var tileName:String = "METAL";
         for (var i:int = 0; i < WALL_COORDS.length; i++) {
-            fitData = App.settingsManager.getFitDataByName(tileName);
             map.setEntity(new ImpactEntity(tileName, 0), WALL_COORDS[i]);
         }
     }
 
-    public static function setHqEagle(map:ImpactMap) {
-
-        var fitData:FitData;
+    public static function setHqEagle(map:ImpactMap):void {
         var tileName:String = "HQ";
         for (var i:int = 0; i < EAGLE_COORDS.length; i++) {
-            fitData = App.settingsManager.getFitDataByName(tileName);
             map.setEntity(new ImpactEntity(tileName, 0), EAGLE_COORDS[i]);
         }
     }

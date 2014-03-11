@@ -52,16 +52,16 @@ public class ImpactEntity {
     private function setFlag(direction:ActorDirection):void {
         switch (direction) {
             case ActorDirection.UP:
-                frontFlag = brickIndex & 0xC;
+                frontFlag = ((brickIndex & 0xC) != 0);
                 break;
             case ActorDirection.RIGHT:
-                frontFlag = brickIndex & 0x5;
+                frontFlag = ((brickIndex & 0x5) != 0);
                 break;
             case ActorDirection.DOWN:
-                frontFlag = brickIndex & 0x3;
+                frontFlag = ((brickIndex & 0x3) != 0);
                 break;
             case ActorDirection.LEFT:
-                frontFlag = brickIndex & 0xA;
+                frontFlag = ((brickIndex & 0xA) != 0);
                 break;
         }
     }
