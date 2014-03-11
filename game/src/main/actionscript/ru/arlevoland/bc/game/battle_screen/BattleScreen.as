@@ -27,9 +27,15 @@ public class BattleScreen extends GameScreen {
     override public function run(data:* = undefined):void {
         setBackgroundVisible(false);
         previousStageResult = StageResult(data);
-        showPreloader();
-        App.dispatcher.addEventListener(BattleScreenEvent.SPLASH_COMPLETED, onPreloaderCompleted);
-        App.dispatcher.addEventListener(BattleScreenEvent.SPLASH_DESTROYED, onPreloaderDestroyed);
+        if (GameSettings.DEBUG) {
+            setBackgroundVisible(true);
+            initializeWorld(previousStageResult.getNextLevelId());
+        } else {
+            showPreloader();
+            App.dispatcher.addEventListener(BattleScreenEvent.SPLASH_COMPLETED, onPreloaderCompleted);
+            App.dispatcher.addEventListener(BattleScreenEvent.SPLASH_DESTROYED, onPreloaderDestroyed);
+        }
+
     }
 
     private function onPreloaderCompleted(event:BattleScreenEvent):void {

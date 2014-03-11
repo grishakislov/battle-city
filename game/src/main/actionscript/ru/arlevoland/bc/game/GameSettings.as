@@ -31,7 +31,7 @@ public class GameSettings {
 
     //Speeds
 
-    public static const PRELOADER_SPEED:uint = 128;
+    public static const PRELOADER_SPEED:uint = 256;
 
     public static const DEFAULT_SPEED:uint = 170;//Pixels per sec
     public static const PLAYER_TANK_SPEED:uint = 50;//Pixels per sec
