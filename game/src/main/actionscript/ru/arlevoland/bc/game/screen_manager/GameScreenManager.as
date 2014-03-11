@@ -3,6 +3,7 @@ import flash.display.Sprite;
 
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.core.debug.LogMessageType;
+import ru.arlevoland.bc.game.events.GameEvent;
 import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
 import ru.arlevoland.bc.game.power_on.PowerOnEffect;

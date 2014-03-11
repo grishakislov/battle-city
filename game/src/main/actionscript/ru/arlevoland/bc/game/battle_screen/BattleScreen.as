@@ -11,8 +11,9 @@ import ru.arlevoland.bc.game.GameScreen;
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.battle_stage_splash.BattleStageSplash;
 import ru.arlevoland.bc.game.battle_screen.world.World;
+import ru.arlevoland.bc.game.events.BattleScreenEvent;
 import ru.arlevoland.bc.game.model.StageResult;
-import ru.arlevoland.bc.game.screen_manager.GameEvent;
+import ru.arlevoland.bc.game.events.GameEvent;
 
 public class BattleScreen extends GameScreen {
 

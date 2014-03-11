@@ -21,10 +21,11 @@ import ru.arlevoland.bc.game.time.TickerEvent;
 
 public class Bullet extends AnimatedObject implements Actor {
 
-    public function Bullet(data:BulletData) {
-        world = data.getWorld();
-        this.direction = data.getActor().getDirection();
-        this.tankCoords = data.getActor().getPosition();
+    public function Bullet(tank:BaseTank, world:World) {
+        this.world = world;
+        this.direction = tank.getDirection();
+        this.tankCoords = tank.getPosition();
+        this.tank = tank;
         initialize();
         applyStartCoordsForBullet();
         playShootSound();
@@ -240,9 +241,14 @@ public class Bullet extends AnimatedObject implements Actor {
         return movement;
     }
 
-    private var _millisElapsed:int = 0;
+    public function getTank():BaseTank {
+        return tank;
+    }
+
+    private var millisElapsed:int = 0;
 
     private var world:World;
+    private var tank:BaseTank;
     private var direction:ActorDirection;
     private var level:uint;
     private var tankCoords:Point;

@@ -10,7 +10,7 @@ import ru.arlevoland.bc.game.GameScreen;
 import ru.arlevoland.bc.game.core.assets.FontTool;
 import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
-import ru.arlevoland.bc.game.screen_manager.GameEvent;
+import ru.arlevoland.bc.game.events.GameEvent;
 import ru.arlevoland.bc.game.time.Ticker;
 import ru.arlevoland.bc.game.time.TickerEvent;
 

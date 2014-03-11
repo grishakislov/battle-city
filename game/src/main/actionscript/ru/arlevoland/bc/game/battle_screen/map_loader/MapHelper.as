@@ -37,6 +37,13 @@ public class MapHelper {
         map.copyPixels(eagle, eagle.rect, new Point(12 * tileSize, 24 * tileSize));
     }
 
+    public static function drawBrokenFlag(map:BitmapData):void {
+        var tileSize:uint = GameSettings.TILE_SIZE;
+        var flag:BitmapData = App.assetManager.getTileAsset("BROKEN_HQ").getBitmap().bitmapData;
+        map.copyPixels(flag, flag.rect, new Point(12 * tileSize, 24 * tileSize));
+    }
+
+
     public static function drawHqBricks(map:BitmapData):void {
         var brick:TileAsset = App.assetManager.getTileAsset("BRICK");
         drawWall(brick, map);
@@ -69,6 +76,7 @@ public class MapHelper {
             map.setEntity(new ImpactEntity(tileName, 0), EAGLE_COORDS[i]);
         }
     }
+
 
     private static function drawWall(asset:TileAsset, map:BitmapData):void {
         var tileSize:uint = GameSettings.TILE_SIZE;

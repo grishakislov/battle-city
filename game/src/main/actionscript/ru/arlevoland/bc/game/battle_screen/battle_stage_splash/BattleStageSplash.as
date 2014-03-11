@@ -1,7 +1,7 @@
 package ru.arlevoland.bc.game.battle_screen.battle_stage_splash {
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.BaseScreen;
-import ru.arlevoland.bc.game.battle_screen.BattleScreenEvent;
+import ru.arlevoland.bc.game.events.BattleScreenEvent;
 
 public class BattleStageSplash extends BaseScreen {
 

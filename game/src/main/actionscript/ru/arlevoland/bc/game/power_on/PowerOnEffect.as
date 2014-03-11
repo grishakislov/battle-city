@@ -8,7 +8,7 @@ import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.GameScreen;
 import ru.arlevoland.bc.game.core.assets.Resources;
-import ru.arlevoland.bc.game.screen_manager.GameEvent;
+import ru.arlevoland.bc.game.events.GameEvent;
 import ru.arlevoland.bc.game.time.Ticker;
 import ru.arlevoland.bc.game.time.TickerEvent;
 

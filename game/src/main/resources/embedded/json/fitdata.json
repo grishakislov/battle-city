@@ -1097,6 +1097,17 @@
 	},
 
 	{
+		"name":"BROKEN_HQ",
+		"palette":"DEFAULT",
+		"coords":[
+			{"x":12,"y":12},
+			{"x":13,"y":12},
+			{"x":14,"y":12},
+			{"x":15,"y":12}
+		]			
+	},
+
+	{
 		"name":"FLAG",
 		"palette":"DEFAULT",
 		"coords":[

@@ -1,4 +1,4 @@
-package ru.arlevoland.bc.game.battle_screen {
+package ru.arlevoland.bc.game.events {
 import flash.events.Event;
 
 public class BattleScreenEvent extends Event {

@@ -8,20 +8,20 @@ import ru.arlevoland.bc.game.battle_screen.world.World;
 
 public class BulletData {
 
-    public function BulletData(actor:Actor, world:World) {
-        this.actor = actor;
+    public function BulletData(tank:Actor, world:World) {
+        this.tank = tank;
         this.world = world;
     }
 
-    public function getActor():Actor {
-        return actor;
+    public function getTank():Actor {
+        return tank;
     }
 
     public function getWorld():World {
         return world;
     }
 
-    private var actor:Actor;
+    private var tank:Actor;
     private var world:World;
 
 }

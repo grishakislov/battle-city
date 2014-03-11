@@ -1,7 +1,11 @@
 package ru.arlevoland.bc.game.battle_screen.world.impact {
+import ru.arlevoland.bc.game.App;
+import ru.arlevoland.bc.game.battle_screen.bullet.Bullet;
+import ru.arlevoland.bc.game.battle_screen.bullet.Bullet;
 import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
 import ru.arlevoland.bc.game.battle_screen.world.Actor;
 import ru.arlevoland.bc.game.battle_screen.world.ActorType;
+import ru.arlevoland.bc.game.events.HQDestroyEvent;
 
 public class ImpactEntity {
 
@@ -17,9 +21,10 @@ public class ImpactEntity {
     public function checkImpact(actor:Actor, positionFlag:Boolean):Boolean {
         if (actor.getType().isTank()) {
 
-            return isBrick() || tileName == "METAL" || tileName == "WATER";
+            return isBrick() || tileName == "METAL" || tileName == "WATER" || isEagle();
 
         } else if (actor.getType() == ActorType.BULLET) {
+
 
             var directionMask:uint = getDirectionMask(actor.getDirection(), positionFlag);
             var impact:uint;
@@ -29,11 +34,21 @@ public class ImpactEntity {
                     setFlag(actor.getDirection());
                 }
             } else {
-                //TODO: Complete
+                if (isEagle()) {
+                    impact = 1;
+                    var bullet:Bullet = Bullet(actor);
+                    App.dispatcher.dispatchEvent(new HQDestroyEvent(HQDestroyEvent.HQ_DESTROY, bullet.getTank()));
+                }
+
+                //TODO: Metal
             }
             return impact > 0;
         }
         return false;
+    }
+
+    public function isEagle():Boolean {
+        return tileName == "HQ";
     }
 
     public function destruct(direction:ActorDirection):void {

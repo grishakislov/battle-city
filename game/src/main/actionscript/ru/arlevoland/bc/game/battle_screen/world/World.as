@@ -7,12 +7,15 @@ import flash.geom.Point;
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.bullet.BulletManager;
+import ru.arlevoland.bc.game.battle_screen.map_loader.MapHelper;
 import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
+import ru.arlevoland.bc.game.battle_screen.tank.BaseTank;
 import ru.arlevoland.bc.game.battle_screen.tank.PlayerTank;
 import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactEntity;
 import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactProcessor;
 import ru.arlevoland.bc.game.battle_screen.world.impact.PointPair;
 import ru.arlevoland.bc.game.battle_screen.world.impact.WorldImpactLayer;
+import ru.arlevoland.bc.game.events.HQDestroyEvent;
 import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
 
@@ -30,6 +33,7 @@ public class World extends Sprite {
     private var bulletLayer:Sprite;
     private var effectsLayer:Sprite;
     private var treeLayer:WorldTreeLayer;
+    private var hqDestroyed:Boolean;
 
     public function initialize(levelId:uint):void {
 
@@ -59,6 +63,8 @@ public class World extends Sprite {
         if (GameSettings.DEBUG) {
             App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
         }
+
+        App.dispatcher.addEventListener(HQDestroyEvent.HQ_DESTROY, onHQDestroyed);
         initTestGrid();
         addChild(c1);
         addChild(c2);
@@ -96,7 +102,7 @@ public class World extends Sprite {
         collisionLayer.applyDestruction(worldPoint, direction);
     }
 
-    public function shoot(tank:Actor):void {
+    public function shoot(tank:BaseTank):void {
         bulletManager.shoot(tank, this);
     }
 
@@ -159,13 +165,22 @@ public class World extends Sprite {
     }
 
     public function redrawTiles(cells:Array):void {
-        for each (var p:Point in cells) {
-            redrawTileAt(p.x, p.y);
+        if (!hqDestroyed) {
+            for each (var p:Point in cells) {
+                redrawTileAt(p.x, p.y);
+            }
         }
     }
 
     private function redrawTileAt(x:uint, y:uint):void {
         collisionLayer.redrawTileAt(x, y);
     }
+
+    private function onHQDestroyed(event:HQDestroyEvent):void {
+        hqDestroyed = true;
+        MapHelper.drawBrokenFlag(collisionLayer.getVisual().bitmapData);
+        //TODO: Explode
+    }
+
 }
 }

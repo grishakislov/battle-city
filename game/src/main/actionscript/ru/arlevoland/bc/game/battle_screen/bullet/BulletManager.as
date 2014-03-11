@@ -14,7 +14,7 @@ public class BulletManager {
     public function BulletManager() {
     }
 
-    public function shoot(tank:Actor, world:World):void {
+    public function shoot(tank:BaseTank, world:World):void {
 
         switch (tank.getType()) {
             case ActorType.PLAYER:
@@ -27,14 +27,12 @@ public class BulletManager {
 
     }
 
-    private function createPlayerBullet(tank:Actor, world:World):Bullet {
+    private function createPlayerBullet(tank:BaseTank, world:World):Bullet {
         var bullet:Bullet;
-        var data:BulletData;
         switch (tank.getLevel()) {
             case PlayerTankLevel.LEVEL_1:
                 if (playerBullets < GameSettings.LEVEL_1_BULLETS) {
-                    data = new BulletData(tank, world);
-                    bullet = new Bullet(data);
+                    bullet = new Bullet(tank, world);
                     return bullet;
                 }
                 break;

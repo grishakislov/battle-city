@@ -131,7 +131,6 @@ public class PlayerTank extends BaseTank {
                     setMovement(ActorDirection.LEFT);
                     break;
                 case KeyCommand.FIRE:
-                    //TODO: Wrap
                     world.shoot(this);
                     break;
             }

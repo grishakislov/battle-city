@@ -63,8 +63,28 @@ public class ImpactProcessor {
         var first:ImpactEntity = entities.getFirst();
         var second:ImpactEntity = entities.getSecond();
 
-        var result1:Boolean = first.checkImpact(actor, false);
-        var result2:Boolean = second.checkImpact(actor, true);
+        var result1:Boolean;
+        var result2:Boolean;
+
+        //Eagle
+        if (first.isEagle() && actor.getType() == ActorType.BULLET) {
+            result1 = first.checkImpact(actor, false);
+            if (result1) {
+                return true;
+            } else {
+                result2 = second.checkImpact(actor, true);
+                if (result2) {
+                    return true;
+                }
+            }
+
+            if (!result1 && !result2) {
+                return false;
+            }
+        }
+
+        result1 = first.checkImpact(actor, false);
+        result2 = second.checkImpact(actor, true);
 
         if (actor.getType() == ActorType.BULLET) {
 
@@ -98,7 +118,6 @@ public class ImpactProcessor {
         var position:Point = actor.getPosition();
 
         var result:PointPair;
-
         var floorX:uint = Math.floor(position.x / GameSettings.TILE_SIZE);
         var floorY:uint = Math.floor(position.y / GameSettings.TILE_SIZE);
         var ceilX:uint = Math.ceil(position.x / GameSettings.TILE_SIZE);

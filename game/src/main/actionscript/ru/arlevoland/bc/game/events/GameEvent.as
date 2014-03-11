@@ -1,4 +1,4 @@
-package ru.arlevoland.bc.game.screen_manager {
+package ru.arlevoland.bc.game.events {
 import flash.events.Event;
 
 public class GameEvent extends Event {

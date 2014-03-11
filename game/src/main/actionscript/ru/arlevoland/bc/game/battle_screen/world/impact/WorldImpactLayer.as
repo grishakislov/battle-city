@@ -72,6 +72,10 @@ public class WorldImpactLayer extends Sprite {
         return impactMap;
     }
 
+    public function getVisual():Bitmap {
+        return visual;
+    }
+
     private var impactMap:ImpactMap;
     private var visual:Bitmap;
     private var data:LevelData;
