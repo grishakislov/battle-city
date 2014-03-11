@@ -2,8 +2,6 @@ package ru.arlevoland.bc.game {
 import flash.events.EventDispatcher;
 
 import ru.arlevoland.bc.game.battle_screen.BattleScreen;
-import ru.arlevoland.bc.game.battle_screen.world.World;
-import ru.arlevoland.bc.game.screen_manager.GameScreenManager;
 import ru.arlevoland.bc.game.core.assets.AssetManager;
 import ru.arlevoland.bc.game.core.assets.LevelDataManager;
 import ru.arlevoland.bc.game.core.debug.DevTools;
@@ -11,6 +9,7 @@ import ru.arlevoland.bc.game.core.debug.LogManager;
 import ru.arlevoland.bc.game.core.debug.viewers.Viewer;
 import ru.arlevoland.bc.game.keyboard.KeyboardManager;
 import ru.arlevoland.bc.game.power_on.PowerOnEffect;
+import ru.arlevoland.bc.game.screen_manager.GameScreenManager;
 import ru.arlevoland.bc.game.settings.SettingsManager;
 import ru.arlevoland.bc.game.sfx.SfxManager;
 import ru.arlevoland.bc.game.title.Title;

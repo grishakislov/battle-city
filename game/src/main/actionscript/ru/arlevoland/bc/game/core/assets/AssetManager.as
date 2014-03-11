@@ -5,13 +5,11 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import ru.arlevoland.bc.game.App;
-
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
 import ru.arlevoland.bc.game.core.assets.model.TileDictionary;
 import ru.arlevoland.bc.game.core.assets.model.TilePalette;
 import ru.arlevoland.bc.game.core.debug.GameError;
-import ru.arlevoland.bc.game.settings.SettingsManager;
 import ru.arlevoland.bc.game.settings.model.BrushMap;
 import ru.arlevoland.bc.game.settings.model.Coord;
 import ru.arlevoland.bc.game.settings.model.FitData;

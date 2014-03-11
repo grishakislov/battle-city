@@ -180,7 +180,7 @@ public class World extends Sprite {
         addChild(gameOverEffect);
         gameOverEffect.addDestroyCallback(function():void {
             //TODO
-            trace();
+            trace("Game Over");
         });
     }
 

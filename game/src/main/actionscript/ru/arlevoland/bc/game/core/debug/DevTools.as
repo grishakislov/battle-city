@@ -3,9 +3,6 @@ import flash.display.Bitmap;
 import flash.display.Sprite;
 
 import ru.arlevoland.bc.game.App;
-
-import ru.arlevoland.bc.game.Main;
-
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.core.assets.FontTool;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;

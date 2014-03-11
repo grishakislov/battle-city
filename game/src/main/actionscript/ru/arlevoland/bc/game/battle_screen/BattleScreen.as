@@ -4,16 +4,13 @@ import flash.display.BitmapData;
 import flash.display.MovieClip;
 
 import ru.arlevoland.bc.game.App;
-
 import ru.arlevoland.bc.game.Colors;
-import ru.arlevoland.bc.game.Main;
 import ru.arlevoland.bc.game.GameScreen;
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.battle_screen.battle_stage_splash.BattleStageSplash;
 import ru.arlevoland.bc.game.battle_screen.world.World;
 import ru.arlevoland.bc.game.events.BattleScreenEvent;
 import ru.arlevoland.bc.game.model.StageResult;
-import ru.arlevoland.bc.game.events.GameEvent;
 
 public class BattleScreen extends GameScreen {
 

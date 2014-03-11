@@ -4,8 +4,6 @@ import flash.display.Sprite;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
-import ru.arlevoland.bc.game.core.debug.GameWarning;
-
 public class TileAsset extends Sprite {
 
     public function TileAsset(name:String, data:Bitmap):void {

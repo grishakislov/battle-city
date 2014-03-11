@@ -1,7 +1,6 @@
 package ru.arlevoland.bc.game.battle_screen.world.impact {
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.battle_screen.bullet.Bullet;
-import ru.arlevoland.bc.game.battle_screen.bullet.Bullet;
 import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
 import ru.arlevoland.bc.game.battle_screen.world.Actor;
 import ru.arlevoland.bc.game.battle_screen.world.ActorType;

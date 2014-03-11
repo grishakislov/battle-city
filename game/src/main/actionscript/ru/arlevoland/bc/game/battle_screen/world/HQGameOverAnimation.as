@@ -39,7 +39,7 @@ public class HQGameOverAnimation extends AnimatedObject {
         if (animateGameOver) {
             if (smbGameOver.y < GameSettings.NATIVE_NES_SCREEN_SIZE.y / 2 - 20) {
                 timer++;
-                if (timer == 500) {
+                if (timer == 200) {
                     destroy();
                 }
                 return;

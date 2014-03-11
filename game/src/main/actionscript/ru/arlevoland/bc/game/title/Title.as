@@ -4,13 +4,13 @@ import flash.display.Sprite;
 import flash.events.Event;
 import flash.geom.Point;
 
-import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.GameScreen;
+import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.core.assets.FontTool;
+import ru.arlevoland.bc.game.events.GameEvent;
 import ru.arlevoland.bc.game.keyboard.KeyboardManagerEvent;
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
-import ru.arlevoland.bc.game.events.GameEvent;
 import ru.arlevoland.bc.game.time.Ticker;
 import ru.arlevoland.bc.game.time.TickerEvent;
 

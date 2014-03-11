@@ -1,7 +1,5 @@
 package ru.arlevoland.bc.game.battle_screen.tank.sequencer {
 import ru.arlevoland.bc.game.App;
-import ru.arlevoland.bc.game.Main;
-import ru.arlevoland.bc.game.battle_screen.tank.*;
 import ru.arlevoland.bc.game.battle_screen.world.ActorType;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
 

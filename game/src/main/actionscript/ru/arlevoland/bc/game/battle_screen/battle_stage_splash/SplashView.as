@@ -3,8 +3,8 @@ import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.geom.Point;
 
-import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.App;
+import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.core.animation.AnimatedObject;
 import ru.arlevoland.bc.game.core.assets.FontTool;
 import ru.arlevoland.bc.game.core.assets.model.TilePalette;

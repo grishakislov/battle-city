@@ -2,7 +2,6 @@ package ru.arlevoland.bc.game.core.animation {
 import flash.display.Sprite;
 
 import ru.arlevoland.bc.game.GameSettings;
-
 import ru.arlevoland.bc.game.time.Ticker;
 import ru.arlevoland.bc.game.time.TickerEvent;
 

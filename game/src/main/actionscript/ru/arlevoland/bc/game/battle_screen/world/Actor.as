@@ -1,7 +1,7 @@
 package ru.arlevoland.bc.game.battle_screen.world {
-import ru.arlevoland.bc.game.battle_screen.tank.*;
-
 import flash.geom.Point;
+
+import ru.arlevoland.bc.game.battle_screen.tank.*;
 
 public interface Actor {
 

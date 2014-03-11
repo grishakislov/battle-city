@@ -4,9 +4,9 @@ import flash.display.BitmapData;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
-import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.App;
 import ru.arlevoland.bc.game.GameScreen;
+import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.core.assets.Resources;
 import ru.arlevoland.bc.game.events.GameEvent;
 import ru.arlevoland.bc.game.time.Ticker;

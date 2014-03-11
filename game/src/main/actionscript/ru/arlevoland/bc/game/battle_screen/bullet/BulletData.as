@@ -1,8 +1,4 @@
 package ru.arlevoland.bc.game.battle_screen.bullet {
-import ru.arlevoland.bc.game.battle_screen.tank.*;
-
-import flash.geom.Point;
-
 import ru.arlevoland.bc.game.battle_screen.world.Actor;
 import ru.arlevoland.bc.game.battle_screen.world.World;
 

@@ -5,9 +5,6 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import ru.arlevoland.bc.game.App;
-
-import ru.arlevoland.bc.game.Main;
-
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
 import ru.arlevoland.bc.game.core.assets.model.TilePalette;

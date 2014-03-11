@@ -3,7 +3,6 @@ import flash.events.EventDispatcher;
 import flash.events.KeyboardEvent;
 
 import ru.arlevoland.bc.game.Main;
-
 import ru.arlevoland.bc.game.keyboard.key.KeyCommand;
 import ru.arlevoland.bc.game.keyboard.key.KeyManager;
 
