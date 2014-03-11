@@ -1083,6 +1083,44 @@
 			{"x":14,"y":9},
 			{"x":15,"y":9}
 		]			
+	},
+
+	{
+		"name":"HQ",
+		"palette":"DEFAULT",
+		"coords":[
+			{"x":8,"y":12},
+			{"x":9,"y":12},
+			{"x":10,"y":12},
+			{"x":11,"y":12}
+		]			
+	},
+
+	{
+		"name":"FLAG",
+		"palette":"DEFAULT",
+		"coords":[
+			{"x":12,"y":6},
+			{"x":13,"y":6},
+			{"x":12,"y":15},
+			{"x":13,"y":15}
+		]			
+	},
+
+	{
+		"name":"TANK_ICON",
+		"palette":"DEFAULT",
+		"coords":[
+			{"x":10,"y":6}
+		]			
+	},
+
+	{
+		"name":"LIFE_ICON",
+		"palette":"DEFAULT",
+		"coords":[
+			{"x":4,"y":1}
+		]			
 	}
 
 ]
