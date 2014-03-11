@@ -54,7 +54,9 @@ public class WorldImpactLayer extends Sprite {
 
     public function redrawTileAt(x:uint, y:uint):void {
         var entity:ImpactEntity = impactMap.getEntity(x,y);
-        redrawTile(new Point(x,y), App.assetManager.getTileAsset(entity.getTileName()));
+        if (entity.getTileName() != "HQ" && entity.getTileName() != "BROKEN_HQ") {
+            redrawTile(new Point(x,y), App.assetManager.getTileAsset(entity.getTileName()));
+        }
     }
 
     private function redrawTile(coords:Point, tile:TileAsset):void {

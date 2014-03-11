@@ -25,6 +25,8 @@ public class AnimatedObject extends Sprite {
     private var lastPixels:Number;
     private var pixelDelta:uint;
 
+    private var callback:Function;
+
     private var paused:Boolean = false;
 
     public function AnimatedObject() {
@@ -43,6 +45,10 @@ public class AnimatedObject extends Sprite {
         lastPixels = currentPixels;
         timeElapsed += event.dt;
         lastDt = event.dt;
+    }
+
+    public final function addDestroyCallback(callback:Function):void {
+        this.callback = callback;
     }
 
     public function pause():void {
@@ -78,6 +84,9 @@ public class AnimatedObject extends Sprite {
 
     public function destroy():void {
         Ticker.removeEventListener(TickerEvent.TICK, onTick);
+        if (callback != null) {
+            callback();
+        }
     }
 
 

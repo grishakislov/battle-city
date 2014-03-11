@@ -33,7 +33,6 @@ public class World extends Sprite {
     private var bulletLayer:Sprite;
     private var effectsLayer:Sprite;
     private var treeLayer:WorldTreeLayer;
-    private var hqDestroyed:Boolean;
 
     public function initialize(levelId:uint):void {
 
@@ -165,10 +164,8 @@ public class World extends Sprite {
     }
 
     public function redrawTiles(cells:Array):void {
-        if (!hqDestroyed) {
-            for each (var p:Point in cells) {
-                redrawTileAt(p.x, p.y);
-            }
+        for each (var p:Point in cells) {
+            redrawTileAt(p.x, p.y);
         }
     }
 
@@ -177,9 +174,19 @@ public class World extends Sprite {
     }
 
     private function onHQDestroyed(event:HQDestroyEvent):void {
-        hqDestroyed = true;
+        freezePlayers();
         MapHelper.drawBrokenFlag(collisionLayer.getVisual().bitmapData);
-        //TODO: Explode
+        var gameOverEffect:HQGameOverAnimation = new HQGameOverAnimation();
+        addChild(gameOverEffect);
+        gameOverEffect.addDestroyCallback(function():void {
+            //TODO
+            trace();
+        });
+    }
+
+    private function freezePlayers():void {
+        playerTank1.pause();
+        //TODO: Player 2
     }
 
 }

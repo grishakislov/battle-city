@@ -86,7 +86,7 @@ public class AssetManager {
             var side:int = Math.sqrt(tilesNumber);
             bitmap = new Bitmap(new BitmapData(tileSize * side, tileSize * side, true, 0x00000000));
             /*
-             Порядок сборки:
+             Fit order:
              0 2 4 6
              1 3 5 7
              8 A C E
@@ -99,6 +99,26 @@ public class AssetManager {
                     targetPoints.push(new Point(x * tileSize, y * 2 * tileSize));
                     targetPoints.push(new Point(x * tileSize, (y * 2 + 1) * tileSize));
                 }
+            }
+
+            for each (var p:Point in targetPoints) {
+                coord = coords.shift();
+                rect = new Rectangle(coord.x * tileSize, coord.y * tileSize, tileSize, tileSize);
+                bitmap.bitmapData.copyPixels(tiles.bitmapData, rect, p);
+            }
+
+        } else if (tilesNumber == 8) {
+            //Game over sprite
+
+            bitmap = new Bitmap(new BitmapData(tileSize * 4, tileSize * 2, true, 0x00000000));
+            var coords:Vector.<Coord> = model.coords.concat();
+            var targetPoints:Array = [];
+            var y:uint;
+            var newX:uint;
+            for (var x:uint = 0; x < 8; x++) {
+                y = x % 2;
+                newX = x / 2;
+                targetPoints.push(new Point(newX * tileSize, y * tileSize));
             }
 
             for each (var p:Point in targetPoints) {
@@ -123,7 +143,7 @@ public class AssetManager {
         coords.push(model.coord);
         var coord:Coord;
         /*
-         Порядок сборки:
+         Fit order:
          0 2
          1 3
          */

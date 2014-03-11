@@ -1,25 +1,36 @@
 package ru.arlevoland.bc.game.battle_screen.bullet {
-import ru.arlevoland.bc.game.battle_screen.tank.*;
-
 import flash.geom.Point;
 
 import ru.arlevoland.bc.game.App;
-
-import ru.arlevoland.bc.game.Main;
-
 import ru.arlevoland.bc.game.GameSettings;
-import ru.arlevoland.bc.game.battle_screen.world.ActorType;
+import ru.arlevoland.bc.game.battle_screen.explode.BaseExplode;
+import ru.arlevoland.bc.game.battle_screen.explode.BigExplode;
+import ru.arlevoland.bc.game.battle_screen.explode.SmallExplode;
+import ru.arlevoland.bc.game.battle_screen.tank.*;
 import ru.arlevoland.bc.game.battle_screen.world.Actor;
+import ru.arlevoland.bc.game.battle_screen.world.ActorType;
 import ru.arlevoland.bc.game.battle_screen.world.World;
-import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactProcessor;
 import ru.arlevoland.bc.game.core.animation.AnimatedObject;
 import ru.arlevoland.bc.game.core.assets.model.TileAsset;
-import ru.arlevoland.bc.game.core.debug.GameError;
-import ru.arlevoland.bc.game.sfx.SfxLoop;
-import ru.arlevoland.bc.game.time.Ticker;
-import ru.arlevoland.bc.game.time.TickerEvent;
 
 public class Bullet extends AnimatedObject implements Actor {
+
+    private var millisElapsed:int = 0;
+
+    private var world:World;
+    private var tank:BaseTank;
+    private var direction:ActorDirection;
+    private var level:uint;
+    private var tankCoords:Point;
+    private var movement:ActorDirection;
+
+    private var UP:TileAsset;
+    private var RIGHT:TileAsset;
+    private var DOWN:TileAsset;
+    private var LEFT:TileAsset;
+
+    private var visual:TileAsset;
+
 
     public function Bullet(tank:BaseTank, world:World) {
         this.world = world;
@@ -88,24 +99,7 @@ public class Bullet extends AnimatedObject implements Actor {
         super.onAnimation(delta);
         if (isMoving()) {
             move(delta);
-        } else {
-            if (framesSkipped >= explodeSequenceFramesSkip) {
-                if (explodeSequenceIndex == explodeSequence.length - 1) {
-                    onExploded();
-                    return;
-                }
-                framesSkipped = 0;
-                explodeSequenceIndex++;
-                updateExplodeVisualAsset(explodeSequenceIndex);
-            }
-            framesSkipped++;
         }
-    }
-
-    private function onTick(e:TickerEvent):void {
-
-
-
     }
 
     private function move(delta:uint):void {
@@ -165,6 +159,9 @@ public class Bullet extends AnimatedObject implements Actor {
     private function explode():void {
         removeChild(visual);
         applyStartCoordsForExplode();
+        var explode:SmallExplode = new SmallExplode();
+        explode.addDestroyCallback(destroy);
+        addChild(explode);
     }
 
     private function playShootSound():void {
@@ -192,16 +189,6 @@ public class Bullet extends AnimatedObject implements Actor {
         addChild(visual);
     }
 
-    private function updateExplodeVisualAsset(index:int):void {
-        if (contains(visual)) removeChild(visual);
-        visual.getBitmap().bitmapData.dispose();
-        visual = App.assetManager.getTileAsset(explodeSequence[index]).getClone();
-        addChild(visual);
-    }
-
-    private function onExploded():void {
-        destroy();
-    }
 
     private function stopMovement():void {
         movement = null;
@@ -215,7 +202,6 @@ public class Bullet extends AnimatedObject implements Actor {
         super.destroy();
         parent.removeChild(this);
         visual.getBitmap().bitmapData.dispose();
-        Ticker.removeEventListener(TickerEvent.TICK, onTick);
     }
 
     //IActor
@@ -245,24 +231,5 @@ public class Bullet extends AnimatedObject implements Actor {
         return tank;
     }
 
-    private var millisElapsed:int = 0;
-
-    private var world:World;
-    private var tank:BaseTank;
-    private var direction:ActorDirection;
-    private var level:uint;
-    private var tankCoords:Point;
-    private var movement:ActorDirection;
-
-    private var UP:TileAsset;
-    private var RIGHT:TileAsset;
-    private var DOWN:TileAsset;
-    private var LEFT:TileAsset;
-
-    private var visual:TileAsset;
-    private var explodeSequence:Array = ["EXPLODE_1", "EXPLODE_2", "EXPLODE_3", "EXPLODE_2", "EXPLODE_1"];
-    private var explodeSequenceIndex:uint;
-    private var explodeSequenceFramesSkip:uint = 2;
-    private var framesSkipped:uint;
 }
 }
