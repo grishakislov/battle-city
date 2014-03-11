@@ -30,13 +30,14 @@ public class MapLoader {
 
 
     public static function createImpactMap(levelId:uint):ImpactMap {
-        return new ImpactMap(levelId);
+        var map:ImpactMap = new ImpactMap(levelId);
+        MapHelper.setHqBricks(map);
+        MapHelper.setHqEagle(map);
+        return map;
     }
 
     [Deprecated]
     public static function drawStageToBitmap(levelId:uint, mode:String, waterTileAsset:TileAsset = null):Bitmap {
-
-
 
         var w:uint = GameSettings.WORLD_WIDTH;
         var h:uint = GameSettings.WORLD_HEIGHT;
@@ -88,7 +89,16 @@ public class MapLoader {
                 }
             }
         }
+
+        if (mode == BattleStageDrawMode.MAIN || mode == BattleStageDrawMode.FULL) {
+            drawHq(resultBitmap);
+        }
         return resultBitmap;
+    }
+
+    private static function drawHq(resultBitmap:Bitmap):void {
+        MapHelper.drawHqBricks(resultBitmap.bitmapData);
+        MapHelper.drawEagle(resultBitmap.bitmapData);
     }
 
     public static function getTileByID(tileID:uint):TileAsset {

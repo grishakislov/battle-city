@@ -81,6 +81,10 @@ public class ImpactMap {
         return result;
     }
 
+    public function setEntity(ety:ImpactEntity, coords:Point):void {
+        storeEntity(coords.x, coords.y, ety);
+    }
+
     //26x26
     private var map:Vector.<ImpactEntity>;
 
