@@ -41,6 +41,18 @@ public class Resources {
     [Embed(source="../../../../../../../resources/embedded/sfx/intro.mp3")]
     public static const INTRO:Class;
 
+    [Embed(source="../../../../../../../resources/embedded/sfx/pause.mp3")]
+    public static const PAUSE:Class;
+
+    [Embed(source="../../../../../../../resources/embedded/sfx/ricochet_brick.mp3")]
+    public static const RICOCHET_BRICK:Class;
+
+    [Embed(source="../../../../../../../resources/embedded/sfx/ricochet_wall.mp3")]
+    public static const RICOCHET_WALL:Class;
+
+    [Embed(source="../../../../../../../resources/embedded/sfx/big_explode.mp3")]
+    public static const BIG_EXPLODE:Class;
+
 
 }
 
