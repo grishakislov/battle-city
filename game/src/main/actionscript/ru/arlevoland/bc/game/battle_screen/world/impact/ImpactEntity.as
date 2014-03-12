@@ -17,33 +17,37 @@ public class ImpactEntity {
      positionFlag равен false для левого и верхнего тайла из двух перед пулей
      и true для правого и нижнего
      */
-    public function checkImpact(actor:Actor, positionFlag:Boolean):Boolean {
+    public function checkImpact(actor:Actor, positionFlag:Boolean):BarrierType {
         if (actor.getType().isTank()) {
 
-            return isBrick() || tileName == "METAL" || tileName == "WATER" || isEagle();
+            if (isBrick()) return BarrierType.BRICK;
+            if (tileName == "METAL") return BarrierType.METAL;
+            if (tileName == "WATER") return BarrierType.WATER;
+            if (isEagle()) return BarrierType.EAGLE;
 
         } else if (actor.getType() == ActorType.BULLET) {
-
-
+            var result:BarrierType;
             var directionMask:uint = getDirectionMask(actor.getDirection(), positionFlag);
             var impact:uint;
             if (isBrick()) {
                 impact = directionMask & brickIndex;
                 if (impact > 0) {
+                    result = BarrierType.BRICK;
                     setFlag(actor.getDirection());
                 }
             } else {
                 if (isEagle()) {
                     impact = 1;
                     var bullet:Bullet = Bullet(actor);
+                    result = BarrierType.EAGLE;
                     App.dispatcher.dispatchEvent(new HQDestroyEvent(HQDestroyEvent.HQ_DESTROY, bullet.getTank()));
                 }
 
                 //TODO: Metal
             }
-            return impact > 0;
+            return result;
         }
-        return false;
+        return null;
     }
 
     public function isEagle():Boolean {

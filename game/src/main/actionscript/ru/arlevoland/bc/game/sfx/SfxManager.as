@@ -4,12 +4,14 @@ import flash.media.Sound;
 
 import ru.arlevoland.bc.game.GameSettings;
 import ru.arlevoland.bc.game.core.assets.SoundAssets;
+import ru.arlevoland.bc.game.sfx.SfxLoop;
 
 public class SfxManager {
 
 
     public function initialize():void {
         mainChannel = new Channel();
+        secondChannel = new Channel();
         loopChannel = new Channel();
     }
 
@@ -27,7 +29,7 @@ public class SfxManager {
         onlySoundPlaying = false;
     }
 
-    public function play(sound:Sound, loop:int = SfxLoop.NO_LOOP):void {
+    public function play(sound:Sound, loop:int = SfxLoop.NO_LOOP, second:Boolean = false):void {
 
         if (!GameSettings.SOUND_ENABLED) return;
 
@@ -39,7 +41,11 @@ public class SfxManager {
 
         switch (loop) {
             case SfxLoop.NO_LOOP:
-                mainChannel.play(sound);
+                if (second) {
+                    secondChannel.play(sound);
+                } else {
+                    mainChannel.play(sound);
+                }
                 break;
 
             case SfxLoop.INFINITE_LOOP:
@@ -54,7 +60,7 @@ public class SfxManager {
     }
 
     public function playShoot():void {
-        play(getSounds().SHOOT);
+        play(getSounds().SHOOT, SfxLoop.NO_LOOP, true);
     }
 
     public function playEngine1():void {
@@ -69,17 +75,31 @@ public class SfxManager {
         play(getSounds().CLICK);
     }
 
+    public function playBorderRicochet():void {
+        play(getSounds().RICOCHET_WALL);
+    }
+
+    public function playBrickRicochet():void {
+        play(getSounds().RICOCHET_BRICK);
+    }
+
+    public function playEagleExplode():void {
+        play(getSounds().BIG_EXPLODE);
+    }
+
     public function playIntro():void {
         playOnly(getSounds().INTRO);
     }
 
     private function stop():void {
         mainChannel.stop();
+        secondChannel.stop();
         loopChannel.stop();
     }
 
     public function pause():void {
         mainChannel.pause();
+        secondChannel.pause();
         loopChannel.pause();
 
         if (onlySoundPlaying && mainChannel.isPlaying()) {
@@ -87,12 +107,12 @@ public class SfxManager {
         }
     }
 
-
     private function getSounds():SoundAssets {
         return sounds;
     }
 
     private var mainChannel:Channel;
+    private var secondChannel:Channel;
     private var loopChannel:Channel;
 
     private var onlySoundPlaying:Boolean;

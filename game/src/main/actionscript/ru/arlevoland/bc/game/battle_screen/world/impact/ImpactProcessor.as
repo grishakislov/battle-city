@@ -8,42 +8,57 @@ import ru.arlevoland.bc.game.battle_screen.world.*;
 
 public class ImpactProcessor {
 
-    public static function isBarrierAhead(actor:Actor, world:World):Boolean {
+    public static function isBarrierAhead(actor:Actor, world:World):BarrierType {
+        var border:BarrierType;
+        var wall:BarrierType;
+
         if (actor.getType() == ActorType.BULLET) {
-            return borderAhead(actor) || checkWallBeforeBullet(actor as Bullet, world);
+            border = borderAhead(actor);
+            wall = checkWallBeforeBullet(actor as Bullet, world);;
         } else if (actor.getType().isTank()) {
-            return borderAhead(actor) || checkWallBeforeActor(actor, world);
+            border = borderAhead(actor);
+            wall = checkWallBeforeActor(actor, world);
         }
 
-        return false;
+        return  border != null ? border : wall;
     }
 
-    private static function borderAhead(actor:Actor):Boolean {
+    private static function borderAhead(actor:Actor):BarrierType {
         var movement:ActorDirection = actor.getDirection();
         var position:Point = actor.getPosition();
         switch (movement) {
+
             case ActorDirection.UP:
-                return position.y <= 0;
+                if (position.y <= 0) {
+                    return BarrierType.BORDER;
+                }
                 break;
+
             case ActorDirection.RIGHT:
-                return position.x >= GameSettings.WORLD_WIDTH * GameSettings.MAP_TILE_SIZE - GameSettings.TANK_SIZE;
+                if (position.x >= GameSettings.WORLD_WIDTH * GameSettings.MAP_TILE_SIZE - GameSettings.TANK_SIZE) {
+                    return BarrierType.BORDER;
+                }
                 break;
+
             case ActorDirection.DOWN:
-                return position.y >= GameSettings.WORLD_HEIGHT * GameSettings.MAP_TILE_SIZE - GameSettings.TANK_SIZE;
+                if (position.y >= GameSettings.WORLD_HEIGHT * GameSettings.MAP_TILE_SIZE - GameSettings.TANK_SIZE) {
+                    return BarrierType.BORDER;
+                }
                 break;
+
             case ActorDirection.LEFT:
-                return position.x <= 0;
-                break;
-            default:
-                return false;
+                if (position.x <= 0) {
+                    return BarrierType.BORDER;
+                }
                 break;
         }
+        return null;
     }
 
-    private static function checkWallBeforeBullet(bullet:Actor, world:World):Boolean {
+    private static function checkWallBeforeBullet(bullet:Actor, world:World):BarrierType {
         var frontCells:PointPair = getFrontCells(bullet);
-        var result:Boolean = checkWallBeforeActor(bullet, world);
-        if (result) {
+        var result:BarrierType = checkWallBeforeActor(bullet, world);
+        if (result != null) {
             world.redrawTiles(frontCells.toArray());
         }
         return result;
@@ -54,7 +69,7 @@ public class ImpactProcessor {
         return impactMap.getEntities(frontCells);
     }
 
-    private static function checkWallBeforeActor(actor:Actor, world:World):Boolean {
+    private static function checkWallBeforeActor(actor:Actor, world:World):BarrierType {
         var frontCells:PointPair = getFrontCells(actor);
 
         world.setFrontCellsCoord(frontCells); //For debug
@@ -63,33 +78,33 @@ public class ImpactProcessor {
         var first:ImpactEntity = entities.getFirst();
         var second:ImpactEntity = entities.getSecond();
 
-        var result1:Boolean;
-        var result2:Boolean;
+        var result_1:BarrierType;
+        var result_2:BarrierType;
 
         //Eagle
         if (first.isEagle() && actor.getType() == ActorType.BULLET) {
-            result1 = first.checkImpact(actor, false);
-            if (result1) {
-                return true;
+            result_1 = first.checkImpact(actor, false);
+            if (result_1 != null) {
+                return result_1;
             } else {
-                result2 = second.checkImpact(actor, true);
-                if (result2) {
-                    return true;
+                result_2 = second.checkImpact(actor, true);
+                if (result_2 != null) {
+                    return result_2;
                 }
             }
 
-            if (!result1 && !result2) {
-                return false;
+            if (result_1 == null && result_2 == null) {
+                return null;
             }
         }
 
-        result1 = first.checkImpact(actor, false);
-        result2 = second.checkImpact(actor, true);
+        result_1 = first.checkImpact(actor, false);
+        result_2 = second.checkImpact(actor, true);
 
         if (actor.getType() == ActorType.BULLET) {
 
             var direction:ActorDirection = actor.getDirection();
-            var doubleImpact:Boolean = result1 && result2;
+            var doubleImpact:Boolean = result_1 != null && result_2 != null;
             var flagsEqual:Boolean = (first.getFrontFlag() == second.getFrontFlag());
 
             if (doubleImpact) {
@@ -102,12 +117,12 @@ public class ImpactProcessor {
                 else if (second.getFrontFlag()) second.destruct(direction);
 
             } else {
-                if (result1) first.destruct(direction);
-                if (result2) second.destruct(direction);
+                if (result_1) first.destruct(direction);
+                if (result_2) second.destruct(direction);
             }
         }
 
-        return result1 || result2;
+        return result_1 != null ? result_1 : result_2;
     }
 
     private static function getFrontCells(actor:Actor):PointPair {

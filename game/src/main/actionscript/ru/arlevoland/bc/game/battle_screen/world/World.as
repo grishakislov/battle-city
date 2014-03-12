@@ -11,6 +11,7 @@ import ru.arlevoland.bc.game.battle_screen.map_loader.MapHelper;
 import ru.arlevoland.bc.game.battle_screen.tank.ActorDirection;
 import ru.arlevoland.bc.game.battle_screen.tank.BaseTank;
 import ru.arlevoland.bc.game.battle_screen.tank.PlayerTank;
+import ru.arlevoland.bc.game.battle_screen.world.impact.BarrierType;
 import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactEntity;
 import ru.arlevoland.bc.game.battle_screen.world.impact.ImpactProcessor;
 import ru.arlevoland.bc.game.battle_screen.world.impact.PointPair;
@@ -106,7 +107,22 @@ public class World extends Sprite {
     }
 
     public function isBarrierAhead(actor:Actor):Boolean {
-        return ImpactProcessor.isBarrierAhead(actor, this);
+        var barrier:BarrierType = ImpactProcessor.isBarrierAhead(actor, this);
+        if (actor.getType() == ActorType.BULLET && barrier != null) {
+            switch (barrier.getId()) {
+                case BarrierType.BORDER.getId():
+                    App.sfxManager.playBorderRicochet();
+                    break;
+                case BarrierType.BRICK.getId():
+                    App.sfxManager.playBrickRicochet();
+                    break;
+                case BarrierType.EAGLE.getId():
+                    App.sfxManager.playEagleExplode();
+                    break;
+            }
+        }
+        //TODO: sfx
+        return barrier != null;
     }
 
     public function getCollisionLayer():WorldImpactLayer {
