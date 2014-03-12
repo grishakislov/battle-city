@@ -48,9 +48,5 @@ public class HQGameOverAnimation extends AnimatedObject {
             }
         }
     }
-
-    override public function destroy():void {
-        super.destroy();
-    }
 }
 }
