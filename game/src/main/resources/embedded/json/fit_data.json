@@ -2,7 +2,6 @@
 	{
 		"name":"BRUSH_0",
 		"palette":"DEFAULT",
-		"brushIndex":0,
 		"tag":"",
 		"coords":[
 			{"x":0,"y":0}
@@ -11,7 +10,6 @@
 	{
 		"name":"BRUSH_1",
 		"palette":"DEFAULT",
-		"brushIndex":1,
 		"tag":"",
 		"coords":[
 			{"x":1,"y":0}
@@ -20,7 +18,6 @@
 	{
 		"name":"BRUSH_2",
 		"palette":"DEFAULT",
-		"brushIndex":2,
 		"tag":"",
 		"coords":[
 			{"x":2,"y":0}
@@ -29,7 +26,6 @@
 	{
 		"name":"BRUSH_3",
 		"palette":"DEFAULT",
-		"brushIndex":3,
 		"tag":"",
 		"coords":[
 			{"x":3,"y":0}
@@ -38,7 +34,6 @@
 	{
 		"name":"BRUSH_4",
 		"palette":"DEFAULT",
-		"brushIndex":4,
 		"tag":"",
 		"coords":[
 			{"x":4,"y":0}
@@ -47,7 +42,6 @@
 	{
 		"name":"BRUSH_5",
 		"palette":"DEFAULT",
-		"brushIndex":5,
 		"tag":"",
 		"coords":[
 			{"x":5,"y":0}
@@ -56,7 +50,6 @@
 	{
 		"name":"BRUSH_6",
 		"palette":"DEFAULT",
-		"brushIndex":6,
 		"tag":"",
 		"coords":[
 			{"x":6,"y":0}
@@ -65,7 +58,6 @@
 	{
 		"name":"BRUSH_7",
 		"palette":"DEFAULT",
-		"brushIndex":7,
 		"tag":"",
 		"coords":[
 			{"x":7,"y":0}
@@ -74,7 +66,6 @@
 	{
 		"name":"BRUSH_8",
 		"palette":"DEFAULT",
-		"brushIndex":8,
 		"tag":"",
 		"coords":[
 			{"x":8,"y":0}
@@ -83,7 +74,6 @@
 	{
 		"name":"BRUSH_9",
 		"palette":"DEFAULT",
-		"brushIndex":9,
 		"tag":"",
 		"coords":[
 			{"x":9,"y":0}
@@ -92,7 +82,6 @@
 	{
 		"name":"BRUSH_A",
 		"palette":"DEFAULT",
-		"brushIndex":10,
 		"tag":"",
 		"coords":[
 			{"x":10,"y":0}
@@ -101,7 +90,6 @@
 	{
 		"name":"BRUSH_B",
 		"palette":"DEFAULT",
-		"brushIndex":11,
 		"tag":"",
 		"coords":[
 			{"x":11,"y":0}
@@ -110,7 +98,6 @@
 	{
 		"name":"BRUSH_C",
 		"palette":"DEFAULT",
-		"brushIndex":12,
 		"tag":"",
 		"coords":[
 			{"x":12,"y":0}
@@ -119,7 +106,6 @@
 	{
 		"name":"BRUSH_D",
 		"palette":"DEFAULT",
-		"brushIndex":13,
 		"tag":"",
 		"coords":[
 			{"x":13,"y":0}
@@ -128,7 +114,6 @@
 	{
 		"name":"BRUSH_E",
 		"palette":"DEFAULT",
-		"brushIndex":14,
 		"tag":"",
 		"coords":[
 			{"x":14,"y":0}
@@ -137,7 +122,6 @@
 	{
 		"name":"BRUSH_F",
 		"palette":"DEFAULT",
-		"brushIndex":15,
 		"tag":"",
 		"coords":[
 			{"x":15,"y":0}

@@ -10,19 +10,22 @@ public class Resources {
     public static const TILES:Class;
 
     //JSON
-    [Embed(source="../../../../../../../resources/embedded/json/fitdata.json", mimeType='application/octet-stream')]
+    [Embed(source="../../../../../../../resources/embedded/json/impact_data.json", mimeType='application/octet-stream')]
+    public static const IMPACT_DATA:Class;
+
+    [Embed(source="../../../../../../../resources/embedded/json/fit_data.json", mimeType='application/octet-stream')]
     public static const FIT_DATA:Class;
 
-    [Embed(source="../../../../../../../resources/embedded/json/tankfitdata.json", mimeType='application/octet-stream')]
+    [Embed(source="../../../../../../../resources/embedded/json/tank_fit_data.json", mimeType='application/octet-stream')]
     public static const TANK_FIT_DATA:Class;
 
     [Embed(source="../../../../../../../resources/embedded/json/levels.json", mimeType='application/octet-stream')]
     public static const LEVELS:Class;
 
-    [Embed(source="../../../../../../../resources/embedded/json/brushmaps.json", mimeType='application/octet-stream')]
+    [Embed(source="../../../../../../../resources/embedded/json/brush_maps.json", mimeType='application/octet-stream')]
     public static const BRUSH_MAPS:Class;
 
-    [Embed(source="../../../../../../../resources/embedded/json/bigtiles.json", mimeType='application/octet-stream')]
+    [Embed(source="../../../../../../../resources/embedded/json/big_tiles.json", mimeType='application/octet-stream')]
     public static const BIG_TILES:Class;
 
     //Sound

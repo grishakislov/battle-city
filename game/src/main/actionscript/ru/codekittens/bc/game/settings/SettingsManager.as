@@ -3,11 +3,13 @@ import ru.codekittens.bc.game.core.assets.Resources;
 import ru.codekittens.bc.game.settings.model.BigTile;
 import ru.codekittens.bc.game.settings.model.BrushMap;
 import ru.codekittens.bc.game.settings.model.FitData;
+import ru.codekittens.bc.game.settings.model.ImpactData;
 import ru.codekittens.bc.game.settings.model.LevelData;
 import ru.codekittens.bc.game.settings.model.TankFitData;
 
 public class SettingsManager {
 
+    private var impactDataDictionary:Object;
     private var fitData:Vector.<FitData>;
     private var fitDataDictionary:Object;
     private var tankFitData:Vector.<TankFitData>;
@@ -17,6 +19,7 @@ public class SettingsManager {
     private var bigTilesIndex:Vector.<BigTile>;
 
     public function initialize():void {
+        impactDataDictionary = createImpactData();
         fitData = createFitData();
         tankFitData = createTankFitData();
         brushMaps = createBrushMaps();
@@ -24,6 +27,23 @@ public class SettingsManager {
         bigTiles = createBigTiles();
         indexBigTiles();
         indexFitData();
+    }
+
+    private function createImpactData():Object {
+        var result:Object = {};
+        var data:String = new Resources.IMPACT_DATA;
+        var array:Array = JSONHelper.readList(ImpactData, data);
+        for each (var impactData:ImpactData in array) {
+            result[impactData.name] = impactData;
+        }
+        return result;
+    }
+
+    private function createFitData():Vector.<FitData> {
+        var data:String = new Resources.FIT_DATA;
+        var array:Array = JSONHelper.readList(FitData, data);
+        var result:Vector.<FitData> = Vector.<FitData>(array);
+        return result;
     }
 
     private function indexBigTiles():void {
@@ -40,10 +60,6 @@ public class SettingsManager {
         }
     }
 
-    public function getFitDataByName(tileName:String):FitData {
-        return fitDataDictionary[tileName];
-    }
-
     private function createBigTiles():Vector.<BigTile> {
         var data:String = new Resources.BIG_TILES;
         var array:Array = JSONHelper.readList(BigTile, data);
@@ -51,12 +67,6 @@ public class SettingsManager {
         return result;
     }
 
-    private function createFitData():Vector.<FitData> {
-        var data:String = new Resources.FIT_DATA;
-        var array:Array = JSONHelper.readList(FitData, data);
-        var result:Vector.<FitData> = Vector.<FitData>(array);
-        return result;
-    }
 
     private function createTankFitData():Vector.<TankFitData> {
         var data:String = new Resources.TANK_FIT_DATA;
@@ -77,6 +87,14 @@ public class SettingsManager {
         var array:Array = JSONHelper.readList(LevelData, data);
         var result:Vector.<LevelData> = Vector.<LevelData>(array);
         return result;
+    }
+
+    public function getImpactDataByName(name:String):ImpactData {
+        return impactDataDictionary[name];
+    }
+
+    public function getFitDataByName(tileName:String):FitData {
+        return fitDataDictionary[tileName];
     }
 
     public function getBigTileById(id:int):BigTile {

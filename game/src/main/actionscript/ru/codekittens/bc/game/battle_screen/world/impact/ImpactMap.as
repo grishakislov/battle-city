@@ -5,6 +5,7 @@ import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.settings.model.BigTile;
 import ru.codekittens.bc.game.settings.model.FitData;
+import ru.codekittens.bc.game.settings.model.ImpactData;
 import ru.codekittens.bc.game.settings.model.LevelData;
 
 public class ImpactMap {
@@ -76,8 +77,8 @@ public class ImpactMap {
     }
 
     private function createEntity(tileName:String):ImpactEntity {
-        var fitData:FitData = App.settingsManager.getFitDataByName(tileName);
-        var result:ImpactEntity = new ImpactEntity(tileName, fitData.brushIndex);
+        var impactData:ImpactData = App.settingsManager.getImpactDataByName(tileName);
+        var result:ImpactEntity = new ImpactEntity(tileName, impactData.brushIndex);
         return result;
     }
 

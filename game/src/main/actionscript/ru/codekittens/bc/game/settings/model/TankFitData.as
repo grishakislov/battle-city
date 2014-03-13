@@ -3,6 +3,7 @@ public class TankFitData {
 
     [JsonProperty("key")]
     public var key:String;
+
     [JsonProperty("coord")]
     public var coord:Coord;
 

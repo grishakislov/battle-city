@@ -8,6 +8,7 @@ import ru.codekittens.bc.game.battle_screen.world.impact.ImpactEntity;
 import ru.codekittens.bc.game.battle_screen.world.impact.ImpactMap;
 import ru.codekittens.bc.game.core.assets.model.TileAsset;
 import ru.codekittens.bc.game.settings.model.FitData;
+import ru.codekittens.bc.game.settings.model.ImpactData;
 
 public class MapHelper {
 
@@ -55,11 +56,11 @@ public class MapHelper {
     }
 
     public static function setHqBricks(map:ImpactMap):void {
-        var fitData:FitData;
+        var impactData:ImpactData;
         var tileName:String = "BRUSH_F";
-        fitData = App.settingsManager.getFitDataByName(tileName);
+        impactData = App.settingsManager.getImpactDataByName(tileName);
         for (var i:int = 0; i < WALL_COORDS.length; i++) {
-            map.setEntity(new ImpactEntity(tileName, fitData.brushIndex), WALL_COORDS[i]);
+            map.setEntity(new ImpactEntity(tileName, impactData.brushIndex), WALL_COORDS[i]);
         }
     }
 

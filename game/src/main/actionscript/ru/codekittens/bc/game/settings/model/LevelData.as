@@ -5,6 +5,7 @@ public class LevelData {
 
     [JsonProperty("id")]
     public var id:String;
+
     [JsonProperty("data")]
     public var data:String;
 
