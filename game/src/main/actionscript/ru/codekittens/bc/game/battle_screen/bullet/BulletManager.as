@@ -16,15 +16,28 @@ public class BulletManager {
 
         switch (tank.getType()) {
             case ActorType.PLAYER:
-                var bullet:Bullet = createPlayerBullet(tank, world);
-                if (bullet != null) {
+                if (isTankCanShoot(tank)) {
+                    var bullet:Bullet = createPlayerBullet(tank, world);
                     bullet.addDestroyCallback(onPlayerBulletDestroyed);
                     bulletLayer.addChild(bullet);
                     playerBullets++;
                 }
                 break;
         }
+    }
 
+    private function isTankCanShoot(tank:BaseTank):Boolean {
+        switch (tank.getType()) {
+            case ActorType.PLAYER:
+                    switch (tank.getLevel()) {
+                        case PlayerTankLevel.LEVEL_1:
+                            return playerBullets < GameSettings.LEVEL_1_BULLETS;
+                        case PlayerTankLevel.LEVEL_2:
+                            return playerBullets < GameSettings.LEVEL_2_BULLETS;
+                    }
+                break;
+        }
+        return false;
     }
 
     private function onPlayerBulletDestroyed():void {
@@ -35,23 +48,17 @@ public class BulletManager {
         var bullet:Bullet;
         switch (tank.getLevel()) {
             case PlayerTankLevel.LEVEL_1:
-                if (playerBullets < GameSettings.LEVEL_1_BULLETS) {
                     bullet = new Bullet(tank, App.settingsManager.getFrameSpeedById("BULLET_SLOW"), world);
                     return bullet;
-                }
                 break;
             case PlayerTankLevel.LEVEL_2:
-                if (playerBullets < GameSettings.LEVEL_2_BULLETS) {
                     bullet = new Bullet(tank, App.settingsManager.getFrameSpeedById("BULLET_FAST"), world);
                     return bullet;
-                }
                 break;
             case PlayerTankLevel.LEVEL_3:
             case PlayerTankLevel.LEVEL_4:
-
                 break;
         }
-
         return null;
     }
 
