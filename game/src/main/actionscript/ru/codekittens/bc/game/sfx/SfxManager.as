@@ -4,7 +4,6 @@ import flash.media.Sound;
 
 import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.core.assets.SoundAssets;
-import ru.codekittens.bc.game.sfx.SfxLoop;
 
 public class SfxManager {
 
@@ -17,14 +16,14 @@ public class SfxManager {
 
     public function playOnly(sound:Sound):void {
         onlySoundPlaying = true;
-        loopChannel.mute();
+        loopChannel.toggleMute();
         mainChannel.stop();
         mainChannel.play(sound);
         mainChannel.getChannel().addEventListener(Event.SOUND_COMPLETE, onOnlySoundCompleted);
     }
 
     private function onOnlySoundCompleted(event:Event):void {
-        loopChannel.mute();
+        loopChannel.toggleMute();
         mainChannel.stop();
         onlySoundPlaying = false;
     }
@@ -52,7 +51,7 @@ public class SfxManager {
             default:
                 loopChannel.play(sound, loop)
                 if (onlySoundPlaying) {
-                    loopChannel.mute();
+                    loopChannel.toggleMute();
                 }
                 break;
         }
@@ -97,10 +96,10 @@ public class SfxManager {
         loopChannel.stop();
     }
 
-    public function pause():void {
-        mainChannel.pause();
-        secondChannel.pause();
-        loopChannel.pause();
+    public function togglePause():void {
+        mainChannel.togglePause();
+        secondChannel.togglePause();
+        loopChannel.togglePause();
 
         if (onlySoundPlaying && mainChannel.isPlaying()) {
             mainChannel.getChannel().addEventListener(Event.SOUND_COMPLETE, onOnlySoundCompleted);

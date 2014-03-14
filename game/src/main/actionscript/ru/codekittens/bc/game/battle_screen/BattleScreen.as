@@ -59,13 +59,13 @@ public class BattleScreen extends GameScreen {
     }
 
 
-    override public function pause():void {
-        super.pause();
+    override public function togglePause():void {
+        super.togglePause();
         if (preloader != null) {
-            preloader.pause();
+            preloader.togglePause();
         }
         if (world != null) {
-            world.pause();
+            world.togglePause();
         }
     }
 

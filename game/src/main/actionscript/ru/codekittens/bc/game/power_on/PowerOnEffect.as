@@ -10,7 +10,6 @@ import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.core.assets.Resources;
 import ru.codekittens.bc.game.events.GameEvent;
 import ru.codekittens.bc.game.time.Ticker;
-import ru.codekittens.bc.game.time.TickerEvent;
 
 public class PowerOnEffect extends GameScreen {
 
@@ -30,15 +29,15 @@ public class PowerOnEffect extends GameScreen {
         var tanks:Bitmap = new Resources.TANKS();
         smallBitmap.bitmapData.copyPixels(tanks.bitmapData, new Rectangle(8,0,8,8), new Point (0,0));
 
-        Ticker.addEventListener(TickerEvent.TICK, onTick);
+        Ticker.addTickListener(onTick);
     }
 
     override public function destroy():* {
-        Ticker.removeEventListener(TickerEvent.TICK, onTick);
+        Ticker.removeTickListener(onTick);
         parent.removeChild(this);
     }
 
-    private function onTick(e:TickerEvent):void {
+    private function onTick(dt:uint):void {
         switch (currentFrame) {
             case PAUSE:
                 App.sfxManager.playClick();
@@ -63,13 +62,14 @@ public class PowerOnEffect extends GameScreen {
         currentFrame++;
     }
 
-    override public function pause():void {
+    override public function togglePause():void {
+        super.togglePause();
         if (paused) {
-            Ticker.addEventListener(TickerEvent.TICK, onTick);
+            Ticker.removeTickListener(onTick);
         } else {
-            Ticker.removeEventListener(TickerEvent.TICK, onTick);
+            Ticker.addTickListener(onTick);
         }
-        super.pause();
+
     }
 
     private var currentFrame:Number = 0;

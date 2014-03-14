@@ -9,14 +9,13 @@ import ru.codekittens.bc.game.battle_screen.BattleStageDrawMode;
 import ru.codekittens.bc.game.battle_screen.map_loader.MapLoader;
 import ru.codekittens.bc.game.core.assets.model.TileAsset;
 import ru.codekittens.bc.game.time.Ticker;
-import ru.codekittens.bc.game.time.TickerEvent;
 
 public class WorldWaterLayer extends Sprite {
 
     private static const WATER_FRAMES_SKIP:uint = 32;//TODO: сравнить со скоростью в оригинале
 
     public function WorldWaterLayer() {
-        Ticker.addEventListener(TickerEvent.TICK, onTick);
+        Ticker.addTickListener(onTick);
     }
 
     public function initialize(levelId:uint):void {
@@ -29,7 +28,7 @@ public class WorldWaterLayer extends Sprite {
         addChild(visual);
     }
 
-    private function onTick(e:TickerEvent):void {
+    private function onTick(dt:uint):void {
         framesPassed++;
         var currentWaterTile:TileAsset;
         if (framesPassed >= WATER_FRAMES_SKIP) {

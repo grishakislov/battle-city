@@ -125,14 +125,16 @@ public class ImpactProcessor {
         return result_1 != null ? result_1 : result_2;
     }
 
+    private static var frontCells:PointPair = new PointPair();
+    private static var left:Point = new Point(0, 0);
+    private static var right:Point = new Point(0, 0);
+    private static var top:Point = new Point(0, 0);
+    private static var bottom:Point = new Point(0, 0);
+
     private static function getFrontCells(actor:Actor):PointPair {
-        var left:Point = new Point(0, 0);
-        var right:Point = new Point(0, 0);
-        var top:Point = new Point(0, 0);
-        var bottom:Point = new Point(0, 0);
+
         var position:Point = actor.getPosition();
 
-        var result:PointPair;
         var floorX:uint = Math.floor(position.x / GameSettings.TILE_SIZE);
         var floorY:uint = Math.floor(position.y / GameSettings.TILE_SIZE);
         var ceilX:uint = Math.ceil(position.x / GameSettings.TILE_SIZE);
@@ -143,36 +145,36 @@ public class ImpactProcessor {
                 left.x = floorX;
                 right.x = floorX + 1;
                 right.y = left.y = floorY;
-                result = new PointPair(left, right);
+                frontCells.set(left, right);
                 break;
 
             case ActorDirection.RIGHT:
                 top.x = bottom.x = ceilX + 1;
                 top.y = floorY;
                 bottom.y = floorY + 1;
-                result = new PointPair(top, bottom);
+                frontCells.set(top, bottom);
                 break;
 
             case ActorDirection.DOWN:
                 left.x = floorX;
                 right.x = floorX + 1;
                 right.y = left.y = ceilY + 1;
-                result = new PointPair(left, right);
+                frontCells.set(left, right);
                 break;
 
             case ActorDirection.LEFT:
                 top.x = bottom.x = ceilX - 1;
                 top.y = floorY;
                 bottom.y = floorY + 1;
-                result = new PointPair(top, bottom);
+                frontCells.set(top, bottom);
                 break;
 
             default :
                 return null;
         }
 
-        trim(result);
-        return result;
+        trim(frontCells);
+        return frontCells;
 
         function trim(pair:PointPair):void {
             const maxX:uint = GameSettings.WORLD_WIDTH * 2 - 1;

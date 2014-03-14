@@ -4,7 +4,6 @@ import flash.geom.Point;
 import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.settings.model.BigTile;
-import ru.codekittens.bc.game.settings.model.FitData;
 import ru.codekittens.bc.game.settings.model.ImpactData;
 import ru.codekittens.bc.game.settings.model.LevelData;
 
@@ -72,8 +71,12 @@ public class ImpactMap {
         return map[getIndexFor(coords.x,coords.y)];
     }
 
+    private var pair:ImpactEntityPair = new ImpactEntityPair();
+
     public function getEntities(frontCells:PointPair):ImpactEntityPair {
-        return new ImpactEntityPair(getEntityByPoint(frontCells.getFirst()), getEntityByPoint(frontCells.getSecond()));
+        pair.setFirst(getEntityByPoint(frontCells.getFirst()));
+        pair.setSecond(getEntityByPoint(frontCells.getSecond()));
+        return pair;
     }
 
     private function createEntity(tileName:String):ImpactEntity {

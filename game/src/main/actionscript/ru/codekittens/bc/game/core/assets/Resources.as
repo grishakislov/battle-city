@@ -10,6 +10,9 @@ public class Resources {
     public static const TILES:Class;
 
     //JSON
+    [Embed(source="../../../../../../../resources/embedded/json/frame_speed.json", mimeType='application/octet-stream')]
+    public static const FRAME_SPEED:Class;
+
     [Embed(source="../../../../../../../resources/embedded/json/impact_data.json", mimeType='application/octet-stream')]
     public static const IMPACT_DATA:Class;
 

@@ -1,7 +1,6 @@
 package ru.codekittens.bc.game.title {
 import flash.display.Bitmap;
 import flash.display.Sprite;
-import flash.events.Event;
 import flash.geom.Point;
 
 import ru.codekittens.bc.game.App;
@@ -12,7 +11,6 @@ import ru.codekittens.bc.game.events.GameEvent;
 import ru.codekittens.bc.game.keyboard.KeyboardManagerEvent;
 import ru.codekittens.bc.game.keyboard.key.KeyCommand;
 import ru.codekittens.bc.game.time.Ticker;
-import ru.codekittens.bc.game.time.TickerEvent;
 
 public class Title extends GameScreen {
 
@@ -32,6 +30,12 @@ public class Title extends GameScreen {
     private const NAMCOT_COORDS:Point = new Point(11, 22);
     private const COPY_COORDS:Point = new Point(4, 24);
     private const ARR_COORDS:Point = new Point(6, 26);
+
+    private var tileSize:uint;
+    private var animationCompleted:Boolean;
+    private var tankCursor:TankCursor;
+    private var content:Sprite;
+    private var selectedPosition:uint;
 
     override public function initialize():void {
         //draw sprites etc
@@ -80,16 +84,17 @@ public class Title extends GameScreen {
 
     override public function run(data:* = undefined):void {
         App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
-        Ticker.addEventListener(TickerEvent.TICK, onTick);
+        Ticker.addTickListener(onTick);
     }
 
-    override public function pause():void {
+    override public function togglePause():void {
+        super.togglePause();
         if (paused) {
-            if (!animationCompleted) Ticker.addEventListener(TickerEvent.TICK, onTick);
+            if (!animationCompleted) Ticker.removeTickListener(onTick);
         } else {
-            if (!animationCompleted) Ticker.removeEventListener(TickerEvent.TICK, onTick);
+            if (!animationCompleted) Ticker.addTickListener(onTick);
         }
-        super.pause();
+
     }
 
     override public function destroy():* {
@@ -98,19 +103,18 @@ public class Title extends GameScreen {
         return selectedPosition;
     }
 
-    private function onTick(e:Event):void {
+    private function onTick(dt:uint):void {
         if (content.y > 0) {
             content.y--;
         } else {
             stopAnimation();
         }
-
     }
 
     private function stopAnimation():void {
         content.y = 0;
         animationCompleted = true;
-        Ticker.removeEventListener(TickerEvent.TICK, onTick);
+        Ticker.removeTickListener(onTick);
         addTankCursor();
     }
 
@@ -131,13 +135,6 @@ public class Title extends GameScreen {
         selectedPosition = e.getPosition();
         App.dispatcher.dispatchEvent(new GameEvent(GameEvent.SCREEN_FINISHED, this));
     }
-
-    private var tileSize:uint;
-    private var animationCompleted:Boolean;
-    private var tankCursor:TankCursor;
-    private var content:Sprite;
-    private var selectedPosition:uint;
-
 
 }
 }

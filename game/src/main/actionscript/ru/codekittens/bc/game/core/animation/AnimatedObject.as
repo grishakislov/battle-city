@@ -1,93 +1,69 @@
 package ru.codekittens.bc.game.core.animation {
-import flash.display.Sprite;
-
-import ru.codekittens.bc.game.GameSettings;
+import ru.codekittens.bc.game.GameObject;
+import ru.codekittens.bc.game.settings.model.FrameSpeed;
 import ru.codekittens.bc.game.time.Ticker;
-import ru.codekittens.bc.game.time.TickerEvent;
 
-public class AnimatedObject extends Sprite {
+public class AnimatedObject extends GameObject {
 
-    /*
-    Анимированный объект с возможностью настройки скорости в пикселях/сек.
-    Отдает целую дельту.
-     */
-
-    //Pixels per second
-    private var pixelsPerSecond:uint;
-
-    private var pixelsPerMilli:Number;
-    private var currentPixels:Number = 0;
-
-    private var timeElapsed:Number = 0;
+    private var speed:FrameSpeed;
+    private var millisPerStep:uint;
+    private var currentStep:uint = 0;
+    private var currentStepMillis:uint = 0;
     protected var lastDt:uint = 0;
 
-    private var lastPixels:Number;
-    private var pixelDelta:uint;
-
-    private var callback:Function;
-
-    private var paused:Boolean = false;
-
-    public function AnimatedObject() {
-        Ticker.addEventListener(TickerEvent.TICK, onTick);
-        setPixelsPerSecond(GameSettings.DEFAULT_SPEED);
+    public function run(speed:FrameSpeed):void {
+        this.speed = speed;
+        millisPerStep = 1000 / 64;
+        Ticker.addTickListener(onTick);
     }
 
-    private function onTick(event:TickerEvent):void {
-        currentPixels += pixelsPerMilli * event.dt;
-        var delta:uint = Math.floor(currentPixels) - Math.floor(lastPixels);
-        if (delta > 0) {
-            onAnimation(delta);
-            currentPixels -= delta;
+    private function onTick(dt:uint):void {
+        if (currentStep == speed.sequence.length) {
+            currentStep = 0;
+        }
+        currentStepMillis += dt;
+        if (currentStepMillis > millisPerStep) {
+            onAnimation(speed.sequence[currentStep] ? speed.pixelsPerFrame : 0);
+            currentStepMillis -= millisPerStep;
         }
 
-        lastPixels = currentPixels;
-        timeElapsed += event.dt;
-        lastDt = event.dt;
+        currentStep++;
+        lastDt = dt;
     }
 
-    public final function addDestroyCallback(callback:Function):void {
-        this.callback = callback;
+    protected final function setAnimationEnabled(value:Boolean):void {
+        if (value) {
+            Ticker.addTickListener(onTick);
+        } else {
+            Ticker.removeTickListener(onTick);
+        }
+    }
+
+    override public function togglePause():void {
+        super.togglePause();
+        if (paused) {
+            Ticker.removeTickListener(onTick);
+        } else {
+            Ticker.addTickListener(onTick);
+        }
     }
 
     public function pause():void {
         if (paused) {
-            Ticker.addEventListener(TickerEvent.TICK, onTick);
+            Ticker.addTickListener(onTick);
         } else {
-            Ticker.removeEventListener(TickerEvent.TICK, onTick);
+            Ticker.removeTickListener(onTick);
         }
         paused = !paused;
     }
 
     protected function onAnimation(delta:uint):void {
         //Do nothing
-//        trace(delta);
     }
 
-    protected final function setAnimationEnabled(value:Boolean):void {
-        if (value) {
-            Ticker.addEventListener(TickerEvent.TICK, onTick);
-        } else {
-            Ticker.removeEventListener(TickerEvent.TICK, onTick);
-        }
+    override public function destroy():* {
+        super.destroy();
+        Ticker.removeTickListener(onTick);
     }
-
-    public function getPixelsPerSecond():uint {
-        return pixelsPerSecond;
-    }
-
-    public function setPixelsPerSecond(value:uint):void {
-        pixelsPerSecond = value;
-        pixelsPerMilli = pixelsPerSecond / 1000;
-    }
-
-    public function destroy():void {
-        Ticker.removeEventListener(TickerEvent.TICK, onTick);
-        if (callback != null) {
-            callback();
-        }
-    }
-
-
 }
 }

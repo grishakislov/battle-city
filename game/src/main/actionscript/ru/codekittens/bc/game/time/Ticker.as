@@ -1,10 +1,10 @@
 package ru.codekittens.bc.game.time {
 import flash.display.Stage;
 import flash.events.Event;
-import flash.events.EventDispatcher;
+import flash.utils.Dictionary;
 import flash.utils.getTimer;
 
-public class Ticker extends EventDispatcher {
+public class Ticker  {
 
     public static const HIGH_TICK_INTERVAL:int = 15;
     public static const SLOW_TICK_INTERVAL:int = 500;
@@ -19,27 +19,32 @@ public class Ticker extends EventDispatcher {
         var dt:int = timeStamp - lastTickTimestamp;
         if (dt >= tickInterval) {
             lastTickTimestamp = timeStamp;
-            instance.dispatchEvent(new TickerEvent(TickerEvent.TICK, dt));
+            dispatchTick(dt);
         }
 
         ++frames;
     }
 
-
-    public static function addEventListener(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void {
-        instance.addEventListener(type, listener, useCapture, priority, useWeakReference);
+    private static function dispatchTick(dt:uint):void {
+        for each (var c:Function in callbacks) {
+            c.call(null, dt);
+        }
     }
 
-    public static function removeEventListener(type:String, listener:Function, useCapture:Boolean = false):void {
-        instance.removeEventListener(type, listener, useCapture);
+    public static function addTickListener(listener:Function):void {
+        callbacks[listener] = listener;
     }
 
+    public static function removeTickListener(listener:Function):void {
+        delete callbacks[listener];
+    }
+
+    private static var callbacks:Dictionary = new Dictionary();
     private static var stage:Stage;
     private static var tickInterval:int = HIGH_TICK_INTERVAL;
     private static var lastTickTimestamp:int = getTimer();
     private static var frames:int = 0;
 
-    private static var instance:Ticker = new Ticker();
 
 }
 }

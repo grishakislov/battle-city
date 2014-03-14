@@ -5,14 +5,14 @@ import flash.events.Event;
 import flash.geom.Point;
 
 import ru.codekittens.bc.game.App;
-import ru.codekittens.bc.game.BaseScreen;
+import ru.codekittens.bc.game.GameObject;
 import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.core.assets.FontTool;
 import ru.codekittens.bc.game.core.assets.model.TileAsset;
 import ru.codekittens.bc.game.keyboard.KeyboardManagerEvent;
 import ru.codekittens.bc.game.keyboard.key.KeyCommand;
 
-public class TileViewer extends BaseScreen {
+public class TileViewer extends GameObject {
 
     private static const HEAD_Y_POSITION:uint = 10;
     private static const NAME_Y_POSITION:uint = 60;

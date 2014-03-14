@@ -2,7 +2,7 @@ package ru.codekittens.bc.game {
 import ru.codekittens.bc.game.core.debug.GameError;
 import ru.codekittens.bc.game.screen_manager.IGameScreen;
 
-public class GameScreen extends BaseScreen implements IGameScreen {
+public class GameScreen extends GameObject implements IGameScreen {
 
     public function GameScreen() {
         super();
@@ -17,18 +17,18 @@ public class GameScreen extends BaseScreen implements IGameScreen {
         GameError.notImplemented("run()");
     }
 
-    public function destroy():* {
+    override public function destroy():* {
         GameError.notImplemented("destroy()");
     }
 
-    override public function pause():void {
+    override public function togglePause():void {
+        super.togglePause();
         if (paused) {
-            Main.removePauseScreen();
-        } else {
             Main.showPauseScreen();
+        } else {
+            Main.removePauseScreen();
         }
-        App.sfxManager.pause();
-        super.pause();
+        App.sfxManager.togglePause();
     }
 }
 }

@@ -32,7 +32,7 @@ public class HQGameOverAnimation extends AnimatedObject {
 
     override public function pause():void {
         super.pause();
-        bigExplode.pause();
+        bigExplode.togglePause();
     }
 
     override protected function onAnimation(delta:uint):void {

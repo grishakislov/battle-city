@@ -31,13 +31,13 @@ public class GameSettings {
 
     //Speeds
 
-    public static const PRELOADER_SPEED:uint = 256;
-
     public static const DEFAULT_SPEED:uint = 170;//Pixels per sec
     public static const PLAYER_TANK_SPEED:uint = 50;//Pixels per sec
 
 
-    public static const LEVEL_1_BULLETS:int = int.MAX_VALUE;
+    //TODO: Move to json
+    public static const LEVEL_1_BULLETS:int = 1;
+    public static const LEVEL_2_BULLETS:int = 1;
 
 
     public static const PLAYER_TANK_1_INITIAL_COORDS:Point = new Point(4, 12);

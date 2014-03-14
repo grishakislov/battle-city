@@ -3,7 +3,7 @@ import flash.geom.Point;
 
 public class PointPair extends AbstractPair {
 
-    public function PointPair(first:Point, second:Point) {
+    public function PointPair(first:Point = null, second:Point = null) {
         super(first, second);
     }
 
@@ -13,6 +13,19 @@ public class PointPair extends AbstractPair {
 
     public function getSecond():Point {
         return second;
+    }
+
+    public function set(first:Point, second:Point):void {
+        this.first = first;
+        this.second = second;
+    }
+
+    public function setFirst(value:Point):void {
+        first = value;
+    }
+
+    public function setSecond(value:Point):void {
+        second = value;
     }
 
     public function trimAll(minX:Number, maxX:Number, minY:Number, maxY:Number):void {

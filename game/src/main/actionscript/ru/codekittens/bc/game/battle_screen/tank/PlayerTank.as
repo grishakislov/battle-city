@@ -29,7 +29,7 @@ public class PlayerTank extends BaseTank {
         setDirection(DEFAULT_DIRECTION);
         addChild(visual);
         moveTo(GameSettings.PLAYER_TANK_1_INITIAL_COORDS);
-        setPixelsPerSecond(GameSettings.PLAYER_TANK_SPEED)
+        run(App.settingsManager.getFrameSpeedById("PLAYER_TANK"));
         playIdleSound();
     }
 
@@ -139,16 +139,14 @@ public class PlayerTank extends BaseTank {
         }
     }
 
-    override public function pause():void {
-        super.pause();
-        if (!paused) {
-            paused = true;
+    override public function togglePause():void {
+        super.togglePause();
+        if (paused) {
 //            stopSound();
             setAnimationEnabled(false);
             controller.removeEventListener(PlayerTankControllerEvent.START, onTankEvent);
             controller.removeEventListener(PlayerTankControllerEvent.STOP, onTankEvent);
         } else {
-            paused = false;
             movement = null;
 //            playIdleSound();
             setAnimationEnabled(true);
@@ -208,8 +206,6 @@ public class PlayerTank extends BaseTank {
 //        App.sfxManager.stop();
 //    }
 
-    //ITank
-
     override public function getLevel():uint {
         return tankLevel;
     }
@@ -218,22 +214,13 @@ public class PlayerTank extends BaseTank {
         return ActorType.PLAYER;
     }
 
-//    override public function getBulletCollisionTable():Array {
-//        return world.getBulletCollisionMap();
-//    }
-
     private var tankLevel:uint;
 
     private var world:World;
-    private var speed:uint;
-    private var score:uint;
     private var animationKey:uint = 1;
     private var animationFramesPassed:Number = 0;
     private var visual:TileAsset;
     private var controller:PlayerTankController;
-    private var currentCommand:String;
-    private var paused:Boolean;
-
 
 }
 

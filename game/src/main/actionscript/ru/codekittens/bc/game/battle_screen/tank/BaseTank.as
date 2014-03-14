@@ -8,9 +8,6 @@ import ru.codekittens.bc.game.core.animation.AnimatedObject;
 import ru.codekittens.bc.game.core.debug.GameError;
 
 public class BaseTank extends AnimatedObject implements Actor {
-    public function BaseTank() {
-    }
-
 
     public function getLevel():uint {
         GameError.notImplemented("getLevel()");

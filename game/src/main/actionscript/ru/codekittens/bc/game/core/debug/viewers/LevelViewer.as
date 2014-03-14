@@ -6,8 +6,8 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import ru.codekittens.bc.game.App;
-import ru.codekittens.bc.game.BaseScreen;
 import ru.codekittens.bc.game.Colors;
+import ru.codekittens.bc.game.GameObject;
 import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.battle_screen.BattleStageDrawMode;
 import ru.codekittens.bc.game.battle_screen.map_loader.MapLoader;
@@ -16,7 +16,7 @@ import ru.codekittens.bc.game.core.assets.FontTool;
 import ru.codekittens.bc.game.keyboard.KeyboardManagerEvent;
 import ru.codekittens.bc.game.keyboard.key.KeyCommand;
 
-public class LevelViewer extends BaseScreen {
+public class LevelViewer extends GameObject {
 
     public static const LEVEL_X:uint = 2;
     public static const LEVEL_Y:uint = 1;

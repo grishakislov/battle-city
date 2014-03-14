@@ -10,10 +10,9 @@ import ru.codekittens.bc.game.battle_screen.world.ActorType;
 import ru.codekittens.bc.game.battle_screen.world.World;
 import ru.codekittens.bc.game.core.animation.AnimatedObject;
 import ru.codekittens.bc.game.core.assets.model.TileAsset;
+import ru.codekittens.bc.game.settings.model.FrameSpeed;
 
 public class Bullet extends AnimatedObject implements Actor {
-
-    private var millisElapsed:int = 0;
 
     private var world:World;
     private var tank:BaseTank;
@@ -21,31 +20,17 @@ public class Bullet extends AnimatedObject implements Actor {
     private var level:uint;
     private var tankCoords:Point;
     private var movement:ActorDirection;
-
-    private var UP:TileAsset;
-    private var RIGHT:TileAsset;
-    private var DOWN:TileAsset;
-    private var LEFT:TileAsset;
-
     private var visual:TileAsset;
 
 
-    public function Bullet(tank:BaseTank, world:World) {
+    public function Bullet(tank:BaseTank, speed:FrameSpeed, world:World) {
         this.world = world;
         this.direction = tank.getDirection();
         this.tankCoords = tank.getPosition();
         this.tank = tank;
-        initialize();
-        applyStartCoordsForBullet();
         playShootSound();
-        start();
-    }
-
-    private function initialize():void {
-        UP = App.assetManager.getTileAsset("BULLET_U");
-        RIGHT = App.assetManager.getTileAsset("BULLET_R");
-        DOWN = App.assetManager.getTileAsset("BULLET_D");
-        LEFT = App.assetManager.getTileAsset("BULLET_L");
+        initialize();
+        run(speed);
     }
 
     private function applyStartCoordsForBullet():void {
@@ -107,10 +92,6 @@ public class Bullet extends AnimatedObject implements Actor {
             return;
         }
 
-//        if (tankAhead() != null) {
-//            stopMovement();
-//            return;
-//        }
         switch (movement) {
             case ActorDirection.UP:
                 y -= delta;
@@ -125,10 +106,6 @@ public class Bullet extends AnimatedObject implements Actor {
                 x -= delta;
                 break;
         }
-    }
-
-    private function tankAhead():* {
-        return null;
     }
 
     private function getForwardBound():Point {
@@ -166,7 +143,8 @@ public class Bullet extends AnimatedObject implements Actor {
         App.sfxManager.playShoot();
     }
 
-    private function start():void {
+    private function initialize():void {
+        applyStartCoordsForBullet();
         var visualName:String;
         movement = direction;
         switch (direction) {
@@ -196,13 +174,13 @@ public class Bullet extends AnimatedObject implements Actor {
         return movement != null;
     }
 
-    override public function destroy():void {
+    override public function destroy():* {
         super.destroy();
         parent.removeChild(this);
         visual.getBitmap().bitmapData.dispose();
     }
 
-    //IActor
+    //Actor
 
     public function getLevel():uint {
         return level;
@@ -210,11 +188,6 @@ public class Bullet extends AnimatedObject implements Actor {
 
     public function getType():ActorType {
         return ActorType.BULLET;
-    }
-
-    [Deprecated]
-    public function getWorldPosition():Point {
-        return null;
     }
 
     public function getPosition():Point {

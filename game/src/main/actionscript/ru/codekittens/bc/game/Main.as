@@ -18,7 +18,7 @@ import ru.codekittens.bc.game.sfx.SfxManager;
 import ru.codekittens.bc.game.time.Ticker;
 import ru.codekittens.bc.game.title.Title;
 
-[SWF(width="768", height="672", frameRate="60", backgroundColor="#000000")]
+[SWF(width="768", height="672", frameRate="64", backgroundColor="#000000")]
 public class Main extends Sprite {
     private const msg:String = "Прикольный у тебя декомпилятор.";
 

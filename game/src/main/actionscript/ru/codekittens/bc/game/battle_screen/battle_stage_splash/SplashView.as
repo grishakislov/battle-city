@@ -34,7 +34,7 @@ internal class SplashView extends AnimatedObject {
 
         currentAnimation = START;
 
-        setPixelsPerSecond(GameSettings.PRELOADER_SPEED);
+        run(App.settingsManager.getFrameSpeedById("SPLASH_SPEED"));
     }
 
     private function createHalfScreenRect():Bitmap {
@@ -113,11 +113,7 @@ internal class SplashView extends AnimatedObject {
         return top.y + top.height - delta > 0;
     }
 
-    override public function getPixelsPerSecond():uint {
-        return super.getPixelsPerSecond();
-    }
-
-    override public function destroy():void {
+    override public function destroy():* {
         super.destroy();
     }
 

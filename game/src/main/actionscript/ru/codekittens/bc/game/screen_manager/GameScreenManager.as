@@ -60,7 +60,7 @@ public class GameScreenManager extends Sprite {
     private function onKeyDown(e:KeyboardManagerEvent):void {
         switch (e.getCommand()) {
             case KeyCommand.PAUSE:
-                currentGameScreen.pause();
+                currentGameScreen.togglePause();
                 break;
         }
     }

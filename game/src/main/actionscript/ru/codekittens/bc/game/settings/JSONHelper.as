@@ -8,7 +8,7 @@ public class JSONHelper {
     public static function readObject(cls:Class, json:Object):* {
         var decodedObject:Object;
         var s:String = getQualifiedClassName(cls);
-        if (s == "String" || s == "uint" || s == "int") {
+        if (s == "String" || s == "uint" || s == "int" || s == "Boolean") {
             return json;
         } else {
             decodedObject = (json is String) ? JSON.parse(json as String) : json;

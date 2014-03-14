@@ -7,7 +7,7 @@ public interface IGameScreen {
 
     function destroy():*;
 
-    function pause():void;
+    function togglePause():void;
 
 }
 }

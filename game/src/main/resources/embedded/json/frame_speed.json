@@ -1,0 +1,32 @@
+[
+	{
+		"id":"PLAYER_TANK",
+		"type":"player",
+		"pixelsPerFrame":1,
+		"sequence":[true, true, true, false]
+	},
+	{
+		"id":"BULLET_SLOW",
+		"type":"bullet",
+		"pixelsPerFrame":2,
+		"sequence":[true]
+	},
+	{
+		"id":"BULLET_FAST",
+		"type":"bullet",
+		"pixelsPerFrame":4,
+		"sequence":[true]
+	},
+	{
+		"id":"AI_TYPE_ONE",
+		"type":"ai",
+		"pixelsPerFrame":1,
+		"sequence":[true, false]
+	},
+	{
+		"id":"PRELOADER_SPEED",
+		"type":"generic",
+		"pixelsPerFrame":256,
+		"sequence":[true]
+	}
+]

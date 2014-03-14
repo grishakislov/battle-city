@@ -4,7 +4,6 @@ import flash.media.SoundChannel;
 import flash.media.SoundTransform;
 
 import ru.codekittens.bc.game.time.Ticker;
-import ru.codekittens.bc.game.time.TickerEvent;
 
 public class Channel {
 
@@ -21,11 +20,11 @@ public class Channel {
         playCurrentSound();
 
         if (sfxLoop == SfxLoop.INFINITE_LOOP) {
-            Ticker.addEventListener(TickerEvent.TICK, onEnterFrame)
+            Ticker.addTickListener(onEnterFrame)
         }
     }
 
-    public function mute():void {
+    public function toggleMute():void {
         if (channel == null) {
             return;
         }
@@ -34,7 +33,7 @@ public class Channel {
 
     }
 
-    public function pause():void {
+    public function togglePause():void {
 
         if (channel == null || sound == null) {
             return;
@@ -74,7 +73,7 @@ public class Channel {
 
     private function reset():void {
         if (looped) {
-            Ticker.removeEventListener(TickerEvent.TICK, onEnterFrame);
+            Ticker.removeTickListener(onEnterFrame);
         }
         if (channel != null) {
             channel.stop();
@@ -89,7 +88,7 @@ public class Channel {
         lastPosition = 0;
     }
 
-    private function onEnterFrame(e:TickerEvent):void {
+    private function onEnterFrame(dt:uint):void {
         if (channel.position >= sound.length - END) {
             channel.stop();
             playCurrentSound();

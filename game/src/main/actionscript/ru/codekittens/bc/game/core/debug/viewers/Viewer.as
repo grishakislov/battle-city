@@ -2,11 +2,11 @@ package ru.codekittens.bc.game.core.debug.viewers {
 import flash.events.Event;
 
 import ru.codekittens.bc.game.App;
-import ru.codekittens.bc.game.BaseScreen;
+import ru.codekittens.bc.game.GameObject;
 import ru.codekittens.bc.game.keyboard.KeyboardManagerEvent;
 import ru.codekittens.bc.game.keyboard.key.KeyCommand;
 
-public class Viewer extends BaseScreen {
+public class Viewer extends GameObject {
 
     public function initialize():void {
         tileViewer = new TileViewer();

@@ -1,9 +1,9 @@
 package ru.codekittens.bc.game.battle_screen.battle_stage_splash {
 import ru.codekittens.bc.game.App;
-import ru.codekittens.bc.game.BaseScreen;
+import ru.codekittens.bc.game.GameObject;
 import ru.codekittens.bc.game.events.BattleScreenEvent;
 
-public class BattleStageSplash extends BaseScreen {
+public class BattleStageSplash extends GameObject {
 
     public function start(level:uint):void {
         animation = new SplashView(this);
@@ -13,7 +13,7 @@ public class BattleStageSplash extends BaseScreen {
     }
 
 
-    public function destroy():void {
+    override public function destroy():* {
         removeChild(animation);
         App.dispatcher.dispatchEvent(new BattleScreenEvent(BattleScreenEvent.SPLASH_DESTROYED));
     }
@@ -22,8 +22,9 @@ public class BattleStageSplash extends BaseScreen {
         App.dispatcher.dispatchEvent(new BattleScreenEvent(BattleScreenEvent.SPLASH_COMPLETED));
     }
 
-    override public function pause():void {
-        animation.pause();
+    override public function togglePause():void {
+        super.togglePause();
+        animation.togglePause();
     }
 
     private var animation:SplashView;

@@ -7,7 +7,6 @@ import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.battle_screen.world.impact.ImpactEntity;
 import ru.codekittens.bc.game.battle_screen.world.impact.ImpactMap;
 import ru.codekittens.bc.game.core.assets.model.TileAsset;
-import ru.codekittens.bc.game.settings.model.FitData;
 import ru.codekittens.bc.game.settings.model.ImpactData;
 
 public class MapHelper {

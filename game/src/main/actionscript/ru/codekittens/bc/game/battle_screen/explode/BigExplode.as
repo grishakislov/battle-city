@@ -6,8 +6,8 @@ public class BigExplode extends BaseExplode {
                             "EXPLODE_4", "EXPLODE_3", "EXPLODE_2", "EXPLODE_1"];
     }
 
-    override protected function onAnimation(delta:uint):void {
-        super.onAnimation(delta);
+    override protected function onTick(delta:uint):void {
+        super.onTick(delta);
         //index incremented by super
         var index:uint = explodeSequenceIndex - 1;
 

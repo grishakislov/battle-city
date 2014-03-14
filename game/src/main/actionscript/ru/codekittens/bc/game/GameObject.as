@@ -3,6 +3,10 @@ import flash.display.Sprite;
 import flash.events.Event;
 
 public class GameObject extends Sprite {
+
+    private var callback:Function;
+    protected var paused:Boolean;
+
     public function GameObject() {
         addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
         addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
@@ -17,10 +21,18 @@ public class GameObject extends Sprite {
         removeEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
     }
 
-    public function pause():void {
-        _paused = !_paused;
+    public function togglePause():void {
+        paused = !paused;
     }
 
-    protected var _paused:Boolean;
+    public final function addDestroyCallback(callback:Function):void {
+        this.callback = callback;
+    }
+
+    public function destroy():* {
+        if (callback != null) {
+            callback();
+        }
+    }
 }
 }

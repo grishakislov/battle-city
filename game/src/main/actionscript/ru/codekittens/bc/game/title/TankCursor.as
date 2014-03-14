@@ -8,7 +8,6 @@ import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.keyboard.KeyboardManagerEvent;
 import ru.codekittens.bc.game.keyboard.key.KeyCommand;
 import ru.codekittens.bc.game.time.Ticker;
-import ru.codekittens.bc.game.time.TickerEvent;
 
 internal class TankCursor extends MovieClip {
 
@@ -44,11 +43,11 @@ internal class TankCursor extends MovieClip {
     }
 
     protected function onAddedToStage(e:Event):void {
-        Ticker.addEventListener(TickerEvent.TICK, onTick);
+        Ticker.addTickListener(onTick);
         App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
-    private function onTick(e:Event):void {
+    private function onTick(dt:uint):void {
 
         if (frame == SKIP_FRAMES) {
             frame = 0;

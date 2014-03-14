@@ -3,6 +3,7 @@ import ru.codekittens.bc.game.core.assets.Resources;
 import ru.codekittens.bc.game.settings.model.BigTile;
 import ru.codekittens.bc.game.settings.model.BrushMap;
 import ru.codekittens.bc.game.settings.model.FitData;
+import ru.codekittens.bc.game.settings.model.FrameSpeed;
 import ru.codekittens.bc.game.settings.model.ImpactData;
 import ru.codekittens.bc.game.settings.model.LevelData;
 import ru.codekittens.bc.game.settings.model.TankFitData;
@@ -10,6 +11,7 @@ import ru.codekittens.bc.game.settings.model.TankFitData;
 public class SettingsManager {
 
     private var impactDataDictionary:Object;
+    private var frameSpeed:Object;
     private var fitData:Vector.<FitData>;
     private var fitDataDictionary:Object;
     private var tankFitData:Vector.<TankFitData>;
@@ -19,6 +21,7 @@ public class SettingsManager {
     private var bigTilesIndex:Vector.<BigTile>;
 
     public function initialize():void {
+        frameSpeed = createFrameSpeed();
         impactDataDictionary = createImpactData();
         fitData = createFitData();
         tankFitData = createTankFitData();
@@ -27,6 +30,16 @@ public class SettingsManager {
         bigTiles = createBigTiles();
         indexBigTiles();
         indexFitData();
+    }
+
+    private function createFrameSpeed():Object {
+        var result:Object = {};
+        var data:String = new Resources.FRAME_SPEED;
+        var array:Array = JSONHelper.readList(FrameSpeed, data);
+        for each (var frameSpeed:FrameSpeed in array) {
+            result[frameSpeed.id] = frameSpeed;
+        }
+        return result;
     }
 
     private function createImpactData():Object {
@@ -87,6 +100,10 @@ public class SettingsManager {
         var array:Array = JSONHelper.readList(LevelData, data);
         var result:Vector.<LevelData> = Vector.<LevelData>(array);
         return result;
+    }
+
+    public function getFrameSpeedById(id:String):FrameSpeed {
+        return frameSpeed[id];
     }
 
     public function getImpactDataByName(name:String):ImpactData {

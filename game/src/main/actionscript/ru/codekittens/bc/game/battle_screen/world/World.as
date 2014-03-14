@@ -5,6 +5,7 @@ import flash.display.Sprite;
 import flash.geom.Point;
 
 import ru.codekittens.bc.game.App;
+import ru.codekittens.bc.game.GameObject;
 import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.battle_screen.bullet.BulletManager;
 import ru.codekittens.bc.game.battle_screen.map_loader.MapHelper;
@@ -20,7 +21,7 @@ import ru.codekittens.bc.game.events.HQDestroyEvent;
 import ru.codekittens.bc.game.keyboard.KeyboardManagerEvent;
 import ru.codekittens.bc.game.keyboard.key.KeyCommand;
 
-public class World extends Sprite {
+public class World extends GameObject {
 
     private var bulletManager:BulletManager;
     private var stageId:uint;
@@ -85,8 +86,10 @@ public class World extends Sprite {
         tankLayer.addChild(playerTank1);
     }
 
-    public function pause():void {
-        playerTank1.pause();
+    override public function togglePause():void {
+        super.togglePause();
+        playerTank1.togglePause();
+        bulletManager.togglePause();
     }
 
     public function getStageId():uint {
@@ -129,7 +132,7 @@ public class World extends Sprite {
         return collisionLayer;
     }
 
-    public function destroy():void {
+    override public function destroy():* {
         if (GameSettings.DEBUG) {
             App.keyboardManager.removeEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
         }
@@ -201,7 +204,7 @@ public class World extends Sprite {
     }
 
     private function freezePlayers():void {
-        playerTank1.pause();
+        playerTank1.togglePause();
         //TODO: Player 2
     }
 
