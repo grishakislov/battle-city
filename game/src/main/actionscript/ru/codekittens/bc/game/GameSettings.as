@@ -38,6 +38,8 @@ public class GameSettings {
     //TODO: Move to json
     public static const LEVEL_1_BULLETS:int = 1;
     public static const LEVEL_2_BULLETS:int = 1;
+    public static const LEVEL_3_BULLETS:int = 1;
+    public static const LEVEL_4_BULLETS:int = 1;
 
 
     public static const PLAYER_TANK_1_INITIAL_COORDS:Point = new Point(4, 12);

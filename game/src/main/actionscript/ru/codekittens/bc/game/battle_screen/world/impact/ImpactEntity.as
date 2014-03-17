@@ -37,25 +37,36 @@ public class ImpactEntity {
                 }
             } else {
                 if (isEagle()) {
-                    impact = 1;
                     var bullet:Bullet = Bullet(actor);
                     result = BarrierType.EAGLE;
                     App.dispatcher.dispatchEvent(new HQDestroyEvent(HQDestroyEvent.HQ_DESTROY, bullet.getTank()));
                 }
 
-                //TODO: Metal
+                if (isMetal()) {
+                    frontFlag = true;
+                    result = BarrierType.METAL;
+                }
             }
             return result;
         }
         return null;
     }
 
+    public function isMetal():Boolean {
+        return tileName == "METAL";
+    }
+
     public function isEagle():Boolean {
         return tileName == "HQ";
     }
 
-    public function destruct(direction:ActorDirection):void {
-        applyDestruction(direction)
+    public function destroy():void {
+        tileName = "ASPHALT";
+        brickIndex = 0;
+    }
+
+    public function destroyBrick(direction:ActorDirection):void {
+        applyBrickDestruction(direction)
         updateTileName();
     }
 
@@ -84,7 +95,7 @@ public class ImpactEntity {
         }
     }
 
-    private function applyDestruction(direction:ActorDirection):void {
+    private function applyBrickDestruction(direction:ActorDirection):void {
         switch (direction) {
             case ActorDirection.UP:
                 brickIndex & 0xC ? brickIndex &= 0x3 : brickIndex = 0;

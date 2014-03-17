@@ -5,6 +5,7 @@ import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.battle_screen.bullet.Bullet;
 import ru.codekittens.bc.game.battle_screen.tank.*;
 import ru.codekittens.bc.game.battle_screen.world.*;
+import ru.codekittens.bc.game.battle_screen.world.impact.ImpactEntity;
 
 public class ImpactProcessor {
 
@@ -78,51 +79,47 @@ public class ImpactProcessor {
         var first:ImpactEntity = entities.getFirst();
         var second:ImpactEntity = entities.getSecond();
 
-        var result_1:BarrierType;
-        var result_2:BarrierType;
+        var firstResult:BarrierType;
+        var secondResult:BarrierType;
 
-        //Eagle
-        if (first.isEagle() && actor.getType() == ActorType.BULLET) {
-            result_1 = first.checkImpact(actor, false);
-            if (result_1 != null) {
-                return result_1;
-            } else {
-                result_2 = second.checkImpact(actor, true);
-                if (result_2 != null) {
-                    return result_2;
-                }
-            }
+        firstResult = first.checkImpact(actor, false);
 
-            if (result_1 == null && result_2 == null) {
-                return null;
-            }
+        if (!first.isEagle()) {
+            secondResult = second.checkImpact(actor, true);
         }
-
-        result_1 = first.checkImpact(actor, false);
-        result_2 = second.checkImpact(actor, true);
 
         if (actor.getType() == ActorType.BULLET) {
 
+            var maxLevel:Boolean = actor.getLevel() == PlayerTankLevel.LEVEL_4;
             var direction:ActorDirection = actor.getDirection();
-            var doubleImpact:Boolean = result_1 != null && result_2 != null;
+            var doubleImpact:Boolean = firstResult != null && secondResult != null;
             var flagsEqual:Boolean = (first.getFrontFlag() == second.getFrontFlag());
 
             if (doubleImpact) {
 
                 if (flagsEqual) {
-                    first.destruct(direction);
-                    second.destruct(direction);
-
-                } else if (first.getFrontFlag()) first.destruct(direction);
-                else if (second.getFrontFlag()) second.destruct(direction);
-
+                    destroy(first, maxLevel, direction);
+                    destroy(second, maxLevel, direction);
+                } else if (first.getFrontFlag()) {
+                    destroy(first, maxLevel, direction);
+                } else if (second.getFrontFlag()) {
+                    destroy(second, maxLevel, direction);
+                }
             } else {
-                if (result_1) first.destruct(direction);
-                if (result_2) second.destruct(direction);
+                if (firstResult) destroy(first, maxLevel, direction);
+                if (secondResult) destroy(second, maxLevel, direction);
             }
         }
 
-        return result_1 != null ? result_1 : result_2;
+        function destroy (ety:ImpactEntity, full:Boolean, direction:ActorDirection):void {
+            if (full) {
+                ety.destroy();
+            } else if (!ety.isMetal()) {
+                ety.destroyBrick(direction);
+            }
+        }
+
+        return firstResult != null ? firstResult : secondResult;
     }
 
     private static var frontCells:PointPair = new PointPair();

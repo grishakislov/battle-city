@@ -30,10 +30,15 @@ public class BulletManager {
         switch (tank.getType()) {
             case ActorType.PLAYER:
                     switch (tank.getLevel()) {
+                        //TODO: To Json
                         case PlayerTankLevel.LEVEL_1:
                             return playerBullets < GameSettings.LEVEL_1_BULLETS;
                         case PlayerTankLevel.LEVEL_2:
                             return playerBullets < GameSettings.LEVEL_2_BULLETS;
+                        case PlayerTankLevel.LEVEL_3:
+                            return playerBullets < GameSettings.LEVEL_3_BULLETS;
+                        case PlayerTankLevel.LEVEL_4:
+                            return playerBullets < GameSettings.LEVEL_4_BULLETS;
                     }
                 break;
         }
@@ -52,12 +57,10 @@ public class BulletManager {
                     return bullet;
                 break;
             case PlayerTankLevel.LEVEL_2:
-                    bullet = new Bullet(tank, App.settingsManager.getFrameSpeedById("BULLET_FAST"), world);
-                    return bullet;
-                break;
             case PlayerTankLevel.LEVEL_3:
             case PlayerTankLevel.LEVEL_4:
-                break;
+                bullet = new Bullet(tank, App.settingsManager.getFrameSpeedById("BULLET_FAST"), world);
+                return bullet;
         }
         return null;
     }

@@ -28,6 +28,7 @@ public class Bullet extends AnimatedObject implements Actor {
         this.direction = tank.getDirection();
         this.tankCoords = tank.getPosition();
         this.tank = tank;
+        this.level = tank.getLevel();
         playShootSound();
         initialize();
         run(speed);
