@@ -92,7 +92,7 @@ public class PlayerTank extends BaseTank {
                 break;
             case ActorDirection.RIGHT:
             case ActorDirection.LEFT:
-                y = Math.round(y / GameSettings.TANK_GRID_SIZE) * GameSettings.TANK_GRID_SIZE;
+                y = Math.round(y / GameSettings.TANK_GRID_SIZE) * GameSettings.TANK_GRID_SIZE + 1;
                 break;
         }
     }
