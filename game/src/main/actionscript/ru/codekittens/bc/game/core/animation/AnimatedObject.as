@@ -1,4 +1,5 @@
 package ru.codekittens.bc.game.core.animation {
+import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.GameObject;
 import ru.codekittens.bc.game.settings.model.FrameSpeed;
 import ru.codekittens.bc.game.time.Ticker;
@@ -11,8 +12,11 @@ public class AnimatedObject extends GameObject {
     private var currentStepMillis:uint = 0;
     protected var lastDt:uint = 0;
 
-    public function run(speed:FrameSpeed):void {
+    public function run(speed:FrameSpeed = null):void {
         this.speed = speed;
+        if (speed == null) {
+            this.speed = App.settingsManager.getFrameSpeedById("DEFAULT");
+        }
         millisPerStep = 1000 / 64;
         Ticker.addTickListener(onTick);
     }

@@ -18,7 +18,8 @@ public class HQGameOverAnimation extends AnimatedObject {
         bigExplode.x = 96;
         bigExplode.y = 191;
         addChild(bigExplode);
-        bigExplode.addDestroyCallback(onExplodeCompleted)
+        bigExplode.addDestroyCallback(onExplodeCompleted);
+        run();
     }
 
     private function onExplodeCompleted():void {
@@ -28,7 +29,6 @@ public class HQGameOverAnimation extends AnimatedObject {
         smbGameOver.y = GameSettings.NATIVE_NES_SCREEN_SIZE.y + smbGameOver.height;
         animateGameOver = true;
     }
-
 
     override public function pause():void {
         super.pause();

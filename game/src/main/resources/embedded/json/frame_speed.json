@@ -28,5 +28,11 @@
 		"type":"generic",
 		"pixelsPerFrame":256,
 		"sequence":[true]
+	},
+	{
+		"id":"DEFAULT",
+		"type":"generic",
+		"pixelsPerFrame":1,
+		"sequence":[true]
 	}
 ]
