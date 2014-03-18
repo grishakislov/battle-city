@@ -17,10 +17,10 @@ internal class PlayerTankController extends EventDispatcher {
 
         if (e.getCommand() != KeyCommand.FIRE) {
             currentCommand = e.getCommand();
-            dispatchEvent(new PlayerTankControllerEvent(PlayerTankControllerEvent.START, currentCommand));
+            dispatchEvent(new TankControllerEvent(TankControllerEvent.START, currentCommand));
         } else {
             //TODO: double command
-            dispatchEvent(new PlayerTankControllerEvent(PlayerTankControllerEvent.START, e.getCommand()));
+            dispatchEvent(new TankControllerEvent(TankControllerEvent.START, e.getCommand()));
         }
     }
 
@@ -29,11 +29,11 @@ internal class PlayerTankController extends EventDispatcher {
 
         if (e.getCommand() != KeyCommand.FIRE) {
             if ((e.getCommand()) == currentCommand) {
-                dispatchEvent(new PlayerTankControllerEvent(PlayerTankControllerEvent.STOP, e.getCommand()));
+                dispatchEvent(new TankControllerEvent(TankControllerEvent.STOP, e.getCommand()));
                 currentCommand = null;
             }
         } else {
-            dispatchEvent(new PlayerTankControllerEvent(PlayerTankControllerEvent.STOP, e.getCommand()));
+            dispatchEvent(new TankControllerEvent(TankControllerEvent.STOP, e.getCommand()));
         }
     }
 

@@ -6,6 +6,7 @@ import flash.geom.Point;
 import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.GameScreen;
 import ru.codekittens.bc.game.GameSettings;
+import ru.codekittens.bc.game.core.animation.AnimatedObject;
 import ru.codekittens.bc.game.core.assets.FontTool;
 import ru.codekittens.bc.game.events.GameEvent;
 import ru.codekittens.bc.game.keyboard.KeyboardManagerEvent;
@@ -34,12 +35,12 @@ public class Title extends GameScreen {
     private var tileSize:uint;
     private var animationCompleted:Boolean;
     private var tankCursor:TankCursor;
-    private var content:Sprite;
+    private var main:TitleAnimation;
     private var selectedPosition:uint;
 
     override public function initialize():void {
         //draw sprites etc
-        content = new Sprite();
+        main = new TitleAnimation();
         tileSize = GameSettings.TILE_SIZE;
 
         var playerMark:Bitmap = App.assetManager.getTileAsset("SYM_I").getBitmap();
@@ -62,19 +63,19 @@ public class Title extends GameScreen {
         applyCoords(foot1, COPY_COORDS);
         applyCoords(foot2, ARR_COORDS);
 
-        content.addChild(playerMark);
-        content.addChild(head);
-        content.addChild(logo);
-        content.addChild(onePlayer);
-        content.addChild(twoPlayer);
-        content.addChild(construction);
-        content.addChild(namcot);
-        content.addChild(foot1);
-        content.addChild(foot2);
+        main.addChild(playerMark);
+        main.addChild(head);
+        main.addChild(logo);
+        main.addChild(onePlayer);
+        main.addChild(twoPlayer);
+        main.addChild(construction);
+        main.addChild(namcot);
+        main.addChild(foot1);
+        main.addChild(foot2);
 
-        content.y = GameSettings.NATIVE_NES_SCREEN_SIZE.y;
-        content.cacheAsBitmap = true;
-        addChild(content);
+        main.y = GameSettings.NATIVE_NES_SCREEN_SIZE.y;
+        main.cacheAsBitmap = true;
+        addChild(main);
     }
 
     private function applyCoords(bitmap:Bitmap, coords:Point):void {
@@ -83,18 +84,14 @@ public class Title extends GameScreen {
     }
 
     override public function run(data:* = undefined):void {
+        main.run();
+        main.addDestroyCallback(stopAnimation);
         App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
-        Ticker.addTickListener(onTick);
     }
 
     override public function togglePause():void {
         super.togglePause();
-        if (paused) {
-            if (!animationCompleted) Ticker.removeTickListener(onTick);
-        } else {
-            if (!animationCompleted) Ticker.addTickListener(onTick);
-        }
-
+        main.togglePause();
     }
 
     override public function destroy():* {
@@ -103,18 +100,12 @@ public class Title extends GameScreen {
         return selectedPosition;
     }
 
-    private function onTick(dt:uint):void {
-        if (content.y > 0) {
-            content.y--;
-        } else {
-            stopAnimation();
-        }
-    }
+//    private function onTick(dt:uint):void {
+//    }
 
     private function stopAnimation():void {
-        content.y = 0;
+        main.y = 0;
         animationCompleted = true;
-        Ticker.removeTickListener(onTick);
         addTankCursor();
     }
 

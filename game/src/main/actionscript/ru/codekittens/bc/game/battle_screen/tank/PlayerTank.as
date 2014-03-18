@@ -33,8 +33,8 @@ public class PlayerTank extends BaseTank {
 
         controller = new PlayerTankController();
         controller.initialize();
-        controller.addEventListener(PlayerTankControllerEvent.START, onTankEvent);
-        controller.addEventListener(PlayerTankControllerEvent.STOP, onTankEvent);
+        controller.addEventListener(TankControllerEvent.START, onTankEvent);
+        controller.addEventListener(TankControllerEvent.STOP, onTankEvent);
         setDirection(DEFAULT_DIRECTION);
         addChild(visual);
         moveTo(GameSettings.PLAYER_TANK_1_INITIAL_COORDS);
@@ -111,8 +111,8 @@ public class PlayerTank extends BaseTank {
         setSprite(TankSpriteSequencer.getSprite(getSequencerRequest()));
     }
 
-    private function onTankEvent(e:PlayerTankControllerEvent):void {
-        if (e.type == PlayerTankControllerEvent.START) {
+    private function onTankEvent(e:TankControllerEvent):void {
+        if (e.type == TankControllerEvent.START) {
             switch (e.getCommand()) {
                 case KeyCommand.UP:
                     setDirection(ActorDirection.UP);
@@ -153,14 +153,14 @@ public class PlayerTank extends BaseTank {
             App.sfxManager.togglePause();
             playIdleSound();
             setAnimationEnabled(false);
-            controller.removeEventListener(PlayerTankControllerEvent.START, onTankEvent);
-            controller.removeEventListener(PlayerTankControllerEvent.STOP, onTankEvent);
+            controller.removeEventListener(TankControllerEvent.START, onTankEvent);
+            controller.removeEventListener(TankControllerEvent.STOP, onTankEvent);
         } else {
             movement = null;
             playIdleSound();
             setAnimationEnabled(true);
-            controller.addEventListener(PlayerTankControllerEvent.START, onTankEvent);
-            controller.addEventListener(PlayerTankControllerEvent.STOP, onTankEvent);
+            controller.addEventListener(TankControllerEvent.START, onTankEvent);
+            controller.addEventListener(TankControllerEvent.STOP, onTankEvent);
         }
     }
 
