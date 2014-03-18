@@ -3,10 +3,7 @@ import ru.codekittens.bc.game.GameSettings;
 
 public class LevelData {
 
-    [JsonProperty("id")]
     public var id:String;
-
-    [JsonProperty("data")]
     public var data:String;
 
     public function getDataAt(x:uint, y:uint):uint {

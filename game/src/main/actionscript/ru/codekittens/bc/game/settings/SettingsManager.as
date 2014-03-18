@@ -34,8 +34,9 @@ public class SettingsManager {
 
     private function createFrameSpeed():Object {
         var result:Object = {};
-        var data:String = new Resources.FRAME_SPEED;
-        var array:Array = JSONHelper.readList(FrameSpeed, data);
+        var json:String = new Resources.FRAME_SPEED;
+        var data:Object = JSON.parse(json);
+        var array:Array = Mapper.mapFrameSpeed(data);
         for each (var frameSpeed:FrameSpeed in array) {
             result[frameSpeed.id] = frameSpeed;
         }
@@ -44,8 +45,9 @@ public class SettingsManager {
 
     private function createImpactData():Object {
         var result:Object = {};
-        var data:String = new Resources.IMPACT_DATA;
-        var array:Array = JSONHelper.readList(ImpactData, data);
+        var json:String = new Resources.IMPACT_DATA;
+        var data:Object = JSON.parse(json);
+        var array:Array = Mapper.mapImpactData(data);
         for each (var impactData:ImpactData in array) {
             result[impactData.name] = impactData;
         }
@@ -53,8 +55,9 @@ public class SettingsManager {
     }
 
     private function createFitData():Vector.<FitData> {
-        var data:String = new Resources.FIT_DATA;
-        var array:Array = JSONHelper.readList(FitData, data);
+        var json:String = new Resources.FIT_DATA;
+        var data:Object = JSON.parse(json);
+        var array:Array = Mapper.mapFitData(data);
         var result:Vector.<FitData> = Vector.<FitData>(array);
         return result;
     }
@@ -74,30 +77,34 @@ public class SettingsManager {
     }
 
     private function createBigTiles():Vector.<BigTile> {
-        var data:String = new Resources.BIG_TILES;
-        var array:Array = JSONHelper.readList(BigTile, data);
+        var json:String = new Resources.BIG_TILES;
+        var data:Object = JSON.parse(json);
+        var array:Array = Mapper.mapBigTiles(data);
         var result:Vector.<BigTile> = Vector.<BigTile>(array);
         return result;
     }
 
 
     private function createTankFitData():Vector.<TankFitData> {
-        var data:String = new Resources.TANK_FIT_DATA;
-        var array:Array = JSONHelper.readList(TankFitData, data);
+        var json:String = new Resources.TANK_FIT_DATA;
+        var data:Object = JSON.parse(json);
+        var array:Array = Mapper.mapTankFitData(data);
         var result:Vector.<TankFitData> = Vector.<TankFitData>(array);
         return result;
     }
 
     private function createBrushMaps():Vector.<BrushMap> {
-        var data:String = new Resources.BRUSH_MAPS;
-        var array:Array = JSONHelper.readList(BrushMap, data);
+        var json:String = new Resources.BRUSH_MAPS;
+        var data:Object = JSON.parse(json);
+        var array:Array = Mapper.mapBrushMaps(data);
         var result:Vector.<BrushMap> = Vector.<BrushMap>(array);
         return result;
     }
 
     private function createLevels():Vector.<LevelData> {
-        var data:String = new Resources.LEVELS;
-        var array:Array = JSONHelper.readList(LevelData, data);
+        var json:String = new Resources.LEVELS;
+        var data:Object = JSON.parse(json);
+        var array:Array = Mapper.mapLevels(data);
         var result:Vector.<LevelData> = Vector.<LevelData>(array);
         return result;
     }
