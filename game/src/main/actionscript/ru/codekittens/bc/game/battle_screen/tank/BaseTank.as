@@ -28,7 +28,21 @@ public class BaseTank extends AnimatedObject implements Actor {
     }
 
     public function getPosition():Point {
-        return new Point(x, y);
+        switch (direction) {
+            case ActorDirection.UP:
+                position.setTo(x, y-1);
+                break;
+            case ActorDirection.LEFT:
+                position.setTo(x, y);
+                break;
+            case ActorDirection.DOWN:
+                position.setTo(x, y+1);
+                break;
+            case ActorDirection.RIGHT:
+                position.setTo(x+1, y);
+                break;
+        }
+        return position;
     }
 
     public function getBulletCollisionTable():Array {
@@ -36,6 +50,7 @@ public class BaseTank extends AnimatedObject implements Actor {
         return null;
     }
 
+    protected var position:Point = new Point(0,0)
     protected var movement:ActorDirection;
     protected var direction:ActorDirection;
 }

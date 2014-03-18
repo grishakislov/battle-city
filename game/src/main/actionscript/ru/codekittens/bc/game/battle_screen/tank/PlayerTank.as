@@ -13,7 +13,16 @@ import ru.codekittens.bc.game.keyboard.key.KeyCommand;
 public class PlayerTank extends BaseTank {
 
     private static const DEFAULT_DIRECTION:ActorDirection = ActorDirection.UP;
-    private static const TRACK_FRAMES_SKIP:uint = 4;
+    private static const TRACK_FRAMES_SKIP:uint = 3;
+
+    private var tankLevel:uint;
+
+    private var world:World;
+    private var animationKey:uint = 1;
+    private var animationFramesPassed:Number = 0;
+    private var visual:TileAsset;
+    private var controller:PlayerTankController;
+    private var barrier:Boolean;
 
     public function PlayerTank(tankLevel:uint, world:World) {
         this.tankLevel = tankLevel;
@@ -47,26 +56,24 @@ public class PlayerTank extends BaseTank {
 
 
     override protected function onAnimation(delta:uint):void {
-        super.onAnimation(delta);
-        if (movement == null) {
-            return;
+
+        if (movement != null) {
+            animationFramesPassed++;
+            if (animationFramesPassed >= TRACK_FRAMES_SKIP - 1) {
+                changeAnimationKey();
+            }
         }
 
-        //TODO: Отвязать от кадров
-        animationFramesPassed++;
-        if (animationFramesPassed >= TRACK_FRAMES_SKIP - 1) {
-            changeAnimationKey();
-        }
         processMovement(delta);
     }
 
     private function processMovement(delta:uint):void {
 
-        if (world.isBarrierAhead(this)) {
-            movement = null;
-            playIdleSound();
+        barrier = world.isBarrierAhead(this);
+        if (barrier) {
             return;
         }
+//        trace("Delta: " + delta + ", " + "last DT: " + lastDt);
 
         switch (movement) {
             case ActorDirection.UP:
@@ -84,6 +91,7 @@ public class PlayerTank extends BaseTank {
         }
     }
 
+    //TODO: Move to BaseTank
     private function alignTankToGrid():void {
         switch (movement) {
             case ActorDirection.UP:
@@ -142,13 +150,14 @@ public class PlayerTank extends BaseTank {
     override public function togglePause():void {
         super.togglePause();
         if (paused) {
-//            stopSound();
+            App.sfxManager.togglePause();
+            playIdleSound();
             setAnimationEnabled(false);
             controller.removeEventListener(PlayerTankControllerEvent.START, onTankEvent);
             controller.removeEventListener(PlayerTankControllerEvent.STOP, onTankEvent);
         } else {
             movement = null;
-//            playIdleSound();
+            playIdleSound();
             setAnimationEnabled(true);
             controller.addEventListener(PlayerTankControllerEvent.START, onTankEvent);
             controller.addEventListener(PlayerTankControllerEvent.STOP, onTankEvent);
@@ -163,7 +172,7 @@ public class PlayerTank extends BaseTank {
 
     private function moveTo(coords:Point):void {
         x = coords.x * GameSettings.TANK_SIZE;
-        y = coords.y * GameSettings.TANK_SIZE;
+        y = coords.y * GameSettings.TANK_SIZE + 1;
     }
 
     //visual
@@ -182,16 +191,6 @@ public class PlayerTank extends BaseTank {
         result.animationKey = animationKey;
         return result;
     }
-
-    //Collisions
-    private function getCurrentWorldCoords():Point {
-        var result:Point = new Point();
-        result.x = Math.floor(x / GameSettings.TANK_GRID_SIZE);
-        result.y = Math.floor(y / GameSettings.TANK_GRID_SIZE);
-        return result;
-    }
-
-    //Shooting
 
     //Sound
     private function playIdleSound():void {
@@ -214,13 +213,6 @@ public class PlayerTank extends BaseTank {
         return ActorType.PLAYER;
     }
 
-    private var tankLevel:uint;
-
-    private var world:World;
-    private var animationKey:uint = 1;
-    private var animationFramesPassed:Number = 0;
-    private var visual:TileAsset;
-    private var controller:PlayerTankController;
 
 }
 
