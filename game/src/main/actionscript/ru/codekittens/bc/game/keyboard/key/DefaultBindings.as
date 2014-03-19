@@ -30,6 +30,12 @@ public class DefaultBindings {
             "d".charCodeAt(0),
             "В".charCodeAt(0),
             "в".charCodeAt(0)]);
+
+        result[KeyCommand.BONUS_TRIGGER.getCommandId()] = new KeyBinding(KeyCommand.BONUS_TRIGGER, ["B".charCodeAt(0),
+            "b".charCodeAt(0),
+            "и".charCodeAt(0),
+            "И".charCodeAt(0)]);
+
         return result;
     }
 

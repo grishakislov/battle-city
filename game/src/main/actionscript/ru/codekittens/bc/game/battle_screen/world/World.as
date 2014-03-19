@@ -7,6 +7,7 @@ import flash.geom.Point;
 import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.GameObject;
 import ru.codekittens.bc.game.GameSettings;
+import ru.codekittens.bc.game.battle_screen.bonus.BonusManager;
 import ru.codekittens.bc.game.battle_screen.bullet.BulletManager;
 import ru.codekittens.bc.game.battle_screen.map_loader.MapHelper;
 import ru.codekittens.bc.game.battle_screen.tank.ActorDirection;
@@ -35,6 +36,8 @@ public class World extends GameObject {
     private var bulletLayer:Sprite;
     private var effectsLayer:Sprite;
     private var treeLayer:WorldTreeLayer;
+    private var bonusLayer:Sprite;
+    private var bonusManager:BonusManager;
 
     public function initialize(levelId:uint):void {
 
@@ -59,6 +62,12 @@ public class World extends GameObject {
         treeLayer.initialize(levelId);
         addChild(treeLayer);
 
+        bonusLayer = new Sprite();
+        addChild(bonusLayer);
+
+        bonusManager = new BonusManager();
+        bonusManager.initialize();
+        bonusManager.reset(bonusLayer);
 
         //Test
         if (GameSettings.DEBUG) {
@@ -74,9 +83,14 @@ public class World extends GameObject {
 
     private function onKeyDown(event:KeyboardManagerEvent):void {
         var command:KeyCommand = event.getCommand();
-        if (command == KeyCommand.IMPACT_TRIGGER) {
-            showImpacts = !showImpacts;
-            updateImpactsVisibility();
+        switch (command) {
+            case KeyCommand.IMPACT_TRIGGER:
+                showImpacts = !showImpacts;
+                updateImpactsVisibility();
+                break;
+            case KeyCommand.BONUS_TRIGGER:
+                bonusManager.appearBonus();
+                break;
         }
     }
 
@@ -126,10 +140,6 @@ public class World extends GameObject {
         }
         //TODO: sfx
         return barrier != null;
-    }
-
-    public function getCollisionLayer():WorldImpactLayer {
-        return collisionLayer;
     }
 
     override public function destroy():* {
@@ -208,5 +218,12 @@ public class World extends GameObject {
         //TODO: Player 2
     }
 
+    public function getCollisionLayer():WorldImpactLayer {
+        return collisionLayer;
+    }
+
+    public function getBonusLayer():Sprite {
+        return bonusLayer;
+    }
 }
 }

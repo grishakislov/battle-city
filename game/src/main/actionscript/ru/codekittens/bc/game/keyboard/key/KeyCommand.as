@@ -16,6 +16,7 @@ public class KeyCommand {
     //DEBUG
     public static const GRID_TRIGGER:KeyCommand = new KeyCommand("GRID_TRIGGER");
     public static const IMPACT_TRIGGER:KeyCommand = new KeyCommand("IMPACT_TRIGGER");
+    public static const BONUS_TRIGGER:KeyCommand = new KeyCommand("BONUS_TRIGGER");
 
 
     public function KeyCommand(command:String) {
