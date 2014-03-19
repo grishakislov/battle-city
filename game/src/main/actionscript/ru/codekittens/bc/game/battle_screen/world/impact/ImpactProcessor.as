@@ -59,7 +59,7 @@ public class ImpactProcessor {
     private static function checkWallBeforeBullet(bullet:Actor, world:World):BarrierType {
         var frontCells:PointPair = getFrontCells(bullet);
         var result:BarrierType = checkWallBeforeActor(bullet, world);
-        if (result != null) {
+        if (result != null && result.getId() != BarrierType.EAGLE.getId()) {
             world.redrawTiles(frontCells.toArray());
         }
         return result;
@@ -83,9 +83,13 @@ public class ImpactProcessor {
         var secondResult:BarrierType;
 
         firstResult = first.checkImpact(actor, false);
+        if (firstResult != null && first.isEagle()) {
+            return firstResult;
+        }
 
-        if (!first.isEagle()) {
-            secondResult = second.checkImpact(actor, true);
+        secondResult = second.checkImpact(actor, true);
+        if (secondResult != null && second.isEagle()) {
+            return secondResult;
         }
 
         if (actor.getType() == ActorType.BULLET) {

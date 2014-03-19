@@ -183,13 +183,14 @@ public class PlayerTank extends BaseTank {
         addChild(visual);
     }
 
+    private var request:SequencerRequest = new SequencerRequest();
+
     private function getSequencerRequest():SequencerRequest {
-        var result:SequencerRequest = new SequencerRequest();
-        result.direction = direction;
-        result.tankType = ActorType.PLAYER;
-        result.level = tankLevel;
-        result.animationKey = animationKey;
-        return result;
+        request.direction = direction;
+        request.tankType = ActorType.PLAYER;
+        request.level = tankLevel;
+        request.animationKey = animationKey;
+        return request;
     }
 
     //Sound
