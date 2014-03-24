@@ -59,6 +59,15 @@ public class Resources {
     [Embed(source="../../../../../../../resources/embedded/sfx/big_explode.mp3")]
     public static const BIG_EXPLODE:Class;
 
+    [Embed(source="../../../../../../../resources/embedded/sfx/bonus_appear.mp3")]
+    public static const BONUS_APPEAR:Class;
+
+    [Embed(source="../../../../../../../resources/embedded/sfx/bonus_life.mp3")]
+    public static const BONUS_LIFE:Class;
+
+    [Embed(source="../../../../../../../resources/embedded/sfx/bonus_taken.mp3")]
+    public static const BONUS_TAKEN:Class;
+
 
 }
 

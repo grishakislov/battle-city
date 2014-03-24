@@ -20,7 +20,8 @@ public class BaseTank extends AnimatedObject implements Actor {
     }
 
     public function getWorldPosition():Point {
-        return new Point(Math.floor(x / GameSettings.TILE_SIZE), Math.floor(y / GameSettings.TILE_SIZE));
+        worldPosition.setTo(Math.floor(x / GameSettings.TILE_SIZE), Math.floor(y / GameSettings.TILE_SIZE));
+        return worldPosition;
     }
 
     public function getDirection():ActorDirection {
@@ -51,6 +52,7 @@ public class BaseTank extends AnimatedObject implements Actor {
     }
 
     protected var position:Point = new Point(0,0)
+    protected var worldPosition:Point = new Point(0,0)
     protected var movement:ActorDirection;
     protected var direction:ActorDirection;
 }

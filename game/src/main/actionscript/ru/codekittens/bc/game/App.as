@@ -11,6 +11,7 @@ import ru.codekittens.bc.game.keyboard.KeyboardManager;
 import ru.codekittens.bc.game.power_on.PowerOnEffect;
 import ru.codekittens.bc.game.screen_manager.GameScreenManager;
 import ru.codekittens.bc.game.settings.SettingsManager;
+import ru.codekittens.bc.game.sfx.GameSoundManager;
 import ru.codekittens.bc.game.sfx.SfxManager;
 import ru.codekittens.bc.game.title.Title;
 
@@ -22,7 +23,7 @@ public class App {
     public static var screenManager:GameScreenManager;
     public static var dispatcher:EventDispatcher;
 
-    public static var sfxManager:SfxManager;
+    public static var sfxManager:GameSoundManager;
 
     public static var powerOnEffect:PowerOnEffect;
     public static var title:Title;

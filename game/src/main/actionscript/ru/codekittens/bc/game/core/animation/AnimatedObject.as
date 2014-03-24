@@ -21,7 +21,7 @@ public class AnimatedObject extends GameObject {
         Ticker.addTickListener(onTick);
     }
 
-    private function onTick(dt:uint):void {
+    override protected function onTick(dt:uint):void {
         if (currentStep == speed.sequence.length) {
             currentStep = 0;
         }
@@ -33,14 +33,6 @@ public class AnimatedObject extends GameObject {
 
         currentStep++;
         lastDt = dt;
-    }
-
-    protected final function setAnimationEnabled(value:Boolean):void {
-        if (value) {
-            Ticker.addTickListener(onTick);
-        } else {
-            Ticker.removeTickListener(onTick);
-        }
     }
 
     override public function togglePause():void {

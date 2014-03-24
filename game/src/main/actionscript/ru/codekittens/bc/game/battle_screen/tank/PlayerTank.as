@@ -73,6 +73,7 @@ public class PlayerTank extends BaseTank {
         if (barrier) {
             return;
         }
+
 //        trace("Delta: " + delta + ", " + "last DT: " + lastDt);
 
         switch (movement) {
@@ -89,6 +90,8 @@ public class PlayerTank extends BaseTank {
                 x -= delta;
                 break;
         }
+
+        world.checkBonus(this);
     }
 
     //TODO: Move to BaseTank
@@ -152,13 +155,13 @@ public class PlayerTank extends BaseTank {
         if (paused) {
             App.sfxManager.togglePause();
             playIdleSound();
-            setAnimationEnabled(false);
+            setTickListening(false);
             controller.removeEventListener(TankControllerEvent.START, onTankEvent);
             controller.removeEventListener(TankControllerEvent.STOP, onTankEvent);
         } else {
             movement = null;
             playIdleSound();
-            setAnimationEnabled(true);
+            setTickListening(true);
             controller.addEventListener(TankControllerEvent.START, onTankEvent);
             controller.addEventListener(TankControllerEvent.STOP, onTankEvent);
         }

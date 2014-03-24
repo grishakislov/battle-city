@@ -14,6 +14,7 @@ import ru.codekittens.bc.game.keyboard.KeyboardManager;
 import ru.codekittens.bc.game.power_on.PowerOnEffect;
 import ru.codekittens.bc.game.screen_manager.GameScreenManager;
 import ru.codekittens.bc.game.settings.SettingsManager;
+import ru.codekittens.bc.game.sfx.GameSoundManager;
 import ru.codekittens.bc.game.sfx.SfxManager;
 import ru.codekittens.bc.game.time.Ticker;
 import ru.codekittens.bc.game.title.Title;
@@ -67,7 +68,7 @@ public class Main extends Sprite {
     }
 
     public function initSFXManager():void {
-        App.sfxManager = new SfxManager();
+        App.sfxManager = new GameSoundManager();
         App.sfxManager.initialize();
         App.logManager.showMessage(LogMessageType.INIT_SFX_MANAGER);
     }

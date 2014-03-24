@@ -3,6 +3,7 @@ import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Sprite;
 import flash.geom.Point;
+import flash.geom.Rectangle;
 
 import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.GameObject;
@@ -12,6 +13,7 @@ import ru.codekittens.bc.game.battle_screen.bullet.BulletManager;
 import ru.codekittens.bc.game.battle_screen.map_loader.MapHelper;
 import ru.codekittens.bc.game.battle_screen.tank.ActorDirection;
 import ru.codekittens.bc.game.battle_screen.tank.BaseTank;
+import ru.codekittens.bc.game.battle_screen.tank.PlayerTank;
 import ru.codekittens.bc.game.battle_screen.tank.PlayerTank;
 import ru.codekittens.bc.game.battle_screen.world.impact.BarrierType;
 import ru.codekittens.bc.game.battle_screen.world.impact.ImpactEntity;
@@ -29,7 +31,7 @@ public class World extends GameObject {
 
     private var tankLayer:Sprite;
     private var playerTank1:PlayerTank;
-    private var player2:PlayerTank;
+    private var playerTank2:PlayerTank;
     private var aiTanks:Array = [];
     private var collisionLayer:WorldImpactLayer;
     private var waterLayer:WorldWaterLayer;
@@ -89,7 +91,7 @@ public class World extends GameObject {
                 updateImpactsVisibility();
                 break;
             case KeyCommand.BONUS_TRIGGER:
-                bonusManager.appearBonus();
+                bonusManager.appearBonus(this);
                 break;
         }
     }
@@ -207,7 +209,7 @@ public class World extends GameObject {
         MapHelper.drawBrokenFlag(collisionLayer.getVisual().bitmapData);
         var gameOverEffect:HQGameOverAnimation = new HQGameOverAnimation();
         addChild(gameOverEffect);
-        gameOverEffect.addDestroyCallback(function():void {
+        gameOverEffect.addDestroyCallback(function ():void {
             //TODO
             trace("Game Over");
         });
@@ -225,5 +227,33 @@ public class World extends GameObject {
     public function getBonusLayer():Sprite {
         return bonusLayer;
     }
+
+    private var playerRect:Rectangle = new Rectangle(0, 0, GameSettings.TILE_SIZE * 2, GameSettings.TILE_SIZE * 2);
+    private var bonusRect:Rectangle = new Rectangle(0, 0, GameSettings.TILE_SIZE * 2, GameSettings.TILE_SIZE * 2);
+
+    public function checkIntersectWithPlayerTank(tank:PlayerTank, rect:Rectangle):Boolean {
+        if (tank == null) {
+            return false;
+        }
+
+        playerRect.x = tank.getPosition().x;
+        playerRect.y = tank.getPosition().y;
+        return playerRect.intersects(rect)
+    }
+
+    public function checkIntersectWithPlayerTanks(rect:Rectangle):Boolean {
+        return checkIntersectWithPlayerTank(playerTank1, rect) || checkIntersectWithPlayerTank(playerTank2, rect);
+    }
+
+    public function checkBonus(tank:PlayerTank):void {
+        if (bonusManager.bonusOnScreen()) {
+            bonusRect.x = bonusManager.getCurrentBonus().coords.x;
+            bonusRect.y = bonusManager.getCurrentBonus().coords.y;
+            if (checkIntersectWithPlayerTank(tank, bonusRect)) {
+                bonusManager.applyBonus(tank);
+            }
+        }
+    }
+
 }
 }

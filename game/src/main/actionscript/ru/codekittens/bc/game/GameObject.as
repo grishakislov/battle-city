@@ -2,6 +2,8 @@ package ru.codekittens.bc.game {
 import flash.display.Sprite;
 import flash.events.Event;
 
+import ru.codekittens.bc.game.time.Ticker;
+
 public class GameObject extends Sprite {
 
     private var callback:Function;
@@ -23,6 +25,18 @@ public class GameObject extends Sprite {
 
     public function togglePause():void {
         paused = !paused;
+    }
+
+    protected final function setTickListening(value:Boolean):void {
+        if (value) {
+            Ticker.addTickListener(onTick);
+        } else {
+            Ticker.removeTickListener(onTick);
+        }
+    }
+
+    protected function onTick(dt:uint):void {
+
     }
 
     public final function addDestroyCallback(callback:Function):void {

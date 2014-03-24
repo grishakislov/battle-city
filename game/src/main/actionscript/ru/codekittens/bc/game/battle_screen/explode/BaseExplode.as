@@ -28,7 +28,7 @@ public class BaseExplode extends GameObject {
         }
     }
 
-    protected function onTick(dt:uint):void {
+    override protected function onTick(dt:uint):void {
         if (framesSkipped >= explodeSequenceFramesSkip) {
             if (explodeSequenceIndex == explodeSequence.length) {
                 onExploded();

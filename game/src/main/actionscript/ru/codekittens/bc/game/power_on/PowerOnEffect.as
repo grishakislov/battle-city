@@ -37,7 +37,7 @@ public class PowerOnEffect extends GameScreen {
         parent.removeChild(this);
     }
 
-    private function onTick(dt:uint):void {
+    override protected function onTick(dt:uint):void {
         switch (currentFrame) {
             case PAUSE:
                 App.sfxManager.playClick();
