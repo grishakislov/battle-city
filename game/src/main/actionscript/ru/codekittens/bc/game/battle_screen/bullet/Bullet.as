@@ -162,7 +162,7 @@ public class Bullet extends AnimatedObject implements Actor {
                 visualName = "BULLET_L";
                 break;
         }
-        visual = App.assetManager.getTileAsset(visualName).getClone();
+        visual = App.assetManager.copyTileAsset(visualName);
         addChild(visual);
     }
 

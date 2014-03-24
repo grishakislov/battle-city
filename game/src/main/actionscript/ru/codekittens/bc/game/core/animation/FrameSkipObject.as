@@ -1,4 +1,7 @@
 package ru.codekittens.bc.game.core.animation {
+import flash.display.Sprite;
+import flash.display.Sprite;
+
 import ru.codekittens.bc.game.GameObject;
 import ru.codekittens.bc.game.time.Ticker;
 
@@ -7,7 +10,10 @@ public class FrameSkipObject extends GameObject {
     private var framesToSkip:uint;
     private var framesSkipped:uint = 0;
 
-    public function FrameSkipObject(framesToSkip:uint = 0) {
+    private var asset:Sprite;
+
+    public function FrameSkipObject(asset:Sprite, framesToSkip:uint = 0) {
+        this.asset = asset;
         this.framesToSkip = framesToSkip;
         Ticker.addTickListener(onTick);
     }
@@ -29,6 +35,8 @@ public class FrameSkipObject extends GameObject {
         Ticker.removeTickListener(onTick);
     }
 
-
+    public function getAsset():Sprite {
+        return asset;
+    }
 }
 }

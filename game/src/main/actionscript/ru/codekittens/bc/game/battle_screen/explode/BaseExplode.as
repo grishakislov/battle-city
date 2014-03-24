@@ -43,7 +43,7 @@ public class BaseExplode extends GameObject {
 
     private function updateExplodeVisualAsset(index:int):void {
         clearVisual();
-        visual = App.assetManager.getTileAsset(explodeSequence[index]).getClone();
+        visual = App.assetManager.copyTileAsset(explodeSequence[index]);
         addChild(visual);
     }
 

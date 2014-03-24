@@ -15,41 +15,11 @@ import ru.codekittens.bc.game.settings.model.LevelData;
 
 public class WorldImpactLayer extends Sprite {
 
-    private static const DESTROYABLE_TILES:Array = [
-        "BRICK_FULL",
-        "BRICK_TOP",
-        "BRICK_RIGHT",
-        "BRICK_DOWN",
-        "BRICK_LEFT"
-    ];
-
     public function initialize(levelId:uint):void {
         impactMap = MapLoader.createImpactMap(levelId);
         visual = MapLoader.drawStageToBitmap(levelId, BattleStageDrawMode.MAIN);
         data = App.levelDataManager.getLevelDataByID(levelId);
         addChild(visual);
-    }
-
-    public function applyDestruction(worldPoint:Point, direction:ActorDirection):void {
-        /*
-         //проверяем, кирпич ли там
-         //если нет, то уходим
-
-         если да, то меняем тайл
-         если кирпич разрушен, то изменяем таблицу столкновений
-         */
-        var mapPoint:Point = new Point(Math.floor(worldPoint.x / 2), Math.floor(worldPoint.y / 2));
-        var currentTile:String = MapLoader.getTileByID(data.getDataAt(mapPoint.x, mapPoint.y)).getName();
-
-        if (!isDestroyable(currentTile)) {
-            return;
-        }
-
-
-    }
-
-    private function isDestroyable(tileName:String):Boolean {
-        return DESTROYABLE_TILES.indexOf(tileName) > -1;
     }
 
     public function redrawTileAt(x:uint, y:uint):void {
@@ -66,10 +36,6 @@ public class WorldImpactLayer extends Sprite {
         visual.bitmapData.copyPixels(tile.getBitmap().bitmapData, rect, coords);
     }
 
-    private function getTile(name:String):TileAsset {
-        return App.assetManager.getTileAsset(name);
-    }
-
     public function getImpactMap():ImpactMap {
         return impactMap;
     }
@@ -81,7 +47,6 @@ public class WorldImpactLayer extends Sprite {
     private var impactMap:ImpactMap;
     private var visual:Bitmap;
     private var data:LevelData;
-    private var water:WorldWaterLayer;
 
 }
 }

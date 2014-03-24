@@ -5,6 +5,7 @@ public class StageResult {
 
     public var score:uint;
     public var playerLevel:uint;
+    public var playerLifes:uint;
     public var finishedStageId:uint;
 
     public function getNextLevelId():uint {

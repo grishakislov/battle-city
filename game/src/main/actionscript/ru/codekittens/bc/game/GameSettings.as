@@ -43,6 +43,7 @@ public class GameSettings {
 
 
     public static const PLAYER_TANK_1_INITIAL_COORDS:Point = new Point(4, 12);
+    public static const SCORE_TO_LIFE:uint = 200000;
 
     //public static const BULLET_MAX_X:int = 208;
     //public static const BULLET_MAX_Y:int = 208;

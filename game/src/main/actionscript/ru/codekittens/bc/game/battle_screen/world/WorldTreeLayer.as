@@ -8,11 +8,11 @@ import ru.codekittens.bc.game.battle_screen.map_loader.MapLoader;
 internal class WorldTreeLayer extends Sprite {
 
     public function initialize(levelId:uint):void {
-        _visual = MapLoader.drawStageToBitmap(levelId, BattleStageDrawMode.TREES);
-        addChild(_visual);
+        visual = MapLoader.drawStageToBitmap(levelId, BattleStageDrawMode.TREES);
+        addChild(visual);
     }
 
-    private var _visual:Bitmap;
+    private var visual:Bitmap;
 
 }
 }

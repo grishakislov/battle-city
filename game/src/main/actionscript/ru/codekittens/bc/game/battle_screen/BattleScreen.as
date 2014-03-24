@@ -107,12 +107,10 @@ public class BattleScreen extends GameScreen {
     }
 
     private function initializeWorld(levelId:uint):void {
-
         world = new World();
         world.initialize(levelId);
-        world.initializePlayerTank(previousStageResult.playerLevel);
+        world.initializePlayerTank(previousStageResult.playerLevel, previousStageResult.score, previousStageResult.playerLifes);
         worldBackground.addChild(world);
-//        App.battleground = world; // TODO: move to Main
     }
 
     private var preloader:BattleStageSplash;

@@ -8,6 +8,7 @@ import flash.geom.Rectangle;
 import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.GameObject;
 import ru.codekittens.bc.game.GameSettings;
+import ru.codekittens.bc.game.Scores;
 import ru.codekittens.bc.game.battle_screen.bonus.BonusManager;
 import ru.codekittens.bc.game.battle_screen.bullet.BulletManager;
 import ru.codekittens.bc.game.battle_screen.map_loader.MapHelper;
@@ -20,6 +21,8 @@ import ru.codekittens.bc.game.battle_screen.world.impact.ImpactEntity;
 import ru.codekittens.bc.game.battle_screen.world.impact.ImpactProcessor;
 import ru.codekittens.bc.game.battle_screen.world.impact.PointPair;
 import ru.codekittens.bc.game.battle_screen.world.impact.WorldImpactLayer;
+import ru.codekittens.bc.game.battle_screen.world.score.ScoreLayer;
+import ru.codekittens.bc.game.events.BattleScreenEvent;
 import ru.codekittens.bc.game.events.HQDestroyEvent;
 import ru.codekittens.bc.game.keyboard.KeyboardManagerEvent;
 import ru.codekittens.bc.game.keyboard.key.KeyCommand;
@@ -39,6 +42,7 @@ public class World extends GameObject {
     private var effectsLayer:Sprite;
     private var treeLayer:WorldTreeLayer;
     private var bonusLayer:Sprite;
+    private var scoreLayer:ScoreLayer;
     private var bonusManager:BonusManager;
 
     public function initialize(levelId:uint):void {
@@ -66,6 +70,9 @@ public class World extends GameObject {
 
         bonusLayer = new Sprite();
         addChild(bonusLayer);
+
+        scoreLayer = new ScoreLayer();
+        addChild(scoreLayer);
 
         bonusManager = new BonusManager();
         bonusManager.initialize();
@@ -96,8 +103,8 @@ public class World extends GameObject {
         }
     }
 
-    public function initializePlayerTank(tankLevel:uint):void {
-        playerTank1 = new PlayerTank(tankLevel, this);
+    public function initializePlayerTank(tankLevel:uint, score:uint, lifes:uint):void {
+        playerTank1 = new PlayerTank(tankLevel, score, lifes, this);
         playerTank1.initialize();
         tankLayer.addChild(playerTank1);
     }
@@ -114,11 +121,6 @@ public class World extends GameObject {
 
     public function getBulletManager():BulletManager {
         return bulletManager;
-    }
-
-
-    public function applyDestruction(worldPoint:Point, direction:ActorDirection):void {
-        collisionLayer.applyDestruction(worldPoint, direction);
     }
 
     public function shoot(tank:BaseTank):void {
@@ -251,6 +253,9 @@ public class World extends GameObject {
             bonusRect.y = bonusManager.getCurrentBonus().coords.y;
             if (checkIntersectWithPlayerTank(tank, bonusRect)) {
                 bonusManager.applyBonus(tank);
+                tank.scoreUp(Scores.BONUS);
+                scoreLayer.showScore(Scores.BONUS, new Point(bonusRect.x, bonusRect.y));
+                App.dispatcher.dispatchEvent(new BattleScreenEvent(BattleScreenEvent.REDRAW_HUD));
             }
         }
     }

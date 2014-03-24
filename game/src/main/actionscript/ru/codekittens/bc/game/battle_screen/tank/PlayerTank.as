@@ -23,9 +23,13 @@ public class PlayerTank extends BaseTank {
     private var visual:TileAsset;
     private var controller:PlayerTankController;
     private var barrier:Boolean;
+    private var score:uint;
+    private var lifes:uint;
 
-    public function PlayerTank(tankLevel:uint, world:World) {
+    public function PlayerTank(tankLevel:uint, score:uint, lifes:uint, world:World) {
         this.tankLevel = tankLevel;
+        this.score = score;
+        this.lifes = lifes;
         this.world = world;
     }
 
@@ -220,6 +224,13 @@ public class PlayerTank extends BaseTank {
     public function upgrade():void {
         if (tankLevel < PlayerTankLevel.LEVEL_4) {
             tankLevel++;
+        }
+    }
+
+    public function scoreUp(score:uint):void {
+        this.score += score;
+        if (this.score >= GameSettings.SCORE_TO_LIFE) {
+            lifes++;
         }
     }
 

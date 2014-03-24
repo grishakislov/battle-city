@@ -26,7 +26,7 @@ public class FontTool {
         var rect:Rectangle;
         for (var i:uint = 0; i < string.length; i++) {
             name = getTileName(string.charAt(i));
-            tileAsset = App.assetManager.getTileAsset(name).getClone();
+            tileAsset = App.assetManager.copyTileAsset(name);
             tileAsset.setPalette(palette);
             rect = new Rectangle(0, 0, tileSize, tileSize);
             result.bitmapData.copyPixels(tileAsset.getBitmap().bitmapData, rect, new Point(i * tileSize, 0));
