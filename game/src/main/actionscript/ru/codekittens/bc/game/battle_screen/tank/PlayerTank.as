@@ -217,6 +217,11 @@ public class PlayerTank extends BaseTank {
         return ActorType.PLAYER;
     }
 
+    public function upgrade():void {
+        if (tankLevel < PlayerTankLevel.LEVEL_4) {
+            tankLevel++;
+        }
+    }
 
 }
 

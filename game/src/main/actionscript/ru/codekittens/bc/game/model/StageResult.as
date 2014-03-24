@@ -15,7 +15,7 @@ public class StageResult {
     public static function createBlankStageResult():StageResult {
         var result:StageResult = new StageResult();
         result.score = 0;
-        result.playerLevel = PlayerTankLevel.LEVEL_4;
+        result.playerLevel = PlayerTankLevel.LEVEL_1;
         result.finishedStageId = 0;
         return result;
     }

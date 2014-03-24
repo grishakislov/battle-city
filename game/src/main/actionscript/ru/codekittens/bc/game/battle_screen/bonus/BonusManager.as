@@ -116,7 +116,11 @@ public class BonusManager {
     }
 
     private function handleBonus(currentBonus:Bonus, tank:PlayerTank):void {
-        //TODO:
+        switch (currentBonus.type) {
+            case BonusType.STAR:
+                tank.upgrade();
+                break;
+        }
     }
 }
 }
