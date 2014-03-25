@@ -31,16 +31,16 @@ public class BaseTank extends AnimatedObject implements Actor {
     public function getPosition():Point {
         switch (direction) {
             case ActorDirection.UP:
-                position.setTo(x, y-1);
+                position.setTo(x, y);
                 break;
             case ActorDirection.LEFT:
                 position.setTo(x, y);
                 break;
             case ActorDirection.DOWN:
-                position.setTo(x, y+1);
+                position.setTo(x, y);
                 break;
             case ActorDirection.RIGHT:
-                position.setTo(x+1, y);
+                position.setTo(x, y);
                 break;
         }
         return position;

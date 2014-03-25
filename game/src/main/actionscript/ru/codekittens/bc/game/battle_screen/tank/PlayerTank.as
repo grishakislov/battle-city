@@ -175,7 +175,7 @@ public class PlayerTank extends BaseTank {
 
     private function moveTo(coords:Point):void {
         x = coords.x * GameSettings.TANK_SIZE;
-        y = coords.y * GameSettings.TANK_SIZE + 1;
+        y = coords.y * GameSettings.TANK_SIZE;
     }
 
     //visual

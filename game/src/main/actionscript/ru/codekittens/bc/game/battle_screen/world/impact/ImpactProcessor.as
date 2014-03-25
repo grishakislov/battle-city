@@ -29,25 +29,25 @@ public class ImpactProcessor {
         switch (movement) {
 
             case ActorDirection.UP:
-                if (position.y <= 0) {
+                if (position.y < 0) {
                     return BarrierType.BORDER;
                 }
                 break;
 
             case ActorDirection.RIGHT:
-                if (position.x >= GameSettings.WORLD_WIDTH * GameSettings.MAP_TILE_SIZE - GameSettings.TANK_SIZE) {
+                if (position.x > GameSettings.WORLD_WIDTH * GameSettings.MAP_TILE_SIZE - GameSettings.TANK_SIZE) {
                     return BarrierType.BORDER;
                 }
                 break;
 
             case ActorDirection.DOWN:
-                if (position.y >= GameSettings.WORLD_HEIGHT * GameSettings.MAP_TILE_SIZE - GameSettings.TANK_SIZE) {
+                if (position.y > GameSettings.WORLD_HEIGHT * GameSettings.MAP_TILE_SIZE - GameSettings.TANK_SIZE) {
                     return BarrierType.BORDER;
                 }
                 break;
 
             case ActorDirection.LEFT:
-                if (position.x <= 0) {
+                if (position.x < 0) {
                     return BarrierType.BORDER;
                 }
                 break;
@@ -136,9 +136,9 @@ public class ImpactProcessor {
         var position:Point = actor.getPosition();
 
         var floorX:uint = Math.floor(position.x / GameSettings.TILE_SIZE);
-        var floorY:uint = Math.floor(position.y / GameSettings.TILE_SIZE);
-        var ceilX:uint = Math.ceil(position.x / GameSettings.TILE_SIZE);
-        var ceilY:uint = Math.ceil(position.y / GameSettings.TILE_SIZE);
+        var floorY:uint = Math.floor((position.y - 1) / GameSettings.TILE_SIZE);
+        var ceilX:uint = Math.ceil((position.x + 1) / GameSettings.TILE_SIZE);
+        var ceilY:uint = Math.ceil((position.y) / GameSettings.TILE_SIZE);
 
         switch (actor.getDirection()) {
             case ActorDirection.UP:
