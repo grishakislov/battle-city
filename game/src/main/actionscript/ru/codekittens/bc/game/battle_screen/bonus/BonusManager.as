@@ -106,19 +106,26 @@ public class BonusManager {
     }
 
     public function applyBonus(tank:PlayerTank):void {
+
         if (currentBonus.type.getId() == BonusType.TANK.getId()) {
             App.sfxManager.playBonusLife();
         } else {
             App.sfxManager.playBonusTaken();
         }
+
         handleBonus(currentBonus, tank);
         removeCurrentBonus();
     }
 
     private function handleBonus(currentBonus:Bonus, tank:PlayerTank):void {
         switch (currentBonus.type) {
+
             case BonusType.STAR:
                 tank.upgrade();
+                break;
+
+            case BonusType.TANK:
+                tank.extraLife();
                 break;
         }
     }

@@ -34,15 +34,15 @@ public class GameSoundManager extends SfxManager {
     }
 
     public function playBonusAppear():void {
-        playOnly(getSounds().BONUS_APPEAR);
+        play(getSounds().BONUS_APPEAR);
     }
 
     public function playBonusTaken():void {
-        playOnly(getSounds().BONUS_TAKEN);
+        play(getSounds().BONUS_TAKEN);
     }
 
     public function playBonusLife():void {
-        playOnly(getSounds().BONUS_LIFE);
+        play(getSounds().BONUS_LIFE);
     }
 
 

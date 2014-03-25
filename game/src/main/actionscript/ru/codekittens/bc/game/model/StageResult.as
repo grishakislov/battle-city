@@ -5,7 +5,7 @@ public class StageResult {
 
     public var score:uint;
     public var playerLevel:uint;
-    public var playerLifes:uint;
+    public var playerLives:uint;
     public var finishedStageId:uint;
 
     public function getNextLevelId():uint {
@@ -16,6 +16,7 @@ public class StageResult {
     public static function createBlankStageResult():StageResult {
         var result:StageResult = new StageResult();
         result.score = 0;
+        result.playerLives = 1;
         result.playerLevel = PlayerTankLevel.LEVEL_1;
         result.finishedStageId = 0;
         return result;

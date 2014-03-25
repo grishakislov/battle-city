@@ -24,12 +24,12 @@ public class PlayerTank extends BaseTank {
     private var controller:PlayerTankController;
     private var barrier:Boolean;
     private var score:uint;
-    private var lifes:uint;
+    private var lives:uint;
 
     public function PlayerTank(tankLevel:uint, score:uint, lifes:uint, world:World) {
         this.tankLevel = tankLevel;
         this.score = score;
-        this.lifes = lifes;
+        this.lives = lifes;
         this.world = world;
     }
 
@@ -230,10 +230,13 @@ public class PlayerTank extends BaseTank {
     public function scoreUp(score:uint):void {
         this.score += score;
         if (this.score >= GameSettings.SCORE_TO_LIFE) {
-            lifes++;
+            lives++;
         }
     }
 
+    public function extraLife():void {
+        lives++;
+    }
 }
 
 }
