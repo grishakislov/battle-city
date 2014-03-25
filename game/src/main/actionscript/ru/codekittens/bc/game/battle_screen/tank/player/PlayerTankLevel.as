@@ -1,4 +1,4 @@
-package ru.codekittens.bc.game.battle_screen.tank {
+package ru.codekittens.bc.game.battle_screen.tank.player {
 public class PlayerTankLevel {
 
     public static const LEVEL_1:uint = 1;

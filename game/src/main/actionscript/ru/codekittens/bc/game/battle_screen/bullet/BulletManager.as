@@ -4,6 +4,7 @@ import flash.display.Sprite;
 import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.battle_screen.tank.*;
+import ru.codekittens.bc.game.battle_screen.tank.player.PlayerTankLevel;
 import ru.codekittens.bc.game.battle_screen.world.ActorType;
 import ru.codekittens.bc.game.battle_screen.world.World;
 import ru.codekittens.bc.game.events.TogglePauseEvent;

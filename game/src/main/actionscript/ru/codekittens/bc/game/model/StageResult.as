@@ -1,5 +1,5 @@
 package ru.codekittens.bc.game.model {
-import ru.codekittens.bc.game.battle_screen.tank.PlayerTankLevel;
+import ru.codekittens.bc.game.battle_screen.tank.player.PlayerTankLevel;
 
 public class StageResult {
 

@@ -15,11 +15,6 @@ public class GameSettings {
 
     public static const WORLD_SCALE:uint = 3;
 
-    public static const WORLD_SIZE_MULTIPLIER:uint = 32;
-
-    public static const STAGE_WIDTH:uint = 512;
-    public static const STAGE_HEIGHT:uint = 448;
-
     public static const AI_TANKS_TOTAL:uint = 20;
     public static const AI_TANKS_MAX:uint = 4;
 
@@ -28,25 +23,14 @@ public class GameSettings {
     public static const TANK_SIZE:int = 16;
     public static const TANK_GRID_SIZE:int = 8;
 
-
-    //Speeds
-
-    public static const DEFAULT_SPEED:uint = 170;//Pixels per sec
-    public static const PLAYER_TANK_SPEED:uint = 50;//Pixels per sec
-
-
     //TODO: Move to json
     public static const LEVEL_1_BULLETS:int = 1;
     public static const LEVEL_2_BULLETS:int = 1;
     public static const LEVEL_3_BULLETS:int = 2;
     public static const LEVEL_4_BULLETS:int = 2;
 
-
     public static const PLAYER_TANK_1_INITIAL_COORDS:Point = new Point(4, 12);
     public static const SCORE_TO_LIFE:uint = 200000;
-
-    //public static const BULLET_MAX_X:int = 208;
-    //public static const BULLET_MAX_Y:int = 208;
 
 }
 }

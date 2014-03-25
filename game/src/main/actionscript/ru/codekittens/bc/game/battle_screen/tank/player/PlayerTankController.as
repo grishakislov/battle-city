@@ -1,13 +1,14 @@
-package ru.codekittens.bc.game.battle_screen.tank {
-import flash.events.EventDispatcher;
-
+package ru.codekittens.bc.game.battle_screen.tank.player {
 import ru.codekittens.bc.game.App;
+import ru.codekittens.bc.game.battle_screen.tank.*;
 import ru.codekittens.bc.game.keyboard.KeyboardManagerEvent;
 import ru.codekittens.bc.game.keyboard.key.KeyCommand;
 
-internal class PlayerTankController extends EventDispatcher {
+internal class PlayerTankController extends BaseTankController {
 
-    public function initialize():void {
+    private var currentCommand:KeyCommand;
+
+    override public function initialize():void {
         App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
         App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_UP, onKeyUp);
     }
@@ -17,10 +18,10 @@ internal class PlayerTankController extends EventDispatcher {
 
         if (e.getCommand() != KeyCommand.FIRE) {
             currentCommand = e.getCommand();
-            dispatchEvent(new TankControllerEvent(TankControllerEvent.START, currentCommand));
+            start(currentCommand);
         } else {
             //TODO: double command
-            dispatchEvent(new TankControllerEvent(TankControllerEvent.START, e.getCommand()));
+            start(e.getCommand());
         }
     }
 
@@ -29,15 +30,15 @@ internal class PlayerTankController extends EventDispatcher {
 
         if (e.getCommand() != KeyCommand.FIRE) {
             if ((e.getCommand()) == currentCommand) {
-                dispatchEvent(new TankControllerEvent(TankControllerEvent.STOP, e.getCommand()));
+                stop(e.getCommand());
+
                 currentCommand = null;
             }
         } else {
-            dispatchEvent(new TankControllerEvent(TankControllerEvent.STOP, e.getCommand()));
+            stop(e.getCommand());
         }
     }
 
-    private var currentCommand:KeyCommand;
 
 }
 }

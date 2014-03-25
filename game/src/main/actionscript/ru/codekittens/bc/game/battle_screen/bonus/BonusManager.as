@@ -5,7 +5,7 @@ import flash.geom.Rectangle;
 
 import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.GameSettings;
-import ru.codekittens.bc.game.battle_screen.tank.PlayerTank;
+import ru.codekittens.bc.game.battle_screen.tank.player.PlayerTank;
 import ru.codekittens.bc.game.battle_screen.world.World;
 import ru.codekittens.bc.game.core.assets.model.TileAsset;
 

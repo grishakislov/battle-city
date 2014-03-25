@@ -95,9 +95,6 @@ public class Title extends GameScreen {
         return selectedPosition;
     }
 
-//    private function onTick(dt:uint):void {
-//    }
-
     private function stopAnimation():void {
         main.y = 0;
         animationCompleted = true;

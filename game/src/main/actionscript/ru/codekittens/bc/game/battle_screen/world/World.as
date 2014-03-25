@@ -13,7 +13,7 @@ import ru.codekittens.bc.game.battle_screen.bonus.BonusManager;
 import ru.codekittens.bc.game.battle_screen.bullet.BulletManager;
 import ru.codekittens.bc.game.battle_screen.map_loader.MapHelper;
 import ru.codekittens.bc.game.battle_screen.tank.BaseTank;
-import ru.codekittens.bc.game.battle_screen.tank.PlayerTank;
+import ru.codekittens.bc.game.battle_screen.tank.player.PlayerTank;
 import ru.codekittens.bc.game.battle_screen.world.impact.BarrierType;
 import ru.codekittens.bc.game.battle_screen.world.impact.ImpactEntity;
 import ru.codekittens.bc.game.battle_screen.world.impact.ImpactProcessor;

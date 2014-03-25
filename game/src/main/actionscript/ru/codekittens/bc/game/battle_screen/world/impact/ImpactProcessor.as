@@ -4,6 +4,7 @@ import flash.geom.Point;
 import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.battle_screen.bullet.Bullet;
 import ru.codekittens.bc.game.battle_screen.tank.*;
+import ru.codekittens.bc.game.battle_screen.tank.player.PlayerTankLevel;
 import ru.codekittens.bc.game.battle_screen.world.*;
 
 public class ImpactProcessor {
