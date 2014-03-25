@@ -4,7 +4,6 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import ru.codekittens.bc.game.App;
-
 import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.battle_screen.tank.PlayerTank;
 import ru.codekittens.bc.game.battle_screen.world.World;

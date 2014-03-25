@@ -1,17 +1,14 @@
 package ru.codekittens.bc.game.title {
 import flash.display.Bitmap;
-import flash.display.Sprite;
 import flash.geom.Point;
 
 import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.GameScreen;
 import ru.codekittens.bc.game.GameSettings;
-import ru.codekittens.bc.game.core.animation.AnimatedObject;
 import ru.codekittens.bc.game.core.assets.FontTool;
 import ru.codekittens.bc.game.events.GameEvent;
 import ru.codekittens.bc.game.keyboard.KeyboardManagerEvent;
 import ru.codekittens.bc.game.keyboard.key.KeyCommand;
-import ru.codekittens.bc.game.time.Ticker;
 
 public class Title extends GameScreen {
 

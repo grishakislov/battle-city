@@ -1,7 +1,7 @@
 package ru.codekittens.bc.game.battle_screen {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
-import flash.display.MovieClip;
+import flash.display.Sprite;
 
 import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.Colors;
@@ -81,16 +81,11 @@ public class BattleScreen extends GameScreen {
 
     }
 
-
-    private function addHQ():void {
-
-    }
-
     private function initializeStageBackground():void {
         var bitmapData:BitmapData = new BitmapData
-                (GameSettings.NATIVE_NES_SCREEN_SIZE.x, GameSettings.NATIVE_NES_SCREEN_SIZE.y, false, Colors.MAIN_BG);
+        (GameSettings.NATIVE_NES_SCREEN_SIZE.x, GameSettings.NATIVE_NES_SCREEN_SIZE.y, false, Colors.MAIN_BG);
         var sprite:Bitmap = new Bitmap(bitmapData);
-        stageBackground = new MovieClip();
+        stageBackground = new Sprite();
         stageBackground.addChild(sprite);
         addChild(stageBackground);
     }
@@ -99,7 +94,7 @@ public class BattleScreen extends GameScreen {
         var multiplier:uint = GameSettings.MAP_TILE_SIZE;
         var sprite:Bitmap = new Bitmap(new BitmapData(GameSettings.WORLD_WIDTH * multiplier,
                 GameSettings.WORLD_HEIGHT * multiplier, false, Colors.SCENE_BG));
-        worldBackground = new MovieClip();
+        worldBackground = new Sprite();
         worldBackground.addChild(sprite);
         worldBackground.x = GameSettings.WORLD_STAGE_INSET.x;
         worldBackground.y = GameSettings.WORLD_STAGE_INSET.y;
@@ -117,8 +112,8 @@ public class BattleScreen extends GameScreen {
 
     private var previousStageResult:StageResult;
 
-    private var stageBackground:MovieClip;
-    private var worldBackground:MovieClip;
+    private var stageBackground:Sprite;
+    private var worldBackground:Sprite;
     private var world:World;
 
 }

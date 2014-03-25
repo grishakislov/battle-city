@@ -8,8 +8,6 @@ import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.battle_screen.BattleStageDrawMode;
 import ru.codekittens.bc.game.battle_screen.map_loader.MapLoader;
-import ru.codekittens.bc.game.battle_screen.tank.ActorDirection;
-import ru.codekittens.bc.game.battle_screen.world.*;
 import ru.codekittens.bc.game.core.assets.model.TileAsset;
 import ru.codekittens.bc.game.settings.model.LevelData;
 

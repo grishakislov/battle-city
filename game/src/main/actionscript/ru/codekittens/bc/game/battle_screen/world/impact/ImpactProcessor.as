@@ -5,7 +5,6 @@ import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.battle_screen.bullet.Bullet;
 import ru.codekittens.bc.game.battle_screen.tank.*;
 import ru.codekittens.bc.game.battle_screen.world.*;
-import ru.codekittens.bc.game.battle_screen.world.impact.ImpactEntity;
 
 public class ImpactProcessor {
 

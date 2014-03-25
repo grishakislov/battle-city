@@ -1,5 +1,4 @@
 package ru.codekittens.bc.game.title {
-import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.geom.Point;
@@ -9,7 +8,7 @@ import ru.codekittens.bc.game.keyboard.KeyboardManagerEvent;
 import ru.codekittens.bc.game.keyboard.key.KeyCommand;
 import ru.codekittens.bc.game.time.Ticker;
 
-internal class TankCursor extends MovieClip {
+internal class TankCursor extends Sprite {
 
     private static const STATE_1:String = "P1R1";
     private static const STATE_2:String = "P1R2";

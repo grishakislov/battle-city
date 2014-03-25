@@ -230,7 +230,7 @@ public class PlayerTank extends BaseTank {
     public function scoreUp(score:uint):void {
         this.score += score;
         if (this.score >= GameSettings.SCORE_TO_LIFE) {
-            lives++;
+            extraLife();
         }
     }
 

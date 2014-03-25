@@ -6,7 +6,6 @@ import flash.events.EventDispatcher;
 import ru.codekittens.bc.game.battle_screen.BattleScreen;
 import ru.codekittens.bc.game.core.assets.AssetManager;
 import ru.codekittens.bc.game.core.assets.LevelDataManager;
-import ru.codekittens.bc.game.core.debug.DevTools;
 import ru.codekittens.bc.game.core.debug.LogManager;
 import ru.codekittens.bc.game.core.debug.LogMessageType;
 import ru.codekittens.bc.game.core.debug.viewers.Viewer;
@@ -15,7 +14,6 @@ import ru.codekittens.bc.game.power_on.PowerOnEffect;
 import ru.codekittens.bc.game.screen_manager.GameScreenManager;
 import ru.codekittens.bc.game.settings.SettingsManager;
 import ru.codekittens.bc.game.sfx.GameSoundManager;
-import ru.codekittens.bc.game.sfx.SfxManager;
 import ru.codekittens.bc.game.time.Ticker;
 import ru.codekittens.bc.game.title.Title;
 
@@ -112,12 +110,6 @@ public class Main extends Sprite {
         App.screenManager = new GameScreenManager();
         App.logManager.showMessage(LogMessageType.INIT_GAME_CONTROLLER);
         App.screenManager.initialize();
-    }
-
-    public function initDevTools():void {
-        App.devTools = new DevTools();
-        App.devTools.initialize();
-        addChild(App.devTools);
     }
 
     public static function showPauseScreen():void {

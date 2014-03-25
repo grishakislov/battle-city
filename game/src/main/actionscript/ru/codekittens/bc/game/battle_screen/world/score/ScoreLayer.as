@@ -3,7 +3,6 @@ import flash.display.Sprite;
 import flash.geom.Point;
 
 import ru.codekittens.bc.game.App;
-
 import ru.codekittens.bc.game.core.assets.model.TileAsset;
 import ru.codekittens.bc.game.core.debug.GameError;
 

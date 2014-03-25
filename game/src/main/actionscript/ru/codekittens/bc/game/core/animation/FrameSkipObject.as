@@ -1,6 +1,5 @@
 package ru.codekittens.bc.game.core.animation {
 import flash.display.Sprite;
-import flash.display.Sprite;
 
 import ru.codekittens.bc.game.GameObject;
 import ru.codekittens.bc.game.time.Ticker;
