@@ -14,8 +14,6 @@ import ru.codekittens.bc.game.model.StageResult;
 
 public class BattleScreen extends GameScreen {
 
-    private static const FIRST_LEVEL_ID:uint = 1;
-
     override public function initialize():void {
         initializeStageBackground();
         initializeWorldBackground();
@@ -32,7 +30,6 @@ public class BattleScreen extends GameScreen {
             App.dispatcher.addEventListener(BattleScreenEvent.SPLASH_COMPLETED, onPreloaderCompleted);
             App.dispatcher.addEventListener(BattleScreenEvent.SPLASH_DESTROYED, onPreloaderDestroyed);
         }
-
     }
 
     private function onPreloaderCompleted(event:BattleScreenEvent):void {
@@ -61,12 +58,7 @@ public class BattleScreen extends GameScreen {
 
     override public function togglePause():void {
         super.togglePause();
-        if (preloader != null) {
-            preloader.togglePause();
-        }
-        if (world != null) {
-            world.togglePause();
-        }
+        App.sfxManager.togglePause();
     }
 
     public function runWithMode(battleStageMode:uint):void {

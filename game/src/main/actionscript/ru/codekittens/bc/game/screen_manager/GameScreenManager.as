@@ -4,6 +4,7 @@ import flash.display.Sprite;
 import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.core.debug.LogMessageType;
 import ru.codekittens.bc.game.events.GameEvent;
+import ru.codekittens.bc.game.events.TogglePauseEvent;
 import ru.codekittens.bc.game.keyboard.KeyboardManagerEvent;
 import ru.codekittens.bc.game.keyboard.key.KeyCommand;
 import ru.codekittens.bc.game.power_on.PowerOnEffect;
@@ -60,7 +61,7 @@ public class GameScreenManager extends Sprite {
     private function onKeyDown(e:KeyboardManagerEvent):void {
         switch (e.getCommand()) {
             case KeyCommand.PAUSE:
-                currentGameScreen.togglePause();
+                App.dispatcher.dispatchEvent(new TogglePauseEvent(TogglePauseEvent.PAUSE));
                 break;
         }
     }

@@ -37,20 +37,13 @@ public class AnimatedObject extends GameObject {
 
     override public function togglePause():void {
         super.togglePause();
-        if (paused) {
-            Ticker.removeTickListener(onTick);
-        } else {
-            Ticker.addTickListener(onTick);
+        if (isRunning()) {
+            setTickListening(!paused);
         }
     }
 
-    public function pause():void {
-        if (paused) {
-            Ticker.addTickListener(onTick);
-        } else {
-            Ticker.removeTickListener(onTick);
-        }
-        paused = !paused;
+    private function isRunning():Boolean {
+    return speed != null;
     }
 
     protected function onAnimation(delta:uint):void {

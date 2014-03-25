@@ -62,16 +62,6 @@ public class PowerOnEffect extends GameScreen {
         currentFrame++;
     }
 
-    override public function togglePause():void {
-        super.togglePause();
-        if (paused) {
-            Ticker.removeTickListener(onTick);
-        } else {
-            Ticker.addTickListener(onTick);
-        }
-
-    }
-
     private var currentFrame:Number = 0;
     private var frameLength:Number;
     private var bigBitmap:Bitmap;

@@ -22,11 +22,6 @@ public class BattleStageSplash extends GameObject {
         App.dispatcher.dispatchEvent(new BattleScreenEvent(BattleScreenEvent.SPLASH_COMPLETED));
     }
 
-    override public function togglePause():void {
-        super.togglePause();
-        animation.togglePause();
-    }
-
     private var animation:SplashView;
     private var level:uint;
 

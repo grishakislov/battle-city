@@ -107,12 +107,6 @@ public class World extends GameObject {
         tankLayer.addChild(playerTank1);
     }
 
-    override public function togglePause():void {
-        super.togglePause();
-        playerTank1.togglePause();
-        bulletManager.togglePause();
-    }
-
     public function getStageId():uint {
         return stageId;
     }

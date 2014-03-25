@@ -1,6 +1,7 @@
 package ru.codekittens.bc.game {
 import ru.codekittens.bc.game.core.debug.GameError;
 import ru.codekittens.bc.game.screen_manager.IGameScreen;
+import ru.codekittens.bc.game.time.Ticker;
 
 public class GameScreen extends GameObject implements IGameScreen {
 
@@ -21,14 +22,6 @@ public class GameScreen extends GameObject implements IGameScreen {
         GameError.notImplemented("destroy()");
     }
 
-    override public function togglePause():void {
-        super.togglePause();
-        if (paused) {
-            Main.showPauseScreen();
-        } else {
-            Main.removePauseScreen();
-        }
-        App.sfxManager.togglePause();
-    }
+
 }
 }

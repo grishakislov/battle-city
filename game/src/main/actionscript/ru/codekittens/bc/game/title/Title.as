@@ -86,13 +86,11 @@ public class Title extends GameScreen {
         App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
-    override public function togglePause():void {
-        super.togglePause();
-        main.togglePause();
-    }
-
     override public function destroy():* {
         tankCursor.removeEventListener(TitleEvent.MENU_SELECTED, onMenuSelected);
+        tankCursor.destroy();
+        removeChild(tankCursor);
+        tankCursor = null;
         parent.removeChild(this);
         return selectedPosition;
     }

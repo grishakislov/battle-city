@@ -2,6 +2,8 @@ package ru.codekittens.bc.game {
 import flash.display.Sprite;
 import flash.events.Event;
 
+import ru.codekittens.bc.game.events.TogglePauseEvent;
+
 import ru.codekittens.bc.game.time.Ticker;
 
 public class GameObject extends Sprite {
@@ -10,8 +12,13 @@ public class GameObject extends Sprite {
     protected var paused:Boolean;
 
     public function GameObject() {
+        App.dispatcher.addEventListener(TogglePauseEvent.PAUSE, onPause);
         addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
         addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+    }
+
+    private function onPause(event:TogglePauseEvent):void {
+        togglePause();
     }
 
     protected function onAddedToStage(e:Event):void {
@@ -44,6 +51,7 @@ public class GameObject extends Sprite {
     }
 
     public function destroy():* {
+        App.dispatcher.removeEventListener(TogglePauseEvent.PAUSE, onPause);
         if (callback != null) {
             callback();
         }

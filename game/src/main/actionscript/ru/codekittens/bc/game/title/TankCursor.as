@@ -4,11 +4,11 @@ import flash.events.Event;
 import flash.geom.Point;
 
 import ru.codekittens.bc.game.App;
+import ru.codekittens.bc.game.core.animation.FrameSkipObject;
 import ru.codekittens.bc.game.keyboard.KeyboardManagerEvent;
 import ru.codekittens.bc.game.keyboard.key.KeyCommand;
-import ru.codekittens.bc.game.time.Ticker;
 
-internal class TankCursor extends Sprite {
+internal class TankCursor extends FrameSkipObject {
 
     private static const STATE_1:String = "P1R1";
     private static const STATE_2:String = "P1R2";
@@ -22,10 +22,8 @@ internal class TankCursor extends Sprite {
         new Point(64, 156)
     ];
 
-    private const SKIP_FRAMES:uint = 4;
-
     public function TankCursor() {
-
+        super (null, 4);
         body = new Sprite();
         state1 = App.assetManager.copyTileAsset(STATE_1);
         state2 = App.assetManager.copyTileAsset(STATE_2);
@@ -41,20 +39,13 @@ internal class TankCursor extends Sprite {
         addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
     }
 
-    protected function onAddedToStage(e:Event):void {
-        Ticker.addTickListener(onTick);
+    override protected function onAddedToStage(e:Event):void {
         App.keyboardManager.addEventListener(KeyboardManagerEvent.KEY_DOWN, onKeyDown);
     }
 
-    private function onTick(dt:uint):void {
-
-        if (frame == SKIP_FRAMES) {
-            frame = 0;
-            state1.visible = (!state1.visible);
-            state2.visible = (!state2.visible);
-        }
-
-        frame++;
+    override protected function onAnimation():void {
+        state1.visible = (!state1.visible);
+        state2.visible = (!state2.visible);
     }
 
     private function onKeyDown(e:KeyboardManagerEvent):void {
@@ -87,7 +78,6 @@ internal class TankCursor extends Sprite {
     }
 
     private var position:int;
-    private var frame:uint = 0;
     private var body:Sprite;
     private var state1:Sprite;
     private var state2:Sprite;

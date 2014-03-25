@@ -6,6 +6,7 @@ import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.battle_screen.tank.*;
 import ru.codekittens.bc.game.battle_screen.world.ActorType;
 import ru.codekittens.bc.game.battle_screen.world.World;
+import ru.codekittens.bc.game.events.TogglePauseEvent;
 
 public class BulletManager {
 
@@ -67,14 +68,6 @@ public class BulletManager {
 
     public static function getBulletLayer():Sprite {
         return bulletLayer;
-    }
-
-    public function togglePause():void {
-        for (var i:int = 0; i < bulletLayer.numChildren; i++) {
-            if (bulletLayer.getChildAt(i) is Bullet) {
-                Bullet(bulletLayer.getChildAt(i)).togglePause();
-            }
-        }
     }
 
 }

@@ -9,6 +9,7 @@ import ru.codekittens.bc.game.core.assets.LevelDataManager;
 import ru.codekittens.bc.game.core.debug.LogManager;
 import ru.codekittens.bc.game.core.debug.LogMessageType;
 import ru.codekittens.bc.game.core.debug.viewers.Viewer;
+import ru.codekittens.bc.game.events.TogglePauseEvent;
 import ru.codekittens.bc.game.keyboard.KeyboardManager;
 import ru.codekittens.bc.game.power_on.PowerOnEffect;
 import ru.codekittens.bc.game.screen_manager.GameScreenManager;
@@ -46,6 +47,17 @@ public class Main extends Sprite {
         initBattleStage();
 
         initGameController();
+
+        App.dispatcher.addEventListener(TogglePauseEvent.PAUSE, onPause);
+    }
+
+    private function onPause(event:TogglePauseEvent):void {
+        paused = !paused;
+        if (paused) {
+            Main.showPauseScreen();
+        } else {
+            Main.removePauseScreen();
+        }
     }
 
     private function initSettingsManager():void {
@@ -128,6 +140,7 @@ public class Main extends Sprite {
         return instance.stage;
     }
 
+    private var paused:Boolean;
     private static var instance:Main;
 }
 }

@@ -30,11 +30,6 @@ public class HQGameOverAnimation extends AnimatedObject {
         animateGameOver = true;
     }
 
-    override public function pause():void {
-        super.pause();
-        bigExplode.togglePause();
-    }
-
     override protected function onAnimation(delta:uint):void {
         if (animateGameOver) {
             if (smbGameOver.y < GameSettings.NATIVE_NES_SCREEN_SIZE.y / 2 - 20) {

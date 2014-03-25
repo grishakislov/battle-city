@@ -7,20 +7,24 @@ import ru.codekittens.bc.game.App;
 import ru.codekittens.bc.game.GameSettings;
 import ru.codekittens.bc.game.battle_screen.BattleStageDrawMode;
 import ru.codekittens.bc.game.battle_screen.map_loader.MapLoader;
+import ru.codekittens.bc.game.core.animation.FrameSkipObject;
 import ru.codekittens.bc.game.core.assets.model.TileAsset;
 import ru.codekittens.bc.game.time.Ticker;
 
-public class WorldWaterLayer extends Sprite {
+public class WorldWaterLayer extends FrameSkipObject {
 
     private static const WATER_FRAMES_SKIP:uint = 32;//TODO: сравнить со скоростью в оригинале
 
     public function WorldWaterLayer() {
-        Ticker.addTickListener(onTick);
+        super(null, WATER_FRAMES_SKIP)
+    }
+
+    override public function togglePause():void {
+        super.togglePause();
     }
 
     public function initialize(levelId:uint):void {
-        framesPassed = 0;
-        key = false
+        key = false;
         this.levelId = levelId;
         visual.bitmapData.dispose();
         visual = MapLoader.drawStageToBitmap(levelId, BattleStageDrawMode.WATER,
@@ -28,20 +32,15 @@ public class WorldWaterLayer extends Sprite {
         addChild(visual);
     }
 
-    private function onTick(dt:uint):void {
-        framesPassed++;
+    override protected function onAnimation():void {
         var currentWaterTile:TileAsset;
-        if (framesPassed >= WATER_FRAMES_SKIP) {
-            111
-            //TODO: изменение палитры тайла, а не перерисовка
-            currentWaterTile = key ? App.assetManager.getTileAsset("WATER_FULL_1")
-                    : App.assetManager.getTileAsset("WATER_FULL_2");
-            removeChild(visual);
-            visual = MapLoader.drawStageToBitmap(levelId, BattleStageDrawMode.WATER, currentWaterTile);
-            addChild(visual);
-            key = !key;
-            framesPassed = 0;
-        }
+        //TODO: изменение палитры тайла, а не перерисовка
+        currentWaterTile = key ? App.assetManager.getTileAsset("WATER_FULL_1")
+                               : App.assetManager.getTileAsset("WATER_FULL_2");
+        removeChild(visual);
+        visual = MapLoader.drawStageToBitmap(levelId, BattleStageDrawMode.WATER, currentWaterTile);
+        addChild(visual);
+        key = !key;
     }
 
     private var levelId:uint;
@@ -50,6 +49,5 @@ public class WorldWaterLayer extends Sprite {
                     GameSettings.MAP_TILE_SIZE * GameSettings.WORLD_HEIGHT,
                     true, 0x00FF0000));
     private var key:Boolean = false;
-    private var framesPassed:uint = 0;
 }
 }

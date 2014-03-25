@@ -19,15 +19,6 @@ public class BaseExplode extends GameObject {
     }
 
 
-    override public function togglePause():void {
-        super.togglePause();
-        if (paused) {
-            Ticker.removeTickListener(onTick);
-        } else {
-            Ticker.addTickListener(onTick);
-        }
-    }
-
     override protected function onTick(dt:uint):void {
         if (framesSkipped >= explodeSequenceFramesSkip) {
             if (explodeSequenceIndex == explodeSequence.length) {
@@ -52,6 +43,11 @@ public class BaseExplode extends GameObject {
             if (contains(visual)) removeChild(visual);
             visual.getBitmap().bitmapData.dispose();
         }
+    }
+
+    override public function togglePause():void {
+        super.togglePause();
+        setTickListening(!paused);
     }
 
     private function onExploded():void {

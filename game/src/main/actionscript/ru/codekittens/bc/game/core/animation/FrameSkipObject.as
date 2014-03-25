@@ -25,6 +25,11 @@ public class FrameSkipObject extends GameObject {
         }
     }
 
+    override public function togglePause():void {
+        super.togglePause();
+        setTickListening(!paused);
+    }
+
     protected function onAnimation():void {
 
     }

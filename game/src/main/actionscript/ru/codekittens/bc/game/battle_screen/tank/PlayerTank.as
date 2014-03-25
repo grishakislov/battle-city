@@ -157,15 +157,11 @@ public class PlayerTank extends BaseTank {
     override public function togglePause():void {
         super.togglePause();
         if (paused) {
-            App.sfxManager.togglePause();
-            playIdleSound();
-            setTickListening(false);
+            movement = null;
             controller.removeEventListener(TankControllerEvent.START, onTankEvent);
             controller.removeEventListener(TankControllerEvent.STOP, onTankEvent);
         } else {
-            movement = null;
             playIdleSound();
-            setTickListening(true);
             controller.addEventListener(TankControllerEvent.START, onTankEvent);
             controller.addEventListener(TankControllerEvent.STOP, onTankEvent);
         }
